@@ -3,7 +3,6 @@ package Repositorio;
 import Repositorio.Entidad;
 import com.google.common.base.Objects;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -51,15 +50,6 @@ public abstract class Repositorio<T extends Entidad> {
     };
     return IterableExtensions.<T>findFirst(this.elementos, _function);
   }
-  
-  public List<T> search(final String value) {
-    final Function1<T, Boolean> _function = (T it) -> {
-      return Boolean.valueOf(this.condicionDeBusqueda(it, value));
-    };
-    return IterableExtensions.<T>toList(IterableExtensions.<T>filter(this.elementos, _function));
-  }
-  
-  public abstract boolean condicionDeBusqueda(final T el, final String value);
   
   @Pure
   public Set<T> getElementos() {

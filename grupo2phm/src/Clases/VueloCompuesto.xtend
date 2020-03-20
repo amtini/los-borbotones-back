@@ -1,24 +1,21 @@
 package Clases
 
-import java.util.Set
-import java.util.HashSet
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.ArrayList
+import java.util.List
+import java.time.temporal.ChronoUnit
 
 @Accessors
 class VueloCompuesto extends Vuelo{
-	Set<Ruta> escalas = new HashSet<Ruta>
+	List<Vuelo> escalas = new ArrayList<Vuelo>
 	
-	def getDuracionDeViaje(){
-		escalas.fold(0.0, [acum, ruta|acum + ruta.duracionDeViaje])
+	def double getDuracionDeViaje(){
+		ChronoUnit.HOURS.between(escalas.head().horarioDePartida,escalas.last().horarioDeLlegada)
 	}
 	
-	override precioDeVuelo(){
-		(precioBase + aerolinea.precioAsiento) * 0.9
-	}
-	
-	def tiempoEntreVuelos(){
-
-		//definir
+	def getPrecioDeVuelo(){
+		(precioBase + aerolinea.precioAsiento) * 0.9 * avion.recargoUltimosPasajes
+		//TODO VER REUTILIZACION
 	}
 	
 	def ordenarSegunTiempo(){

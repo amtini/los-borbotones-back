@@ -3,7 +3,6 @@ package Repositorio
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Set
 import java.util.HashSet
-import java.util.List
 
 interface Entidad {
 
@@ -15,7 +14,7 @@ interface Entidad {
 
 @Accessors
 abstract class Repositorio<T extends Entidad> {
-
+	
 	Set<T> elementos = new HashSet<T>
 	int id = 0
 	
@@ -32,7 +31,7 @@ abstract class Repositorio<T extends Entidad> {
 	def String newID() {
 		id.toString()
 	}
-
+	
 	def delete(T element) {
 		elementos.remove(element)
 	}
@@ -47,10 +46,4 @@ abstract class Repositorio<T extends Entidad> {
 	def searchByID(String id) {
 		elementos.findFirst(element|element.getID == id)
 	}
-
-	def List<T> search(String value) {
-		elementos.filter[condicionDeBusqueda(it, value)].toList
-	}
-
-	def boolean condicionDeBusqueda(T el, String value)
 }

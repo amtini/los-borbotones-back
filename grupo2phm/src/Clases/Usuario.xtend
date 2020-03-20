@@ -1,10 +1,9 @@
 package Clases
 
-import java.util.Set
-
-import java.util.HashSet
 import org.eclipse.xtend.lib.annotations.Accessors
 import Repositorio.Entidad
+import java.util.ArrayList
+import java.util.List
 
 @Accessors
 class Usuario implements Entidad{
@@ -13,12 +12,13 @@ class Usuario implements Entidad{
 	
 	String nombre
 	String apellido
+	String password
 	int edad
 	double dinero
 	
-	Set<Usuario> amigos = new HashSet<Usuario>
+	List<Usuario> amigos = new ArrayList<Usuario>
 	
-	Set<Reserva> reservas = new HashSet<Reserva>
+	List<Vuelo> pasajesComprados = new ArrayList<Vuelo>
 	
 	override getID() {
 		id
@@ -28,9 +28,8 @@ class Usuario implements Entidad{
 		id  = idd
 	}
 	
-	
-	def comprarPasaje(Vuelo vuelo, Asiento asiento){
-		reservas.add(new Reserva(vuelo,asiento))
+	def comprarPasaje(Vuelo vuelo){
+		pasajesComprados.add(vuelo)
 	}
 	
 	def addAmigo(Usuario usuario){
@@ -39,5 +38,21 @@ class Usuario implements Entidad{
 	
 	def removerAmigo(Usuario usuario){
 		amigos.remove(usuario)
+	}
+	
+	def cambiarPassword(String pass){
+		password = pass
+	}
+	
+	def cambiarEdad(int ed){
+		edad = ed
+	}
+	
+	def agregarSaldo(double din){
+		dinero += din
+	}
+	
+	def removerSaldo(double din){
+		dinero -= din
 	}
 }

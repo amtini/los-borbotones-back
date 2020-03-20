@@ -1,24 +1,21 @@
 package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.HashSet
-import java.util.Set
 import java.time.LocalDate
 import Repositorio.Entidad
+import java.time.temporal.ChronoUnit
 
 @Accessors
 class Vuelo implements Entidad{
 	String id
 	
-	Ruta ruta
 	String ciudadDeOrigen
 	String ciudadDeDestino
+	LocalDate horarioDePartida
+	LocalDate horarioDeLlegada
 	Aerolinea aerolinea
 	
-	LocalDate horarioDePartida
 	Avion avion
-	
-	Set<Asiento> asientosDisponibles = new HashSet<Asiento>
 	
 	Double precioBase
 	
@@ -31,14 +28,10 @@ class Vuelo implements Entidad{
 	}
 	
 	def precioDeVuelo(){
-		(precioBase + aerolinea.precioAsiento) * recargoUltimosPasajes
+		(precioBase + aerolinea.precioAsiento) * avion.recargoUltimosPasajes
 	}
 	
-	def recargoUltimosPasajes(){
-		if(asientosDisponibles.length<=2){1.15}else{1}
-	}
-	
-	def comprarPasaje(Asiento asientoAComprar){
-		asientosDisponibles.remove(asientoAComprar)
+	def double duracionDeViaje(){
+		ChronoUnit.HOURS.between(horarioDePartida,horarioDeLlegada)
 	}
 }

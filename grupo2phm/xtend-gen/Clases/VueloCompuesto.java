@@ -1,56 +1,47 @@
 package Clases;
 
-import Clases.Ruta;
 import Clases.Vuelo;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
 public class VueloCompuesto extends Vuelo {
-  private Set<Ruta> escalas = new HashSet<Ruta>();
+  private List<Vuelo> escalas = new ArrayList<Vuelo>();
   
-  public Double getDuracionDeViaje() {
-    final Function2<Double, Ruta, Double> _function = (Double acum, Ruta ruta) -> {
-      long _duracionDeViaje = ruta.duracionDeViaje();
-      return Double.valueOf(((acum).doubleValue() + _duracionDeViaje));
-    };
-    return IterableExtensions.<Ruta, Double>fold(this.escalas, Double.valueOf(0.0), _function);
+  public double getDuracionDeViaje() {
+    return ChronoUnit.HOURS.between(IterableExtensions.<Vuelo>head(this.escalas).getHorarioDePartida(), IterableExtensions.<Vuelo>last(this.escalas).getHorarioDeLlegada());
   }
   
-  @Override
-  public double precioDeVuelo() {
+  public double getPrecioDeVuelo() {
     Double _precioBase = this.getPrecioBase();
     Double _precioAsiento = this.getAerolinea().getPrecioAsiento();
     double _plus = DoubleExtensions.operator_plus(_precioBase, _precioAsiento);
-    return (_plus * 0.9);
+    double _multiply = (_plus * 0.9);
+    double _recargoUltimosPasajes = this.getAvion().recargoUltimosPasajes();
+    return (_multiply * _recargoUltimosPasajes);
   }
   
-  public Object tiempoEntreVuelos() {
-    return null;
-  }
-  
-  public List<Ruta> ordenarSegunTiempo() {
-    final Function1<Ruta, LocalDate> _function = (Ruta it) -> {
+  public List<Vuelo> ordenarSegunTiempo() {
+    final Function1<Vuelo, LocalDate> _function = (Vuelo it) -> {
       return it.getHorarioDePartida();
     };
-    return IterableExtensions.<Ruta, LocalDate>sortBy(this.escalas, _function);
+    return IterableExtensions.<Vuelo, LocalDate>sortBy(this.escalas, _function);
   }
   
   @Pure
-  public Set<Ruta> getEscalas() {
+  public List<Vuelo> getEscalas() {
     return this.escalas;
   }
   
-  public void setEscalas(final Set<Ruta> escalas) {
+  public void setEscalas(final List<Vuelo> escalas) {
     this.escalas = escalas;
   }
 }

@@ -1,11 +1,9 @@
 package Clases;
 
-import Clases.Asiento;
-import Clases.Reserva;
 import Clases.Vuelo;
 import Repositorio.Entidad;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -18,13 +16,15 @@ public class Usuario implements Entidad {
   
   private String apellido;
   
+  private String password;
+  
   private int edad;
   
   private double dinero;
   
-  private Set<Usuario> amigos = new HashSet<Usuario>();
+  private List<Usuario> amigos = new ArrayList<Usuario>();
   
-  private Set<Reserva> reservas = new HashSet<Reserva>();
+  private List<Vuelo> pasajesComprados = new ArrayList<Vuelo>();
   
   @Override
   public String getID() {
@@ -36,9 +36,8 @@ public class Usuario implements Entidad {
     return this.id = idd;
   }
   
-  public boolean comprarPasaje(final Vuelo vuelo, final Asiento asiento) {
-    Reserva _reserva = new Reserva(vuelo, asiento);
-    return this.reservas.add(_reserva);
+  public boolean comprarPasaje(final Vuelo vuelo) {
+    return this.pasajesComprados.add(vuelo);
   }
   
   public boolean addAmigo(final Usuario usuario) {
@@ -47,6 +46,24 @@ public class Usuario implements Entidad {
   
   public boolean removerAmigo(final Usuario usuario) {
     return this.amigos.remove(usuario);
+  }
+  
+  public String cambiarPassword(final String pass) {
+    return this.password = pass;
+  }
+  
+  public int cambiarEdad(final int ed) {
+    return this.edad = ed;
+  }
+  
+  public double agregarSaldo(final double din) {
+    double _dinero = this.dinero;
+    return this.dinero = (_dinero + din);
+  }
+  
+  public double removerSaldo(final double din) {
+    double _dinero = this.dinero;
+    return this.dinero = (_dinero - din);
   }
   
   @Pure
@@ -77,6 +94,15 @@ public class Usuario implements Entidad {
   }
   
   @Pure
+  public String getPassword() {
+    return this.password;
+  }
+  
+  public void setPassword(final String password) {
+    this.password = password;
+  }
+  
+  @Pure
   public int getEdad() {
     return this.edad;
   }
@@ -95,20 +121,20 @@ public class Usuario implements Entidad {
   }
   
   @Pure
-  public Set<Usuario> getAmigos() {
+  public List<Usuario> getAmigos() {
     return this.amigos;
   }
   
-  public void setAmigos(final Set<Usuario> amigos) {
+  public void setAmigos(final List<Usuario> amigos) {
     this.amigos = amigos;
   }
   
   @Pure
-  public Set<Reserva> getReservas() {
-    return this.reservas;
+  public List<Vuelo> getPasajesComprados() {
+    return this.pasajesComprados;
   }
   
-  public void setReservas(final Set<Reserva> reservas) {
-    this.reservas = reservas;
+  public void setPasajesComprados(final List<Vuelo> pasajesComprados) {
+    this.pasajesComprados = pasajesComprados;
   }
 }

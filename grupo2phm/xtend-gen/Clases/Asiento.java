@@ -1,12 +1,13 @@
 package Clases;
 
 import Clases.ClaseAsiento;
+import Repositorio.Entidad;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
 @SuppressWarnings("all")
-public class Asiento {
+public class Asiento implements Entidad {
   private String id;
   
   private boolean alLadoDeLaVentana;
@@ -17,6 +18,16 @@ public class Asiento {
   
   public float precio() {
     return this.claseDeAsiento.getPrecioClase();
+  }
+  
+  @Override
+  public String getID() {
+    return this.id;
+  }
+  
+  @Override
+  public String setID(final String idd) {
+    return this.id = this.id;
   }
   
   @Pure
