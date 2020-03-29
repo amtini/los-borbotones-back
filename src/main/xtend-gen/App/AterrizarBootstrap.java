@@ -710,7 +710,7 @@ public class AterrizarBootstrap {
         it.setDinero(74358.0);
       }
     };
-    final Usuario BraianZerial = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_3, _function_69);
+    final Usuario BrianZerial = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_3, _function_69);
     Usuario _usuario_4 = new Usuario();
     final Procedure1<Usuario> _function_70 = new Procedure1<Usuario>() {
       public void apply(final Usuario it) {
@@ -736,15 +736,45 @@ public class AterrizarBootstrap {
     };
     final Usuario JorgeLopez = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_5, _function_71);
     AgustinMarioTini.agregarAmigo(NicolasDichiara);
-    AgustinMarioTini.agregarAmigo(BraianZerial);
-    BraianZerial.agregarAmigo(NicolasDichiara);
-    NicolasDichiara.agregarAmigo(BraianZerial);
+    AgustinMarioTini.agregarAmigo(BrianZerial);
+    BrianZerial.agregarAmigo(NicolasDichiara);
+    NicolasDichiara.agregarAmigo(BrianZerial);
     LocalDate _of = LocalDate.of(2020, 3, 29);
     final Pasaje pasajeBSaRioMMorena = new Pasaje(vueloBSaRio, asiento25, Double.valueOf(15000.0), _of);
     LocalDate _of_1 = LocalDate.of(2020, 4, 16);
     final Pasaje pasajeBSaCHILEMMorena = new Pasaje(vueloBSaMiami, asiento26, Double.valueOf(36000.0), _of_1);
     MartinMorena.getPasajesComprados().add(pasajeBSaRioMMorena);
     MartinMorena.getPasajesComprados().add(pasajeBSaCHILEMMorena);
+    LocalDate _of_2 = LocalDate.of(2020, 3, 25);
+    final Pasaje pasajeBSaJamaicaLPerez = new Pasaje(vueloBSaJamaica, asiento36, Double.valueOf(26000.0), _of_2);
+    LocalDate _of_3 = LocalDate.of(2020, 4, 2);
+    final Pasaje pasajeBSaFranciaLPerez = new Pasaje(vueloAFrancia, asiento35, Double.valueOf(45000.0), _of_3);
+    LucasPerez.getPasajesComprados().add(pasajeBSaJamaicaLPerez);
+    LucasPerez.getPasajesComprados().add(pasajeBSaFranciaLPerez);
+    LocalDate _of_4 = LocalDate.of(2020, 3, 23);
+    final Pasaje pasajeBSaMiamiDiachiara = new Pasaje(vueloBSaMiami, asiento27, Double.valueOf(150000.0), _of_4);
+    LocalDate _of_5 = LocalDate.of(2020, 2, 1);
+    final Pasaje pasajeBSaItaliaDiachiara = new Pasaje(vueloBSaItalia, asiento28, Double.valueOf(36000.0), _of_5);
+    NicolasDichiara.getPasajesComprados().add(pasajeBSaMiamiDiachiara);
+    NicolasDichiara.getPasajesComprados().add(pasajeBSaItaliaDiachiara);
+    LocalDate _of_6 = LocalDate.of(2020, 3, 23);
+    final Pasaje pasajeBSaItaliaBrian = new Pasaje(vueloBSaItalia, asiento29, Double.valueOf(150000.0), _of_6);
+    LocalDate _of_7 = LocalDate.of(2020, 2, 1);
+    final Pasaje pasajeBSaAustraliaBrian = new Pasaje(vueloBSaAustralia, asiento30, Double.valueOf(36000.0), _of_7);
+    BrianZerial.getPasajesComprados().add(pasajeBSaItaliaBrian);
+    BrianZerial.getPasajesComprados().add(pasajeBSaAustraliaBrian);
+    LocalDate _of_8 = LocalDate.of(2020, 3, 27);
+    final Pasaje vueloAFranciaAMTini = new Pasaje(vueloBSaJamaica, asiento34, Double.valueOf(55000.0), _of_8);
+    LocalDate _of_9 = LocalDate.of(2020, 4, 6);
+    final Pasaje vueloBSaInglaterraAMTini = new Pasaje(vueloAFrancia, asiento33, Double.valueOf(65000.0), _of_9);
+    AgustinMarioTini.getPasajesComprados().add(vueloAFranciaAMTini);
+    AgustinMarioTini.getPasajesComprados().add(vueloBSaInglaterraAMTini);
+    LocalDate _of_10 = LocalDate.of(2020, 3, 22);
+    final Pasaje vueloBSaInglaterraJLopez = new Pasaje(vueloBSaInglaterra, asiento32, Double.valueOf(63000.0), _of_10);
+    LocalDate _of_11 = LocalDate.of(2020, 2, 15);
+    final Pasaje vueloBSaAustraliaJLopez = new Pasaje(vueloBSaAustralia, asiento31, Double.valueOf(85000.0), _of_11);
+    JorgeLopez.getPasajesComprados().add(vueloBSaInglaterraJLopez);
+    JorgeLopez.getPasajesComprados().add(vueloBSaAustraliaJLopez);
     final RepositorioAsiento repoAsiento = new RepositorioAsiento();
     final RepositorioUsuario repoUsuario = new RepositorioUsuario();
     final RepositorioVuelo repoVuelo = new RepositorioVuelo();
@@ -760,7 +790,7 @@ public class AterrizarBootstrap {
     repoUsuario.create(MartinMorena);
     repoUsuario.create(LucasPerez);
     repoUsuario.create(NicolasDichiara);
-    repoUsuario.create(BraianZerial);
+    repoUsuario.create(BrianZerial);
     repoUsuario.create(AgustinMarioTini);
     repoUsuario.create(JorgeLopez);
     repoAsiento.create(asiento1);

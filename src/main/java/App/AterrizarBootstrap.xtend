@@ -536,7 +536,7 @@ class AterrizarBootstrap {
 			dinero = 74856.0
 		]
 		
-		val BraianZerial = new Usuario =>[
+		val BrianZerial = new Usuario =>[
 			usuario = "bzerial"
 			nombre = "Braian"
 			apellido = "Zerial"
@@ -566,9 +566,9 @@ class AterrizarBootstrap {
 		//amigos
 		
 		AgustinMarioTini.agregarAmigo(NicolasDichiara)
-		AgustinMarioTini.agregarAmigo(BraianZerial)	
-		BraianZerial.agregarAmigo(NicolasDichiara)
-		NicolasDichiara.agregarAmigo(BraianZerial)
+		AgustinMarioTini.agregarAmigo(BrianZerial)	
+		BrianZerial.agregarAmigo(NicolasDichiara)
+		NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena
 		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio,asiento25,15000.0,LocalDate.of(2020,03,29))
@@ -576,6 +576,45 @@ class AterrizarBootstrap {
 		
 		MartinMorena.pasajesComprados.add(pasajeBSaRioMMorena)
 		MartinMorena.pasajesComprados.add(pasajeBSaCHILEMMorena)
+		
+		//pasajes para Lucas Perez
+		
+		val pasajeBSaJamaicaLPerez = new Pasaje(vueloBSaJamaica,asiento36,26000.0,LocalDate.of(2020,03,25))
+		val pasajeBSaFranciaLPerez = new Pasaje(vueloAFrancia,asiento35,45000.0,LocalDate.of(2020,04,02))
+		
+		LucasPerez.pasajesComprados.add(pasajeBSaJamaicaLPerez)
+		LucasPerez.pasajesComprados.add(pasajeBSaFranciaLPerez)
+		
+		//pasajes para NicolasDichiara
+        val pasajeBSaMiamiDiachiara = new Pasaje(vueloBSaMiami,asiento27,150000.0,LocalDate.of(2020,03,23))
+        val pasajeBSaItaliaDiachiara= new Pasaje(vueloBSaItalia,asiento28,36000.0,LocalDate.of(2020,02,01))
+
+        NicolasDichiara.pasajesComprados.add(pasajeBSaMiamiDiachiara)
+        NicolasDichiara.pasajesComprados.add(pasajeBSaItaliaDiachiara)
+
+         //pasajes para BrianZerial
+        val pasajeBSaItaliaBrian = new Pasaje(vueloBSaItalia,asiento29,150000.0,LocalDate.of(2020,03,23))
+        val pasajeBSaAustraliaBrian= new Pasaje(vueloBSaAustralia,asiento30,36000.0,LocalDate.of(2020,02,01))
+
+        BrianZerial.pasajesComprados.add(pasajeBSaItaliaBrian)
+        BrianZerial.pasajesComprados.add(pasajeBSaAustraliaBrian)
+
+		//Pasajes para Agustin Mario Tini
+		
+		val vueloAFranciaAMTini = new Pasaje(vueloBSaJamaica,asiento34,55000.0,LocalDate.of(2020,03,27))
+		val vueloBSaInglaterraAMTini = new Pasaje(vueloAFrancia,asiento33,65000.0,LocalDate.of(2020,04,06))
+		
+		AgustinMarioTini.pasajesComprados.add(vueloAFranciaAMTini)
+		AgustinMarioTini.pasajesComprados.add(vueloBSaInglaterraAMTini)
+		
+		
+		//Pasajes para Jorge Lopez
+		
+		val vueloBSaInglaterraJLopez = new Pasaje(vueloBSaInglaterra,asiento32,63000.0,LocalDate.of(2020,03,22))
+		val	vueloBSaAustraliaJLopez = new Pasaje(vueloBSaAustralia,asiento31,85000.0,LocalDate.of(2020,02,15))
+		
+		JorgeLopez.pasajesComprados.add(vueloBSaInglaterraJLopez)
+		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
 		
 		//XTRest.startInstance(16005, new DefensorRestAPI(repoUsuario, repoVuelo))
 		
@@ -598,7 +637,7 @@ class AterrizarBootstrap {
         repoUsuario.create(MartinMorena)
         repoUsuario.create(LucasPerez)
         repoUsuario.create(NicolasDichiara)
-        repoUsuario.create(BraianZerial)
+        repoUsuario.create(BrianZerial)
         repoUsuario.create(AgustinMarioTini)
         repoUsuario.create(JorgeLopez)
 		
