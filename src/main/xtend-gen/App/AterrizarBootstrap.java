@@ -4,6 +4,7 @@ import Clases.Aerolinea;
 import Clases.Asiento;
 import Clases.Avion;
 import Clases.ClaseAsiento;
+import Clases.Usuario;
 import Clases.Vuelo;
 import Clases.VueloCompuesto;
 import java.time.LocalDate;
@@ -539,5 +540,81 @@ public class AterrizarBootstrap {
     final Vuelo vueloCHILEaCUBA = ObjectExtensions.<Vuelo>operator_doubleArrow(_vuelo_9, _function_53);
     vueloARGaCHILEaCUBA.agregarEscala(vueloBSaCHILE);
     vueloARGaCHILEaCUBA.agregarEscala(vueloCHILEaCUBA);
+    Usuario _usuario = new Usuario();
+    final Procedure1<Usuario> _function_54 = new Procedure1<Usuario>() {
+      public void apply(final Usuario it) {
+        it.setUsuario("mmorena");
+        it.setNombre("Martin");
+        it.setApellido("Morena");
+        it.setPassword("mmorena");
+        it.setEdad(28);
+        it.setDinero(25000.0);
+      }
+    };
+    final Usuario MartinMorena = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario, _function_54);
+    Usuario _usuario_1 = new Usuario();
+    final Procedure1<Usuario> _function_55 = new Procedure1<Usuario>() {
+      public void apply(final Usuario it) {
+        it.setUsuario("lperez");
+        it.setNombre("Lucas");
+        it.setApellido("Perez");
+        it.setPassword("lperez");
+        it.setEdad(24);
+        it.setDinero(155000.0);
+      }
+    };
+    final Usuario LucasPerez = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_1, _function_55);
+    Usuario _usuario_2 = new Usuario();
+    final Procedure1<Usuario> _function_56 = new Procedure1<Usuario>() {
+      public void apply(final Usuario it) {
+        it.setUsuario("ndichiara");
+        it.setNombre("Nicolas");
+        it.setApellido("Dichiara");
+        it.setPassword("ndichiara");
+        it.setEdad(25);
+        it.setDinero(74856.0);
+      }
+    };
+    final Usuario NicolasDichiara = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_2, _function_56);
+    Usuario _usuario_3 = new Usuario();
+    final Procedure1<Usuario> _function_57 = new Procedure1<Usuario>() {
+      public void apply(final Usuario it) {
+        it.setUsuario("bzerial");
+        it.setNombre("Braian");
+        it.setApellido("Zerial");
+        it.setPassword("bzerial");
+        it.setEdad(30);
+        it.setDinero(74358.0);
+      }
+    };
+    final Usuario BraianZerial = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_3, _function_57);
+    Usuario _usuario_4 = new Usuario();
+    final Procedure1<Usuario> _function_58 = new Procedure1<Usuario>() {
+      public void apply(final Usuario it) {
+        it.setUsuario("atini");
+        it.setNombre("Agustin Mario");
+        it.setApellido("Tini");
+        it.setPassword("atini");
+        it.setEdad(24);
+        it.setDinero(148654.0);
+      }
+    };
+    final Usuario AgustinMarioTini = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_4, _function_58);
+    Usuario _usuario_5 = new Usuario();
+    final Procedure1<Usuario> _function_59 = new Procedure1<Usuario>() {
+      public void apply(final Usuario it) {
+        it.setUsuario("jlopez");
+        it.setNombre("Jorgue");
+        it.setApellido("Lopez");
+        it.setPassword("jlopez");
+        it.setEdad(56);
+        it.setDinero(23984.0);
+      }
+    };
+    final Usuario JorgeLopez = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_5, _function_59);
+    AgustinMarioTini.agregarAmigo(NicolasDichiara);
+    AgustinMarioTini.agregarAmigo(BraianZerial);
+    BraianZerial.agregarAmigo(NicolasDichiara);
+    NicolasDichiara.agregarAmigo(BraianZerial);
   }
 }

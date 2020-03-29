@@ -7,6 +7,7 @@ import Clases.Aerolinea
 import Clases.Vuelo
 import java.time.LocalDate
 import Clases.VueloCompuesto
+import Clases.Usuario
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -416,6 +417,71 @@ class AterrizarBootstrap {
 
         vueloARGaCHILEaCUBA.agregarEscala(vueloBSaCHILE)
         vueloARGaCHILEaCUBA.agregarEscala(vueloCHILEaCUBA)
+		
+		
+		//usuarios
+	
+		val MartinMorena = new Usuario =>[
+			usuario = "mmorena"
+			nombre = "Martin"
+			apellido = "Morena"
+			password = "mmorena"
+			edad = 28
+			dinero = 25000.0
+		]
+		
+		val LucasPerez = new Usuario =>[
+			usuario = "lperez"
+			nombre = "Lucas"
+			apellido = "Perez"
+			password = "lperez"
+			edad = 24
+			dinero = 155000.0
+		]
+		
+		val NicolasDichiara = new Usuario =>[
+			usuario = "ndichiara"
+			nombre = "Nicolas"
+			apellido = "Dichiara"
+			password = "ndichiara"
+			edad = 25
+			dinero = 74856.0
+		]
+		
+		val BraianZerial = new Usuario =>[
+			usuario = "bzerial"
+			nombre = "Braian"
+			apellido = "Zerial"
+			password = "bzerial"
+			edad = 30
+			dinero = 74358.0
+		]
+		
+		val AgustinMarioTini = new Usuario =>[
+			usuario = "atini"
+			nombre = "Agustin Mario"
+			apellido = "Tini"
+			password = "atini"
+			edad = 24
+			dinero = 148654.0
+		]
+		
+		val JorgeLopez = new Usuario =>[
+			usuario = "jlopez"
+			nombre = "Jorgue"
+			apellido = "Lopez"
+			password = "jlopez"
+			edad = 56
+			dinero = 23984.0
+		]
+		
+		//amigos
+		
+		AgustinMarioTini.agregarAmigo(NicolasDichiara)
+		AgustinMarioTini.agregarAmigo(BraianZerial)	
+		BraianZerial.agregarAmigo(NicolasDichiara)
+		NicolasDichiara.agregarAmigo(BraianZerial)
+		
 		
 		
 		
