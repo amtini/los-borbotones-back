@@ -37,8 +37,9 @@ public class VueloCompuesto extends Vuelo {
     return this.escalas.size();
   }
   
-  public boolean agregarEscala(final Vuelo vuelo) {
-    return this.escalas.add(vuelo);
+  public boolean tieneEscalas() {
+    int _cantidadDeEscalas = this.cantidadDeEscalas();
+    return (_cantidadDeEscalas > 1);
   }
   
   @Pure

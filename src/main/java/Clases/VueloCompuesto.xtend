@@ -24,7 +24,7 @@ class VueloCompuesto extends Vuelo{
 		escalas.size
 	}
 	
-	def agregarEscala(Vuelo vuelo){
-		escalas.add(vuelo)
+	def boolean tieneEscalas(){
+		cantidadDeEscalas > 1
 	}
 }

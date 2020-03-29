@@ -8,14 +8,13 @@ import java.util.HashSet
 class Avion {
 	String nombre
 	
-	
-	Set<Asiento> asientosDisponibles = new HashSet<Asiento>
+	Set<Asiento> asientos = new HashSet<Asiento>
 	
 	def recargoUltimosPasajes(){
-		if(asientosDisponibles.length<=2){1.15}else{1}
+		if(asientos.length<=2){1.15}else{1}
 	}
 	
-	def agregarAsiento(Asiento asiento){
-		asientosDisponibles.add(asiento)
+	def asientosDisponibles(){
+		asientos.filter[it.disponible == true]
 	}
 }

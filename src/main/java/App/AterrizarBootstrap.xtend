@@ -8,6 +8,7 @@ import Clases.Vuelo
 import java.time.LocalDate
 import Clases.VueloCompuesto
 import Clases.Usuario
+import Clases.Pasaje
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -121,9 +122,15 @@ class AterrizarBootstrap {
 			claseDeAsiento = bussisnes
 		]
 		
-		Boeing747.agregarAsiento(asiento1)
-		Boeing747.agregarAsiento(asiento2)
-		Boeing747.agregarAsiento(asiento3)
+		val asiento25 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = turista
+		]
+		
+		Boeing747.asientos.add(asiento1)
+		Boeing747.asientos.add(asiento2)
+		Boeing747.asientos.add(asiento3)
 		
 		// vuelo 2
 		
@@ -155,9 +162,9 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
-		Boeing747.agregarAsiento(asiento4)
-		Boeing747.agregarAsiento(asiento5)
-		Boeing747.agregarAsiento(asiento6)
+		AirbusA320.asientos.add(asiento4)
+		AirbusA320.asientos.add(asiento5)
+		AirbusA320.asientos.add(asiento6)
 		
 		//avion 3
 		
@@ -191,9 +198,9 @@ class AterrizarBootstrap {
 			claseDeAsiento = bussisnes
 		]
 		
-		Boeing747.agregarAsiento(asiento7)
-		Boeing747.agregarAsiento(asiento8)
-		Boeing747.agregarAsiento(asiento9)
+		Tu204.asientos.add(asiento7)
+		Tu204.asientos.add(asiento8)
+		Tu204.asientos.add(asiento9)
 		
 		//avion 4
 		
@@ -227,9 +234,9 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
-		Boeing747.agregarAsiento(asiento10)
-		Boeing747.agregarAsiento(asiento11)
-		Boeing747.agregarAsiento(asiento12)
+		Il96.asientos.add(asiento10)
+		Il96.asientos.add(asiento11)
+		Il96.asientos.add(asiento12)
 		//avion 5
 		
 		// vuelo 1
@@ -262,9 +269,16 @@ class AterrizarBootstrap {
 			claseDeAsiento = turista
 		]
 		
-		Boeing747.agregarAsiento(asiento13)
-		Boeing747.agregarAsiento(asiento14)
-		Boeing747.agregarAsiento(asiento15)
+		val asiento26 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = bussisnes
+		]
+		
+		CRJ200.asientos.add(asiento13)
+		CRJ200.asientos.add(asiento14)
+		CRJ200.asientos.add(asiento15)
+		CRJ200.asientos.add(asiento26)
 		//avion 6
 		
 		// vuelo 1
@@ -297,9 +311,9 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
-		Boeing747.agregarAsiento(asiento16)
-		Boeing747.agregarAsiento(asiento17)
-		Boeing747.agregarAsiento(asiento18)
+		Boeing777.asientos.add(asiento16)
+		Boeing777.asientos.add(asiento17)
+		Boeing777.asientos.add(asiento18)
 		//avion 7
 		
 		// vuelo 1
@@ -331,9 +345,9 @@ class AterrizarBootstrap {
 			disponible = true
 			claseDeAsiento = primeraClase
 		]
-		Boeing747.agregarAsiento(asiento19)
-		Boeing747.agregarAsiento(asiento20)
-		Boeing747.agregarAsiento(asiento21)
+		Boeing767.asientos.add(asiento19)
+		Boeing767.asientos.add(asiento20)
+		Boeing767.asientos.add(asiento21)
 		
 		//avion 8
 		
@@ -367,9 +381,9 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
-		Boeing747.agregarAsiento(asiento22)
-		Boeing747.agregarAsiento(asiento23)
-		Boeing747.agregarAsiento(asiento24)
+		Boeing757.asientos.add(asiento22)
+		Boeing757.asientos.add(asiento23)
+		Boeing757.asientos.add(asiento24)
 	
 	
 	
@@ -384,7 +398,7 @@ class AterrizarBootstrap {
             claseDeAsiento = bussisnes
         ]
 
-        RapidoDelNorte.agregarAsiento(asientoDeRapidoDelNorte)
+        RapidoDelNorte.asientos.add(asientoDeRapidoDelNorte)
 
         val vueloARGaCHILEaCUBA = new VueloCompuesto  =>[
             ciudadDeOrigen = "Buenos Aires"
@@ -415,8 +429,8 @@ class AterrizarBootstrap {
            precioBase = 18000.0
         ]
 
-        vueloARGaCHILEaCUBA.agregarEscala(vueloBSaCHILE)
-        vueloARGaCHILEaCUBA.agregarEscala(vueloCHILEaCUBA)
+        vueloARGaCHILEaCUBA.escalas.add(vueloBSaCHILE)
+        vueloARGaCHILEaCUBA.escalas.add(vueloCHILEaCUBA)
 		
 		
 		//usuarios
@@ -482,8 +496,12 @@ class AterrizarBootstrap {
 		BraianZerial.agregarAmigo(NicolasDichiara)
 		NicolasDichiara.agregarAmigo(BraianZerial)
 		
+		//pasajes para Martin Morena
+		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio,asiento25,15000.0,LocalDate.of(2020,03,29))
+		val pasajeBSaCHILEMMorena = new Pasaje(vueloBSaMiami,asiento26,36000.0,LocalDate.of(2020,04,16))
 		
-		
+		MartinMorena.pasajesComprados.add(pasajeBSaRioMMorena)
+		MartinMorena.pasajesComprados.add(pasajeBSaCHILEMMorena)
 		
 		//XTRest.startInstance(16005, new DefensorRestAPI(repoUsuario, repoVuelo))
 	}

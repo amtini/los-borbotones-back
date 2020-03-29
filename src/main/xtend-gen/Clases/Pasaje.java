@@ -13,15 +13,15 @@ public class Pasaje {
   
   private Asiento asiento;
   
-  private double costo;
+  private Double costo;
   
   private LocalDate comprado;
   
-  public Pasaje(final Vuelo vuelo_, final Asiento asiento_, final double costo_) {
+  public Pasaje(final Vuelo vuelo_, final Asiento asiento_, final Double costo_, final LocalDate comprado_) {
     this.vuelo = vuelo_;
     this.asiento = asiento_;
     this.costo = costo_;
-    this.comprado = LocalDate.now();
+    this.comprado = comprado_;
   }
   
   @Pure
@@ -43,11 +43,11 @@ public class Pasaje {
   }
   
   @Pure
-  public double getCosto() {
+  public Double getCosto() {
     return this.costo;
   }
   
-  public void setCosto(final double costo) {
+  public void setCosto(final Double costo) {
     this.costo = costo;
   }
   

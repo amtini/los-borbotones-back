@@ -6,6 +6,7 @@ import java.util.ArrayList
 import java.util.List
 import java.util.HashSet
 import java.util.Set
+import java.time.LocalDate
 
 @Accessors
 class Usuario implements Entidad{
@@ -38,7 +39,7 @@ class Usuario implements Entidad{
 	}
 	
 	def comprarPasaje(){
-		carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo))]
+		carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))]
 	}
 	
 	def agregarAmigo(Usuario usuario){

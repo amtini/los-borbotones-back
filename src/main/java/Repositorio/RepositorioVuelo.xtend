@@ -8,7 +8,7 @@ class RepositorioVuelo extends Repositorio<Vuelo>{
 	
 	def vuelosDisponibles(){
 		elementos.filter[
-			vuelo | vuelo.avion.asientosDisponibles.length > 0
+			vuelo | vuelo.avion.asientosDisponibles.size > 0
 		]
 	}
 }

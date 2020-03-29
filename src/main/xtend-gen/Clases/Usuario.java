@@ -6,6 +6,7 @@ import Clases.Pasaje;
 import Clases.Ticket;
 import Clases.Vuelo;
 import Repositorio.Entidad;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -55,7 +56,8 @@ public class Usuario implements Entidad {
         Vuelo _vuelo = ticket.getVuelo();
         Asiento _asiento = ticket.getAsiento();
         double _costo = ticket.costo();
-        Pasaje _pasaje = new Pasaje(_vuelo, _asiento, _costo);
+        LocalDate _now = LocalDate.now();
+        Pasaje _pasaje = new Pasaje(_vuelo, _asiento, Double.valueOf(_costo), _now);
         Usuario.this.pasajesComprados.add(_pasaje);
       }
     };

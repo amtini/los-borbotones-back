@@ -8,13 +8,14 @@ class Pasaje{
 	
 	Vuelo vuelo
 	Asiento asiento
-	double costo
+	Double costo
 	LocalDate comprado
 	
-	new(Vuelo vuelo_, Asiento asiento_, double costo_){
+	new(Vuelo vuelo_, Asiento asiento_, Double costo_, LocalDate comprado_) {
 		vuelo = vuelo_
 		asiento = asiento_
 		costo = costo_
-		comprado = LocalDate.now
+		comprado = comprado_
 	}
+	
 }
