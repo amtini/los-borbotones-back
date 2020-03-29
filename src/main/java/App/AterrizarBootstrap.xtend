@@ -9,6 +9,9 @@ import java.time.LocalDate
 import Clases.VueloCompuesto
 import Clases.Usuario
 import Clases.Pasaje
+import Repositorio.RepositorioAsiento
+import Repositorio.RepositorioUsuario
+import Repositorio.RepositorioVuelo
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -161,10 +164,16 @@ class AterrizarBootstrap {
 			disponible = true
 			claseDeAsiento = primeraClase
 		]
+		val asiento36 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = primeraClase
+		]
 		
 		AirbusA320.asientos.add(asiento4)
 		AirbusA320.asientos.add(asiento5)
 		AirbusA320.asientos.add(asiento6)
+		AirbusA320.asientos.add(asiento36)
 		
 		//avion 3
 		
@@ -198,9 +207,23 @@ class AterrizarBootstrap {
 			claseDeAsiento = bussisnes
 		]
 		
+		val asiento34 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = bussisnes
+		]
+		
+		val asiento35 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = bussisnes
+		]
+		
 		Tu204.asientos.add(asiento7)
 		Tu204.asientos.add(asiento8)
 		Tu204.asientos.add(asiento9)
+		Tu204.asientos.add(asiento34)
+		Tu204.asientos.add(asiento35)
 		
 		//avion 4
 		
@@ -275,10 +298,17 @@ class AterrizarBootstrap {
 			claseDeAsiento = bussisnes
 		]
 		
+			val asiento27 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = bussisnes
+		]
+		
 		CRJ200.asientos.add(asiento13)
 		CRJ200.asientos.add(asiento14)
 		CRJ200.asientos.add(asiento15)
 		CRJ200.asientos.add(asiento26)
+		CRJ200.asientos.add(asiento27)
 		//avion 6
 		
 		// vuelo 1
@@ -311,9 +341,24 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
+		val asiento28 = new Asiento =>[
+			ventana = false
+			disponible = true
+			claseDeAsiento = primeraClase
+		]
+		
+		val asiento29 = new Asiento =>[
+			ventana = false
+			disponible = true
+			claseDeAsiento = primeraClase
+		]
+		
+		
 		Boeing777.asientos.add(asiento16)
 		Boeing777.asientos.add(asiento17)
 		Boeing777.asientos.add(asiento18)
+		Boeing777.asientos.add(asiento28)
+		Boeing777.asientos.add(asiento29)
 		//avion 7
 		
 		// vuelo 1
@@ -345,9 +390,23 @@ class AterrizarBootstrap {
 			disponible = true
 			claseDeAsiento = primeraClase
 		]
+		
+			val asiento30 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = primeraClase
+		]
+			val asiento31 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = primeraClase
+		]
+		
 		Boeing767.asientos.add(asiento19)
 		Boeing767.asientos.add(asiento20)
 		Boeing767.asientos.add(asiento21)
+		Boeing767.asientos.add(asiento30)
+		Boeing767.asientos.add(asiento31)
 		
 		//avion 8
 		
@@ -381,9 +440,24 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
+		val asiento32 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = primeraClase
+		]
+		
+		val asiento33 = new Asiento =>[
+			ventana = false
+			disponible = false
+			claseDeAsiento = primeraClase
+		]
+		
+		
 		Boeing757.asientos.add(asiento22)
 		Boeing757.asientos.add(asiento23)
 		Boeing757.asientos.add(asiento24)
+		Boeing757.asientos.add(asiento32)
+		Boeing757.asientos.add(asiento33)
 	
 	
 	
@@ -504,5 +578,68 @@ class AterrizarBootstrap {
 		MartinMorena.pasajesComprados.add(pasajeBSaCHILEMMorena)
 		
 		//XTRest.startInstance(16005, new DefensorRestAPI(repoUsuario, repoVuelo))
+		
+		//REPOOO
+		
+		val repoAsiento = new RepositorioAsiento
+		val repoUsuario = new RepositorioUsuario
+		val repoVuelo = new RepositorioVuelo
+		
+		repoVuelo.create(vueloBSaRio)
+        repoVuelo.create(vueloBSaJamaica)
+        repoVuelo.create(vueloAFrancia)
+        repoVuelo.create(vueloBSaChile)
+        repoVuelo.create(vueloBSaMiami)
+        repoVuelo.create(vueloBSaItalia)
+        repoVuelo.create(vueloBSaAustralia)
+        repoVuelo.create(vueloBSaInglaterra)
+        repoVuelo.create(vueloARGaCHILEaCUBA)
+        
+        repoUsuario.create(MartinMorena)
+        repoUsuario.create(LucasPerez)
+        repoUsuario.create(NicolasDichiara)
+        repoUsuario.create(BraianZerial)
+        repoUsuario.create(AgustinMarioTini)
+        repoUsuario.create(JorgeLopez)
+		
+		
+		repoAsiento.create(asiento1)
+		repoAsiento.create(asiento2)
+		repoAsiento.create(asiento3)
+		repoAsiento.create(asiento4)
+		repoAsiento.create(asiento5)
+		repoAsiento.create(asiento6)
+		repoAsiento.create(asiento7)
+		repoAsiento.create(asiento8)
+		repoAsiento.create(asiento9)
+		repoAsiento.create(asiento10)
+		repoAsiento.create(asiento11)
+		repoAsiento.create(asiento12)
+		repoAsiento.create(asiento13)
+		repoAsiento.create(asiento14)
+		repoAsiento.create(asiento15)
+		repoAsiento.create(asiento16)
+		repoAsiento.create(asiento17)
+		repoAsiento.create(asiento18)
+		repoAsiento.create(asiento19)
+		repoAsiento.create(asiento20)
+		repoAsiento.create(asiento21)
+		repoAsiento.create(asiento22)
+		repoAsiento.create(asiento23)
+		repoAsiento.create(asiento24)
+		repoAsiento.create(asiento25)
+		repoAsiento.create(asiento26)
+		repoAsiento.create(asiento27)
+		repoAsiento.create(asiento28)
+		repoAsiento.create(asiento29)
+		repoAsiento.create(asiento30)
+		repoAsiento.create(asiento31)
+		repoAsiento.create(asiento32)
+		repoAsiento.create(asiento33)
+		repoAsiento.create(asiento34)
+		repoAsiento.create(asiento35)
+		repoAsiento.create(asiento36)
+		
+
 	}
 }
