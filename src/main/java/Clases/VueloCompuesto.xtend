@@ -21,4 +21,8 @@ class VueloCompuesto extends Vuelo{
 	def ordenarSegunTiempo(){
 		escalas.sortBy[horarioDePartida]
 	}
+	
+	def cantidadDeEscalas(){
+		escalas.size
+	}
 }

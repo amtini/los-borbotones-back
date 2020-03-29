@@ -4,12 +4,15 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import Repositorio.Entidad
 import java.util.ArrayList
 import java.util.List
+import java.util.HashSet
+import java.util.Set
 
 @Accessors
 class Usuario implements Entidad{
 	
 	String id
 	
+	String usuario
 	String nombre
 	String apellido
 	String password
@@ -18,7 +21,9 @@ class Usuario implements Entidad{
 	
 	List<Usuario> amigos = new ArrayList<Usuario>
 	
-	List<Vuelo> pasajesComprados = new ArrayList<Vuelo>
+	CarritoDeCompras carritoDeCompras
+	
+	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
 	override getID() {
 		id
@@ -28,8 +33,12 @@ class Usuario implements Entidad{
 		id  = idd
 	}
 	
-	def comprarPasaje(Vuelo vuelo){
-		pasajesComprados.add(vuelo)
+	def limpiarCarrito(){
+		pasajesComprados.empty
+	}
+	
+	def comprarPasaje(){
+		carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo))]
 	}
 	
 	def addAmigo(Usuario usuario){

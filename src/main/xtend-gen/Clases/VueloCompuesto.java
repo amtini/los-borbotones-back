@@ -38,6 +38,10 @@ public class VueloCompuesto extends Vuelo {
     return IterableExtensions.<Vuelo, LocalDate>sortBy(this.escalas, _function);
   }
   
+  public int cantidadDeEscalas() {
+    return this.escalas.size();
+  }
+  
   @Pure
   public List<Vuelo> getEscalas() {
     return this.escalas;

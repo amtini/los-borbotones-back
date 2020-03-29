@@ -12,6 +12,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public abstract class Repositorio<T extends Entidad> {
+  private String tipo;
+  
   private Set<T> elementos = new HashSet<T>();
   
   private int id = 0;
@@ -29,7 +31,9 @@ public abstract class Repositorio<T extends Entidad> {
   }
   
   public String newID() {
-    return Integer.valueOf(this.id).toString();
+    String _tipo = this.getTipo();
+    String _string = Integer.valueOf(this.id).toString();
+    return (_tipo + _string);
   }
   
   public boolean delete(final T element) {
@@ -51,6 +55,15 @@ public abstract class Repositorio<T extends Entidad> {
       }
     };
     return IterableExtensions.<T>findFirst(this.elementos, _function);
+  }
+  
+  @Pure
+  public String getTipo() {
+    return this.tipo;
+  }
+  
+  public void setTipo(final String tipo) {
+    this.tipo = tipo;
   }
   
   @Pure

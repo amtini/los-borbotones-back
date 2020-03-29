@@ -1,9 +1,16 @@
 package Clases;
 
+import Clases.Asiento;
+import Clases.CarritoDeCompras;
+import Clases.Pasaje;
+import Clases.Ticket;
 import Clases.Vuelo;
 import Repositorio.Entidad;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -11,6 +18,8 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class Usuario implements Entidad {
   private String id;
+  
+  private String usuario;
   
   private String nombre;
   
@@ -24,7 +33,9 @@ public class Usuario implements Entidad {
   
   private List<Usuario> amigos = new ArrayList<Usuario>();
   
-  private List<Vuelo> pasajesComprados = new ArrayList<Vuelo>();
+  private CarritoDeCompras carritoDeCompras;
+  
+  private Set<Pasaje> pasajesComprados = new HashSet<Pasaje>();
   
   public String getID() {
     return this.id;
@@ -34,8 +45,21 @@ public class Usuario implements Entidad {
     return this.id = idd;
   }
   
-  public boolean comprarPasaje(final Vuelo vuelo) {
-    return this.pasajesComprados.add(vuelo);
+  public boolean limpiarCarrito() {
+    return this.pasajesComprados.isEmpty();
+  }
+  
+  public void comprarPasaje() {
+    final Consumer<Ticket> _function = new Consumer<Ticket>() {
+      public void accept(final Ticket ticket) {
+        Vuelo _vuelo = ticket.getVuelo();
+        Asiento _asiento = ticket.getAsiento();
+        double _costo = ticket.costo();
+        Pasaje _pasaje = new Pasaje(_vuelo, _asiento, _costo);
+        Usuario.this.pasajesComprados.add(_pasaje);
+      }
+    };
+    this.carritoDeCompras.getTickets().forEach(_function);
   }
   
   public boolean addAmigo(final Usuario usuario) {
@@ -71,6 +95,15 @@ public class Usuario implements Entidad {
   
   public void setId(final String id) {
     this.id = id;
+  }
+  
+  @Pure
+  public String getUsuario() {
+    return this.usuario;
+  }
+  
+  public void setUsuario(final String usuario) {
+    this.usuario = usuario;
   }
   
   @Pure
@@ -128,11 +161,20 @@ public class Usuario implements Entidad {
   }
   
   @Pure
-  public List<Vuelo> getPasajesComprados() {
+  public CarritoDeCompras getCarritoDeCompras() {
+    return this.carritoDeCompras;
+  }
+  
+  public void setCarritoDeCompras(final CarritoDeCompras carritoDeCompras) {
+    this.carritoDeCompras = carritoDeCompras;
+  }
+  
+  @Pure
+  public Set<Pasaje> getPasajesComprados() {
     return this.pasajesComprados;
   }
   
-  public void setPasajesComprados(final List<Vuelo> pasajesComprados) {
+  public void setPasajesComprados(final Set<Pasaje> pasajesComprados) {
     this.pasajesComprados = pasajesComprados;
   }
 }

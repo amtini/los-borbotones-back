@@ -15,6 +15,8 @@ interface Entidad {
 @Accessors
 abstract class Repositorio<T extends Entidad> {
 	
+	String tipo
+	
 	Set<T> elementos = new HashSet<T>
 	int id = 0
 	
@@ -29,7 +31,7 @@ abstract class Repositorio<T extends Entidad> {
 	}
 	
 	def String newID() {
-		id.toString()
+		getTipo + id.toString()
 	}
 	
 	def delete(T element) {

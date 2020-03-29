@@ -7,7 +7,7 @@ import Repositorio.Entidad
 class Asiento implements Entidad{
 	String id
 	
-	boolean alLadoDeLaVentana
+	boolean ventana
 	boolean disponible
 	
 	ClaseAsiento claseDeAsiento
@@ -23,5 +23,4 @@ class Asiento implements Entidad{
 	override setID(String idd) {
 		id = id
 	}
-	
 }

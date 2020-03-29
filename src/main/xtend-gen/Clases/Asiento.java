@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class Asiento implements Entidad {
   private String id;
   
-  private boolean alLadoDeLaVentana;
+  private boolean ventana;
   
   private boolean disponible;
   
@@ -38,12 +38,12 @@ public class Asiento implements Entidad {
   }
   
   @Pure
-  public boolean isAlLadoDeLaVentana() {
-    return this.alLadoDeLaVentana;
+  public boolean isVentana() {
+    return this.ventana;
   }
   
-  public void setAlLadoDeLaVentana(final boolean alLadoDeLaVentana) {
-    this.alLadoDeLaVentana = alLadoDeLaVentana;
+  public void setVentana(final boolean ventana) {
+    this.ventana = ventana;
   }
   
   @Pure
