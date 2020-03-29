@@ -12,9 +12,8 @@ class Vuelo implements Entidad{
 	String ciudadDeOrigen
 	String ciudadDeDestino
 	LocalDate horarioDePartida
-	LocalDate horarioDeLlegada
 	Aerolinea aerolinea
-	
+	Double duracionDeVuelo
 	Avion avion
 	
 	Double precioBase
@@ -31,7 +30,9 @@ class Vuelo implements Entidad{
 		(precioBase + aerolinea.precioAsiento) * avion.recargoUltimosPasajes
 	}
 	
-	def double duracionDeViaje(){
+/* 	def double duracionDeViaje(){
 		ChronoUnit.HOURS.between(horarioDePartida,horarioDeLlegada)
-	}
+	}*/
+	
+	
 }

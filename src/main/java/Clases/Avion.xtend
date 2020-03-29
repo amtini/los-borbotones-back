@@ -14,4 +14,8 @@ class Avion {
 	def recargoUltimosPasajes(){
 		if(asientosDisponibles.length<=2){1.15}else{1}
 	}
+	
+	def agregarAsiento(Asiento asiento){
+		asientosDisponibles.add(asiento)
+	}
 }

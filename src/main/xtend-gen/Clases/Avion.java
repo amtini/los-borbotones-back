@@ -26,6 +26,10 @@ public class Avion {
     return _xifexpression;
   }
   
+  public boolean agregarAsiento(final Asiento asiento) {
+    return this.asientosDisponibles.add(asiento);
+  }
+  
   @Pure
   public String getNombre() {
     return this.nombre;

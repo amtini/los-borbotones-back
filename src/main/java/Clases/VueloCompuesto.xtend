@@ -10,19 +10,21 @@ class VueloCompuesto extends Vuelo{
 	List<Vuelo> escalas = new ArrayList<Vuelo>
 	
 	def double getDuracionDeViaje(){
-		ChronoUnit.HOURS.between(escalas.head().horarioDePartida,escalas.last().horarioDeLlegada)
+		//ChronoUnit.HOURS.between(escalas.head().horarioDePartida,escalas.last().horarioDeLlegada)
+		escalas.fold(0.0, [acum, vuelo | acum + vuelo.duracionDeVuelo ])
 	}
 	
-	def getPrecioDeVuelo(){
+	override precioDeVuelo(){
 		(precioBase + aerolinea.precioAsiento) * 0.9 * avion.recargoUltimosPasajes
 		//TODO VER REUTILIZACION
 	}
 	
-	def ordenarSegunTiempo(){
-		escalas.sortBy[horarioDePartida]
-	}
-	
+
 	def cantidadDeEscalas(){
 		escalas.size
+	}
+	
+	def agregarEscala(Vuelo vuelo){
+		escalas.add(vuelo)
 	}
 }

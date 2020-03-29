@@ -6,17 +6,17 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Aerolinea {
-  private String name;
+  private String nombre;
   
   private Double precioAsiento;
   
   @Pure
-  public String getName() {
-    return this.name;
+  public String getNombre() {
+    return this.nombre;
   }
   
-  public void setName(final String name) {
-    this.name = name;
+  public void setNombre(final String nombre) {
+    this.nombre = nombre;
   }
   
   @Pure

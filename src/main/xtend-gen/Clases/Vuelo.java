@@ -4,7 +4,6 @@ import Clases.Aerolinea;
 import Clases.Avion;
 import Repositorio.Entidad;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -20,9 +19,9 @@ public class Vuelo implements Entidad {
   
   private LocalDate horarioDePartida;
   
-  private LocalDate horarioDeLlegada;
-  
   private Aerolinea aerolinea;
+  
+  private Double duracionDeVuelo;
   
   private Avion avion;
   
@@ -41,10 +40,6 @@ public class Vuelo implements Entidad {
     double _plus = DoubleExtensions.operator_plus(this.precioBase, _precioAsiento);
     double _recargoUltimosPasajes = this.avion.recargoUltimosPasajes();
     return (_plus * _recargoUltimosPasajes);
-  }
-  
-  public double duracionDeViaje() {
-    return ChronoUnit.HOURS.between(this.horarioDePartida, this.horarioDeLlegada);
   }
   
   @Pure
@@ -84,21 +79,21 @@ public class Vuelo implements Entidad {
   }
   
   @Pure
-  public LocalDate getHorarioDeLlegada() {
-    return this.horarioDeLlegada;
-  }
-  
-  public void setHorarioDeLlegada(final LocalDate horarioDeLlegada) {
-    this.horarioDeLlegada = horarioDeLlegada;
-  }
-  
-  @Pure
   public Aerolinea getAerolinea() {
     return this.aerolinea;
   }
   
   public void setAerolinea(final Aerolinea aerolinea) {
     this.aerolinea = aerolinea;
+  }
+  
+  @Pure
+  public Double getDuracionDeVuelo() {
+    return this.duracionDeVuelo;
+  }
+  
+  public void setDuracionDeVuelo(final Double duracionDeVuelo) {
+    this.duracionDeVuelo = duracionDeVuelo;
   }
   
   @Pure

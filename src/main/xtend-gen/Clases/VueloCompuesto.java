@@ -1,13 +1,11 @@
 package Clases;
 
 import Clases.Vuelo;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
 
@@ -17,10 +15,16 @@ public class VueloCompuesto extends Vuelo {
   private List<Vuelo> escalas = new ArrayList<Vuelo>();
   
   public double getDuracionDeViaje() {
-    return ChronoUnit.HOURS.between(IterableExtensions.<Vuelo>head(this.escalas).getHorarioDePartida(), IterableExtensions.<Vuelo>last(this.escalas).getHorarioDeLlegada());
+    final Function2<Double, Vuelo, Double> _function = new Function2<Double, Vuelo, Double>() {
+      public Double apply(final Double acum, final Vuelo vuelo) {
+        Double _duracionDeVuelo = vuelo.getDuracionDeVuelo();
+        return Double.valueOf(DoubleExtensions.operator_plus(acum, _duracionDeVuelo));
+      }
+    };
+    return (double) IterableExtensions.<Vuelo, Double>fold(this.escalas, Double.valueOf(0.0), _function);
   }
   
-  public double getPrecioDeVuelo() {
+  public double precioDeVuelo() {
     Double _precioBase = this.getPrecioBase();
     Double _precioAsiento = this.getAerolinea().getPrecioAsiento();
     double _plus = DoubleExtensions.operator_plus(_precioBase, _precioAsiento);
@@ -29,17 +33,12 @@ public class VueloCompuesto extends Vuelo {
     return (_multiply * _recargoUltimosPasajes);
   }
   
-  public List<Vuelo> ordenarSegunTiempo() {
-    final Function1<Vuelo, LocalDate> _function = new Function1<Vuelo, LocalDate>() {
-      public LocalDate apply(final Vuelo it) {
-        return it.getHorarioDePartida();
-      }
-    };
-    return IterableExtensions.<Vuelo, LocalDate>sortBy(this.escalas, _function);
-  }
-  
   public int cantidadDeEscalas() {
     return this.escalas.size();
+  }
+  
+  public boolean agregarEscala(final Vuelo vuelo) {
+    return this.escalas.add(vuelo);
   }
   
   @Pure
