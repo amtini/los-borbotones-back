@@ -1,5 +1,6 @@
 package App;
 
+import App.AterrizarRestAPI;
 import Clases.Aerolinea;
 import Clases.Asiento;
 import Clases.Avion;
@@ -14,6 +15,7 @@ import Repositorio.RepositorioVuelo;
 import java.time.LocalDate;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.uqbar.xtrest.api.XTRest;
 
 @SuppressWarnings("all")
 public class AterrizarBootstrap {
@@ -829,5 +831,7 @@ public class AterrizarBootstrap {
     repoAsiento.create(asiento34);
     repoAsiento.create(asiento35);
     repoAsiento.create(asiento36);
+    AterrizarRestAPI _aterrizarRestAPI = new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento);
+    XTRest.startInstance(16000, _aterrizarRestAPI);
   }
 }

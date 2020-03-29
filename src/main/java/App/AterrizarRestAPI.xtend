@@ -1,15 +1,21 @@
 package App
 
+import Repositorio.RepositorioUsuario
+import Repositorio.RepositorioVuelo
+import Repositorio.RepositorioAsiento
+import org.uqbar.xtrest.api.annotation.Controller
+
+@Controller
 class AterrizarRestAPI {
-	/*
+	
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
-	RepositorioRuta repoRuta
+	RepositorioAsiento repoAsiento
 	
-	new(RepositorioUsuario repoU, repositorioVuelo repoV, repositorioRuta repoR)){
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV, RepositorioAsiento repoA){
 		repoUsuario = repoU
 		repoVuelo = repoV
-		repoRuta = repoR
+		repoAsiento = repoA
 	}
-	*/
+	
 }

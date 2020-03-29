@@ -1,5 +1,6 @@
 package App
 
+import org.uqbar.xtrest.api.XTRest
 import Clases.ClaseAsiento
 import Clases.Avion
 import Clases.Asiento
@@ -616,7 +617,7 @@ class AterrizarBootstrap {
 		JorgeLopez.pasajesComprados.add(vueloBSaInglaterraJLopez)
 		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
 		
-		//XTRest.startInstance(16005, new DefensorRestAPI(repoUsuario, repoVuelo))
+		
 		
 		//REPOOO
 		
@@ -679,6 +680,6 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento35)
 		repoAsiento.create(asiento36)
 		
-
+		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento))
 	}
 }
