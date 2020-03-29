@@ -6,6 +6,7 @@ import Clases.Asiento
 import Clases.Aerolinea
 import Clases.Vuelo
 import java.time.LocalDate
+import Clases.VueloCompuesto
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -63,29 +64,40 @@ class AterrizarBootstrap {
 		
 		val Luftansa = new Aerolinea =>[
 			nombre = "Luftansa"
+			precioAsiento = 2000.0
+		]
+		
+		val CopaAirlans = new Aerolinea =>[
+			nombre = "Copa Airlans"
+			precioAsiento = 700.0
+		]
+		
+		val Varig = new Aerolinea =>[
+			nombre = "Varig"
+			precioAsiento = 500.0
+		]
+		
+		val LanChile = new Aerolinea =>[
+			nombre = "Lan Chile"
+			precioAsiento = 300.0
+		]
+		
+		val AirFrance = new Aerolinea =>[
+			nombre = "Air France"
 			precioAsiento = 1000.0
 		]
 		
-		val Luftansa = new Aerolinea =>[
-			nombre = "Luftansa"
-			precioAsiento = 1000.0
-		]
 		
-		
-		//DECLARACION
-		//vuelos: ciduad origine y destino, horario de partida, asignarle el avion, asignar aerolinea (hay qeu declararla), valor de precio base, duracion de vuelo
-		//crear los usuarios
-		//vuelos compuestos: 
 		
 		// vuelo 1
 		
 		val vueloBSaRio = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
 	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
+	       horarioDePartida = LocalDate.of(2020,09,01)
 	       aerolinea = AerolineasArgentinas
 	       duracionDeVuelo = 5.0
-	       avion = Boeing747
+	       avion = Boeing747 
 	       precioBase = 8000.0
 		]
 		
@@ -117,10 +129,10 @@ class AterrizarBootstrap {
 		val vueloBSaJamaica = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
 	       ciudadDeDestino = "Kingston"
-	       horarioDePartida = LocalDate.of(2020,02,01)
+	       horarioDePartida = LocalDate.of(2020,07,09)
 	       aerolinea = Luftansa
 	       duracionDeVuelo = 7.0
-	       avion = Boeing747
+	       avion = AirbusA320 
 	       precioBase = 50000.0
 		]
 		
@@ -142,18 +154,22 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
+		Boeing747.agregarAsiento(asiento4)
+		Boeing747.agregarAsiento(asiento5)
+		Boeing747.agregarAsiento(asiento6)
+		
 		//avion 3
 		
 		// vuelo 1
 		
-		val vueloBSaRio = new Vuelo =>[
+		val vueloAFrancia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
-	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
-	       aerolinea = AerolineasArgentinas
-	       duracionDeVuelo = 5.0
-	       avion = Boeing747
-	       precioBase = 8000.0
+	       ciudadDeDestino = "Paris"
+	       horarioDePartida = LocalDate.of(2020,07,01)
+	       aerolinea = AirFrance
+	       duracionDeVuelo = 17.0
+	       avion = Tu204 
+	       precioBase = 80000.0
 		]
 		
 		val asiento7 = new Asiento =>[
@@ -174,18 +190,22 @@ class AterrizarBootstrap {
 			claseDeAsiento = bussisnes
 		]
 		
+		Boeing747.agregarAsiento(asiento7)
+		Boeing747.agregarAsiento(asiento8)
+		Boeing747.agregarAsiento(asiento9)
+		
 		//avion 4
 		
 		// vuelo 1
 		
-		val vueloBSaRio = new Vuelo =>[
+		val vueloBSaChile = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
-	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
-	       aerolinea = AerolineasArgentinas
-	       duracionDeVuelo = 5.0
-	       avion = Boeing747
-	       precioBase = 8000.0
+	       ciudadDeDestino = "Santiago"
+	       horarioDePartida = LocalDate.of(2020,07,14)
+	       aerolinea = LanChile
+	       duracionDeVuelo = 3.0
+	       avion = Il96 
+	       precioBase = 200.0
 		]
 		
 		val asiento10 = new Asiento =>[
@@ -206,18 +226,21 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
+		Boeing747.agregarAsiento(asiento10)
+		Boeing747.agregarAsiento(asiento11)
+		Boeing747.agregarAsiento(asiento12)
 		//avion 5
 		
 		// vuelo 1
 		
-		val vueloBSaRio = new Vuelo =>[
+		val vueloBSaMiami = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
-	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
-	       aerolinea = AerolineasArgentinas
-	       duracionDeVuelo = 5.0
-	       avion = Boeing747
-	       precioBase = 8000.0
+	       ciudadDeDestino = "Miami"
+	       horarioDePartida = LocalDate.of(2020,08,01)
+	       aerolinea = CopaAirlans
+	       duracionDeVuelo = 12.0
+	       avion = CRJ200 
+	       precioBase = 15000.0
 		]
 		
 		val asiento13 = new Asiento =>[
@@ -238,18 +261,21 @@ class AterrizarBootstrap {
 			claseDeAsiento = turista
 		]
 		
+		Boeing747.agregarAsiento(asiento13)
+		Boeing747.agregarAsiento(asiento14)
+		Boeing747.agregarAsiento(asiento15)
 		//avion 6
 		
 		// vuelo 1
 		
-		val vueloBSaRio = new Vuelo =>[
+		val vueloBSaItalia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
 	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
-	       aerolinea = AerolineasArgentinas
-	       duracionDeVuelo = 5.0
-	       avion = Boeing747
-	       precioBase = 8000.0
+	       horarioDePartida = LocalDate.of(2021,06,01)
+	       aerolinea = AirFrance
+	       duracionDeVuelo = 15.0
+	       avion = Boeing777 
+	       precioBase = 30000.0
 		]
 		
 		val asiento16 = new Asiento =>[
@@ -270,18 +296,21 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
+		Boeing747.agregarAsiento(asiento16)
+		Boeing747.agregarAsiento(asiento17)
+		Boeing747.agregarAsiento(asiento18)
 		//avion 7
 		
 		// vuelo 1
 		
-		val vueloBSaRio = new Vuelo =>[
+		val vueloBSaAustralia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
-	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
-	       aerolinea = AerolineasArgentinas
-	       duracionDeVuelo = 5.0
-	       avion = Boeing747
-	       precioBase = 8000.0
+	       ciudadDeDestino = "Sidney"
+	       horarioDePartida = LocalDate.of(2021,03,01)
+	       aerolinea = Luftansa
+	       duracionDeVuelo = 16.0
+	       avion = Boeing767 
+	       precioBase = 80000.0
 		]
 		
 		val asiento19 = new Asiento =>[
@@ -301,18 +330,21 @@ class AterrizarBootstrap {
 			disponible = true
 			claseDeAsiento = primeraClase
 		]
+		Boeing747.agregarAsiento(asiento19)
+		Boeing747.agregarAsiento(asiento20)
+		Boeing747.agregarAsiento(asiento21)
 		
 		//avion 8
 		
 		// vuelo 1
 		
-		val vueloBSaRio = new Vuelo =>[
+		val vueloBSaInglaterra = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
-	       ciudadDeDestino = "Rio de Janeiro"
-	       horarioDePartida = LocalDate.of(2020,01,01)
-	       aerolinea = AerolineasArgentinas
-	       duracionDeVuelo = 5.0
-	       avion = Boeing747
+	       ciudadDeDestino = "Londres"
+	       horarioDePartida = LocalDate.of(2021,01,05)
+	       aerolinea = Varig
+	       duracionDeVuelo = 10.0
+	       avion = Boeing757 
 	       precioBase = 8000.0
 		]
 		
@@ -334,7 +366,56 @@ class AterrizarBootstrap {
 			claseDeAsiento = primeraClase
 		]
 		
+		Boeing747.agregarAsiento(asiento22)
+		Boeing747.agregarAsiento(asiento23)
+		Boeing747.agregarAsiento(asiento24)
 	
+	
+	
+	
+	//vuelo compuesto
+	
+	val RapidoDelNorte = new Avion =>[ nombre = "Rapido del Norte"]
+
+        val asientoDeRapidoDelNorte = new Asiento =>[
+            ventana = false
+            disponible = true
+            claseDeAsiento = bussisnes
+        ]
+
+        RapidoDelNorte.agregarAsiento(asientoDeRapidoDelNorte)
+
+        val vueloARGaCHILEaCUBA = new VueloCompuesto  =>[
+            ciudadDeOrigen = "Buenos Aires"
+            ciudadDeDestino = "La Habana"
+            horarioDePartida = LocalDate.of(2020,11,23)
+            aerolinea = AerolineasArgentinas
+            avion = RapidoDelNorte
+            precioBase = 45000.0
+        ]
+
+        val vueloBSaCHILE = new Vuelo =>[
+           ciudadDeOrigen = "Buenos Aires"
+           ciudadDeDestino = "Santiago de Chile"
+           horarioDePartida = LocalDate.of(2020,11,23)
+           aerolinea = AerolineasArgentinas
+           duracionDeVuelo = 2.0
+           avion = RapidoDelNorte
+           precioBase = 8000.0
+        ]
+
+        val vueloCHILEaCUBA = new Vuelo =>[
+           ciudadDeOrigen = "Santiago de Chile"
+           ciudadDeDestino = "La Habana"
+           horarioDePartida = LocalDate.of(2020,11,23)
+           aerolinea = AerolineasArgentinas
+           duracionDeVuelo = 12.0
+           avion = RapidoDelNorte
+           precioBase = 18000.0
+        ]
+
+        vueloARGaCHILEaCUBA.agregarEscala(vueloBSaCHILE)
+        vueloARGaCHILEaCUBA.agregarEscala(vueloCHILEaCUBA)
 		
 		
 		

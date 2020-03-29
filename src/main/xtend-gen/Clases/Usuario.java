@@ -62,7 +62,7 @@ public class Usuario implements Entidad {
     this.carritoDeCompras.getTickets().forEach(_function);
   }
   
-  public boolean addAmigo(final Usuario usuario) {
+  public boolean agregarAmigo(final Usuario usuario) {
     return this.amigos.add(usuario);
   }
   

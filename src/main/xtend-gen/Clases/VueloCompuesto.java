@@ -14,14 +14,14 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class VueloCompuesto extends Vuelo {
   private List<Vuelo> escalas = new ArrayList<Vuelo>();
   
-  public double getDuracionDeViaje() {
+  public Double getDuracionDeVuelo() {
     final Function2<Double, Vuelo, Double> _function = new Function2<Double, Vuelo, Double>() {
       public Double apply(final Double acum, final Vuelo vuelo) {
         Double _duracionDeVuelo = vuelo.getDuracionDeVuelo();
         return Double.valueOf(DoubleExtensions.operator_plus(acum, _duracionDeVuelo));
       }
     };
-    return (double) IterableExtensions.<Vuelo, Double>fold(this.escalas, Double.valueOf(0.0), _function);
+    return IterableExtensions.<Vuelo, Double>fold(this.escalas, Double.valueOf(0.0), _function);
   }
   
   public double precioDeVuelo() {

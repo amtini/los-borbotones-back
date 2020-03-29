@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit
 class VueloCompuesto extends Vuelo{
 	List<Vuelo> escalas = new ArrayList<Vuelo>
 	
-	def double getDuracionDeViaje(){
+	override getDuracionDeVuelo(){
 		//ChronoUnit.HOURS.between(escalas.head().horarioDePartida,escalas.last().horarioDeLlegada)
 		escalas.fold(0.0, [acum, vuelo | acum + vuelo.duracionDeVuelo ])
 	}
