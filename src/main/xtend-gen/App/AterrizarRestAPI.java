@@ -11,6 +11,7 @@ import Repositorio.RepositorioUsuario;
 import Repositorio.RepositorioVuelo;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import java.io.IOException;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.ServletException;
@@ -244,6 +245,20 @@ public class AterrizarRestAPI extends ResultFactory {
     }
   }
   
+  @Post("/asientosDeVuelo/:id")
+  public Result dameAsientos(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final Set<Asiento> asientos = this.repoVuelo.searchByID(id).getAvion().getAsientos();
+      return ResultFactory.ok(this._jSONUtils.toJson(asientos));
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
   public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
     {
     	Matcher matcher = 
@@ -318,6 +333,26 @@ public class AterrizarRestAPI extends ResultFactory {
             response.setContentType("application/json");
     		
     	    Result result = finalizarCompra(id, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/asientosDeVuelo/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String id = matcher.group(1);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = dameAsientos(id, target, baseRequest, request, response);
     	    result.process(response);
     	    
     		response.addHeader("Access-Control-Allow-Origin", "*");

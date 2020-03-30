@@ -176,12 +176,25 @@ class AterrizarRestAPI {
 		}
 	}
 	
+	//dame vuelos y dame asientos
+	
 	@Post("/vuelos")
 	def dameVuelos(@Body String body){
 		try{
 			val filtros = body.fromJson(filtrosRequest)
 			
 			return ok(/*repoVuelo.vuelosDisponibles.toJson)*/ repoVuelo.buscarVuelos(filtros.origen, filtros.destino, filtros.desde, filtros.hasta).toJson)
+		}catch(UserException exception){
+			return badRequest()
+		}
+	}
+	
+	@Post("/asientosDeVuelo/:id")
+	def dameAsientos(){
+		try{
+			val asientos = repoVuelo.searchByID(id).avion.asientos
+			
+			return ok(asientos.toJson)
 		}catch(UserException exception){
 			return badRequest()
 		}
