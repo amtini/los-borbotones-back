@@ -6,6 +6,8 @@ import Clases.Pasaje;
 import Clases.Ticket;
 import Clases.Vuelo;
 import Repositorio.Entidad;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Objects;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,7 +20,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Usuario implements Entidad {
-  private String id;
+  private String ID;
   
   private String usuario;
   
@@ -32,18 +34,25 @@ public class Usuario implements Entidad {
   
   private double dinero;
   
+  @JsonIgnore
   private List<Usuario> amigos = new ArrayList<Usuario>();
   
+  @JsonIgnore
   private CarritoDeCompras carritoDeCompras;
   
+  @JsonIgnore
   private Set<Pasaje> pasajesComprados = new HashSet<Pasaje>();
   
   public String getID() {
-    return this.id;
+    return this.ID;
   }
   
   public String setID(final String idd) {
-    return this.id = idd;
+    return this.ID = idd;
+  }
+  
+  public boolean verificarUsuario(final String usuarioLogin, final String passwordLogin) {
+    return (Objects.equal(this.usuario, usuarioLogin) && Objects.equal(this.password, passwordLogin));
   }
   
   public boolean limpiarCarrito() {
@@ -88,15 +97,6 @@ public class Usuario implements Entidad {
   public double removerSaldo(final double din) {
     double _dinero = this.dinero;
     return this.dinero = (_dinero - din);
-  }
-  
-  @Pure
-  public String getId() {
-    return this.id;
-  }
-  
-  public void setId(final String id) {
-    this.id = id;
   }
   
   @Pure

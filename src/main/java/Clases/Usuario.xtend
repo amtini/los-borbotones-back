@@ -7,11 +7,12 @@ import java.util.List
 import java.util.HashSet
 import java.util.Set
 import java.time.LocalDate
+import com.fasterxml.jackson.annotation.JsonIgnore
 
 @Accessors
 class Usuario implements Entidad{
 	
-	String id
+	String ID
 	
 	String usuario
 	String nombre
@@ -20,18 +21,22 @@ class Usuario implements Entidad{
 	int edad
 	double dinero
 	
-	List<Usuario> amigos = new ArrayList<Usuario>
+	@JsonIgnore List<Usuario> amigos = new ArrayList<Usuario>
 	
-	CarritoDeCompras carritoDeCompras
+	@JsonIgnore CarritoDeCompras carritoDeCompras
 	
-	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
+	@JsonIgnore Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
 	override getID() {
-		id
+		ID
 	}
 	
 	override setID(String idd) {
-		id  = idd
+		ID  = idd
+	}
+	
+	def verificarUsuario(String usuarioLogin,String passwordLogin){
+		return (usuario == usuarioLogin && password == passwordLogin)
 	}
 	
 	def limpiarCarrito(){
