@@ -24,6 +24,10 @@ class CarritoDeCompras {
 		tickets.findFirst[it.vuelo == vuelo && it.asiento == asiento]
 	}
 	
+	def limpiarCarritoDeCompras(){
+		tickets.clear
+	}
+	
 	def costoTotalDelCarrito(){
 		tickets.fold(0.0, [acum, ticket | acum + ticket.costo])
 	}

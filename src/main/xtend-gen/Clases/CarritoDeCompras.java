@@ -37,6 +37,10 @@ public class CarritoDeCompras {
     return IterableExtensions.<Ticket>findFirst(this.tickets, _function);
   }
   
+  public void limpiarCarritoDeCompras() {
+    this.tickets.clear();
+  }
+  
   public Double costoTotalDelCarrito() {
     final Function2<Double, Ticket, Double> _function = new Function2<Double, Ticket, Double>() {
       public Double apply(final Double acum, final Ticket ticket) {

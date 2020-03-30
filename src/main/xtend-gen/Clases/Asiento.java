@@ -8,7 +8,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Asiento implements Entidad {
-  private String id;
+  private String ID;
   
   private boolean ventana;
   
@@ -21,20 +21,11 @@ public class Asiento implements Entidad {
   }
   
   public String getID() {
-    return this.id;
+    return this.ID;
   }
   
   public String setID(final String idd) {
-    return this.id = this.id;
-  }
-  
-  @Pure
-  public String getId() {
-    return this.id;
-  }
-  
-  public void setId(final String id) {
-    this.id = id;
+    return this.ID = idd;
   }
   
   @Pure

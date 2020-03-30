@@ -5,7 +5,7 @@ import Repositorio.Entidad
 
 @Accessors
 class Asiento implements Entidad{
-	String id
+	String ID
 	
 	boolean ventana
 	boolean disponible
@@ -17,10 +17,10 @@ class Asiento implements Entidad{
 	}
 	
 	override getID() {
-		id
+		ID
 	}
 	
 	override setID(String idd) {
-		id = id
+		ID = idd
 	}
 }

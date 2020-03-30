@@ -1,5 +1,6 @@
 package App;
 
+import App.filtrosRequest;
 import App.usuarioLogeadoRequest;
 import Clases.Asiento;
 import Clases.Ticket;
@@ -22,7 +23,6 @@ import org.uqbar.commons.model.exceptions.UserException;
 import org.uqbar.xtrest.api.Result;
 import org.uqbar.xtrest.api.annotation.Body;
 import org.uqbar.xtrest.api.annotation.Controller;
-import org.uqbar.xtrest.api.annotation.Get;
 import org.uqbar.xtrest.api.annotation.Post;
 import org.uqbar.xtrest.json.JSONUtils;
 import org.uqbar.xtrest.result.ResultFactory;
@@ -200,12 +200,43 @@ public class AterrizarRestAPI extends ResultFactory {
     }
   }
   
-  @Get("/dameUsuarios")
-  public Result dameUsuarios(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+  @Post("/usuario/limpiarCarritoDeCompras/:id")
+  public Result limpiarCarritoDeCompras(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     try {
-      return ResultFactory.ok(this._jSONUtils.toJson(this.repoUsuario.getElementos()));
+      final Usuario usuario = this.repoUsuario.searchByID(id);
+      usuario.getCarritoDeCompras().limpiarCarritoDeCompras();
+      return ResultFactory.ok("carrito de compras limpio");
     } catch (final Throwable _t) {
-      if (_t instanceof UnrecognizedPropertyException) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
+  @Post("/usuario/finalizarCompra/:id")
+  public Result finalizarCompra(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final Usuario usuario = this.repoUsuario.searchByID(id);
+      usuario.comprarPasajes();
+      return ResultFactory.ok("pasajes comprados");
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
+  @Post("/vuelos")
+  public Result dameVuelos(@Body final String body, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final filtrosRequest filtros = this._jSONUtils.<filtrosRequest>fromJson(body, filtrosRequest.class);
+      return ResultFactory.ok(this._jSONUtils.toJson(this.repoVuelo.buscarVuelos(filtros.getOrigen(), filtros.getDestino(), filtros.getDesde(), filtros.getHasta())));
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
         return ResultFactory.badRequest();
       } else {
         throw Exceptions.sneakyThrow(_t);
@@ -214,25 +245,6 @@ public class AterrizarRestAPI extends ResultFactory {
   }
   
   public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
-    {
-    	Matcher matcher = 
-    		Pattern.compile("/dameUsuarios").matcher(target);
-    	if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches()) {
-    		// take parameters from request
-    		
-    		// take variables from url
-    		
-            // set default content type (it can be overridden during next call)
-            response.setContentType("application/json");
-    		
-    	    Result result = dameUsuarios(target, baseRequest, request, response);
-    	    result.process(response);
-    	    
-    		response.addHeader("Access-Control-Allow-Origin", "*");
-    	    baseRequest.setHandled(true);
-    	    return;
-    	}
-    }
     {
     	Matcher matcher = 
     		Pattern.compile("/login").matcher(target);
@@ -246,6 +258,66 @@ public class AterrizarRestAPI extends ResultFactory {
             response.setContentType("application/json");
     		
     	    Result result = login(body, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/vuelos").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		String body = readBodyAsString(request);
+    		
+    		// take variables from url
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = dameVuelos(body, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/usuario/limpiarCarritoDeCompras/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String id = matcher.group(1);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = limpiarCarritoDeCompras(id, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/usuario/finalizarCompra/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String id = matcher.group(1);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = finalizarCompra(id, target, baseRequest, request, response);
     	    result.process(response);
     	    
     		response.addHeader("Access-Control-Allow-Origin", "*");

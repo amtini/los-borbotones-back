@@ -7,7 +7,7 @@ import java.time.temporal.ChronoUnit
 
 @Accessors
 class Vuelo implements Entidad{
-	String id
+	String ID
 	
 	String ciudadDeOrigen
 	String ciudadDeDestino
@@ -19,11 +19,11 @@ class Vuelo implements Entidad{
 	Double precioBase
 	
 	override getID() {
-		id
+		ID
 	}
 	
 	override setID(String idd) {
-		id  = idd
+		ID  = idd
 	}
 	
 	def precioDeVuelo(){
@@ -34,5 +34,7 @@ class Vuelo implements Entidad{
 		ChronoUnit.HOURS.between(horarioDePartida,horarioDeLlegada)
 	}*/
 	
-	
+	def cumpleLosFiltros(String origen_, String destino_, LocalDate desde, LocalDate hasta){
+		ciudadDeDestino == destino_ && ciudadDeOrigen == origen_ && horarioDePartida >= desde && horarioDePartida <= hasta 
+	}	
 }

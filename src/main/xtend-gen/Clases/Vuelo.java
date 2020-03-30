@@ -3,6 +3,7 @@ package Clases;
 import Clases.Aerolinea;
 import Clases.Avion;
 import Repositorio.Entidad;
+import com.google.common.base.Objects;
 import java.time.LocalDate;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.DoubleExtensions;
@@ -11,7 +12,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @Accessors
 @SuppressWarnings("all")
 public class Vuelo implements Entidad {
-  private String id;
+  private String ID;
   
   private String ciudadDeOrigen;
   
@@ -28,11 +29,11 @@ public class Vuelo implements Entidad {
   private Double precioBase;
   
   public String getID() {
-    return this.id;
+    return this.ID;
   }
   
   public String setID(final String idd) {
-    return this.id = idd;
+    return this.ID = idd;
   }
   
   public double precioDeVuelo() {
@@ -42,13 +43,13 @@ public class Vuelo implements Entidad {
     return (_plus * _recargoUltimosPasajes);
   }
   
-  @Pure
-  public String getId() {
-    return this.id;
-  }
-  
-  public void setId(final String id) {
-    this.id = id;
+  /**
+   * def double duracionDeViaje(){
+   * ChronoUnit.HOURS.between(horarioDePartida,horarioDeLlegada)
+   * }
+   */
+  public boolean cumpleLosFiltros(final String origen_, final String destino_, final LocalDate desde, final LocalDate hasta) {
+    return (((Objects.equal(this.ciudadDeDestino, destino_) && Objects.equal(this.ciudadDeOrigen, origen_)) && (this.horarioDePartida.compareTo(desde) >= 0)) && (this.horarioDePartida.compareTo(hasta) <= 0));
   }
   
   @Pure

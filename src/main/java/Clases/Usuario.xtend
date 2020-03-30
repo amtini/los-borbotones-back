@@ -43,7 +43,7 @@ class Usuario implements Entidad{
 		pasajesComprados.empty
 	}
 	
-	def comprarPasaje(){
+	def comprarPasajes(){
 		carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))]
 	}
 	

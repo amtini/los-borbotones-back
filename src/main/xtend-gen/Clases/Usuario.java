@@ -58,7 +58,7 @@ public class Usuario implements Entidad {
     return this.pasajesComprados.isEmpty();
   }
   
-  public void comprarPasaje() {
+  public void comprarPasajes() {
     final Consumer<Ticket> _function = new Consumer<Ticket>() {
       public void accept(final Ticket ticket) {
         Vuelo _vuelo = ticket.getVuelo();

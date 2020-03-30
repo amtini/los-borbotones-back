@@ -13,6 +13,9 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.xtrest.api.annotation.Get
 import Clases.Ticket
 import Clases.Asiento
+import java.time.LocalDate
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
 
 @Controller
 class AterrizarRestAPI {
@@ -145,14 +148,53 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Get("/dameUsuarios")
-	def dameUsuarios(){
-        try {
-            return ok(repoUsuario.elementos.toJson)
-        } catch (UnrecognizedPropertyException exception) {
-            return badRequest()
-        }
+	@Post("/usuario/limpiarCarritoDeCompras/:id")
+	def limpiarCarritoDeCompras(){
+		try{
+			val usuario = repoUsuario.searchByID(id)
+			
+			usuario.carritoDeCompras.limpiarCarritoDeCompras
+			
+			return ok("carrito de compras limpio")
+		} catch (UserException exception){
+			return badRequest()
+		}
 	}
+	
+	//comprarPasajes
+	
+	@Post("/usuario/finalizarCompra/:id")
+	def finalizarCompra(){
+		try{
+			val usuario = repoUsuario.searchByID(id)
+			
+			usuario.comprarPasajes
+			
+			return ok("pasajes comprados")
+		}catch(UserException exception){
+			return badRequest()
+		}
+	}
+	
+	@Post("/vuelos")
+	def dameVuelos(@Body String body){
+		try{
+			val filtros = body.fromJson(filtrosRequest)
+			
+			return ok(/*repoVuelo.vuelosDisponibles.toJson)*/ repoVuelo.buscarVuelos(filtros.origen, filtros.destino, filtros.desde, filtros.hasta).toJson)
+		}catch(UserException exception){
+			return badRequest()
+		}
+	}
+}
+
+@Accessors
+class filtrosRequest{
+	String origen
+	String destino
+	LocalDate desde
+	LocalDate hasta
+	boolean ventanilla
 }
 
 @Accessors
