@@ -23,7 +23,7 @@ class Usuario implements Entidad{
 	
 	@JsonIgnore List<Usuario> amigos = new ArrayList<Usuario>
 	
-	@JsonIgnore CarritoDeCompras carritoDeCompras
+	CarritoDeCompras carritoDeCompras
 	
 	@JsonIgnore Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	

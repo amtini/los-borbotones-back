@@ -1,6 +1,7 @@
 package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import com.fasterxml.jackson.annotation.JsonProperty
 
 @Accessors
 class Ticket{
@@ -8,15 +9,20 @@ class Ticket{
 	Vuelo vuelo
 	Asiento asiento
 	
-	def reservar(){
+	new(Vuelo vuelo_, Asiento asiento_) {
+		vuelo = vuelo_
+		asiento = asiento_
+	}
+	
+	@JsonProperty def reservar(){
 		asiento.disponible = false
 	}
 	
-	def cancelarReserva(){
+	@JsonProperty def cancelarReserva(){
 		asiento.disponible = true
 	}
 	
-	def costo(){
+	@JsonProperty def costo(){
 		vuelo.precioDeVuelo + asiento.claseDeAsiento.precioClase
 	}
 }

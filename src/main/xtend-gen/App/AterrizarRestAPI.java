@@ -1,7 +1,10 @@
 package App;
 
 import App.usuarioLogeadoRequest;
+import Clases.Asiento;
+import Clases.Ticket;
 import Clases.Usuario;
+import Clases.Vuelo;
 import Repositorio.RepositorioAsiento;
 import Repositorio.RepositorioUsuario;
 import Repositorio.RepositorioVuelo;
@@ -162,6 +165,41 @@ public class AterrizarRestAPI extends ResultFactory {
     }
   }
   
+  @Post("/usuario/reservarVuelo/:idUsuario/:idVuelo/:idAsiento")
+  public Result reservarVuelo(final String idUsuario, final String idVuelo, final String idAsiento, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final Usuario usuario = this.repoUsuario.searchByID(this._jSONUtils.<String>fromJson(idUsuario, String.class));
+      final Vuelo vuelo = this.repoVuelo.searchByID(this._jSONUtils.<String>fromJson(idVuelo, String.class));
+      final Asiento asiento = this.repoAsiento.searchByID(this._jSONUtils.<String>fromJson(idAsiento, String.class));
+      Ticket _ticket = new Ticket(vuelo, asiento);
+      usuario.getCarritoDeCompras().agregarTicketAlCarrito(_ticket);
+      return ResultFactory.ok("se ha realizado la reserva");
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
+  @Post("/usuario/cancelarReserva/:idUsuario/:idVuelo/:idAsiento")
+  public Result cancelarReserva(final String idUsuario, final String idVuelo, final String idAsiento, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final Usuario usuario = this.repoUsuario.searchByID(this._jSONUtils.<String>fromJson(idUsuario, String.class));
+      final Vuelo vuelo = this.repoVuelo.searchByID(this._jSONUtils.<String>fromJson(idVuelo, String.class));
+      final Asiento asiento = this.repoAsiento.searchByID(this._jSONUtils.<String>fromJson(idAsiento, String.class));
+      usuario.getCarritoDeCompras().removerTicketDelCarrito(vuelo, asiento);
+      return ResultFactory.ok("se ha cancelado la reserva");
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
   @Get("/dameUsuarios")
   public Result dameUsuarios(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     try {
@@ -313,6 +351,50 @@ public class AterrizarRestAPI extends ResultFactory {
             response.setContentType("application/json");
     		
     	    Result result = eliminarAmigo(id, nombreAmigo, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/usuario/reservarVuelo/(\\w+)/(\\w+)/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String idUsuario = matcher.group(1);
+    		String idVuelo = matcher.group(2);
+    		String idAsiento = matcher.group(3);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = reservarVuelo(idUsuario, idVuelo, idAsiento, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/usuario/cancelarReserva/(\\w+)/(\\w+)/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String idUsuario = matcher.group(1);
+    		String idVuelo = matcher.group(2);
+    		String idAsiento = matcher.group(3);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = cancelarReserva(idUsuario, idVuelo, idAsiento, target, baseRequest, request, response);
     	    result.process(response);
     	    
     		response.addHeader("Access-Control-Allow-Origin", "*");

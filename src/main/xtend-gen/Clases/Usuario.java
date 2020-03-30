@@ -37,7 +37,6 @@ public class Usuario implements Entidad {
   @JsonIgnore
   private List<Usuario> amigos = new ArrayList<Usuario>();
   
-  @JsonIgnore
   private CarritoDeCompras carritoDeCompras;
   
   @JsonIgnore

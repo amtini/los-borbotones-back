@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
 import org.uqbar.commons.model.exceptions.UserException
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.xtrest.api.annotation.Get
+import Clases.Ticket
+import Clases.Asiento
 
 @Controller
 class AterrizarRestAPI {
@@ -106,6 +108,38 @@ class AterrizarRestAPI {
 		try{
 			repoUsuario.agregarAmigo(id, nombreAmigo)
 			return ok("amigo agregado exitosamente")
+		} catch (UserException exception){
+			return badRequest()
+		}
+	}
+	
+	//reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
+	
+	@Post("/usuario/reservarVuelo/:idUsuario/:idVuelo/:idAsiento")
+	def reservarVuelo(){
+		try{
+			val usuario = repoUsuario.searchByID(idUsuario.fromJson(String))
+			val vuelo = repoVuelo.searchByID(idVuelo.fromJson(String))
+			val asiento = repoAsiento.searchByID(idAsiento.fromJson(String))
+			
+			usuario.carritoDeCompras.agregarTicketAlCarrito(new Ticket(vuelo, asiento))
+			
+			return ok("se ha realizado la reserva")
+		} catch (UserException exception){
+			return badRequest()
+		}
+	}
+	
+	@Post("/usuario/cancelarReserva/:idUsuario/:idVuelo/:idAsiento")
+	def cancelarReserva(){
+		try{
+			val usuario = repoUsuario.searchByID(idUsuario.fromJson(String))
+			val vuelo = repoVuelo.searchByID(idVuelo.fromJson(String))
+			val asiento = repoAsiento.searchByID(idAsiento.fromJson(String))
+			
+			usuario.carritoDeCompras.removerTicketDelCarrito(vuelo, asiento)
+			
+			return ok("se ha cancelado la reserva")
 		} catch (UserException exception){
 			return badRequest()
 		}

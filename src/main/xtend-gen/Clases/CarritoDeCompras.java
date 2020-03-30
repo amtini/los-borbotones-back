@@ -1,9 +1,13 @@
 package Clases;
 
+import Clases.Asiento;
 import Clases.Ticket;
+import Clases.Vuelo;
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -18,9 +22,19 @@ public class CarritoDeCompras {
     ticket.reservar();
   }
   
-  public void removerTicketDelCarrito(final Ticket ticket) {
+  public void removerTicketDelCarrito(final Vuelo vuelo, final Asiento asiento) {
+    final Ticket ticket = this.buscarTicket(vuelo, asiento);
     this.tickets.remove(ticket);
     ticket.cancelarReserva();
+  }
+  
+  public Ticket buscarTicket(final Vuelo vuelo, final Asiento asiento) {
+    final Function1<Ticket, Boolean> _function = new Function1<Ticket, Boolean>() {
+      public Boolean apply(final Ticket it) {
+        return Boolean.valueOf((Objects.equal(it.getVuelo(), vuelo) && Objects.equal(it.getAsiento(), asiento)));
+      }
+    };
+    return IterableExtensions.<Ticket>findFirst(this.tickets, _function);
   }
   
   public Double costoTotalDelCarrito() {
