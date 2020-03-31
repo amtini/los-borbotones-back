@@ -2,12 +2,15 @@ package App;
 
 import App.usuarioLogeadoRequest;
 import Clases.Asiento;
+import Clases.Pasaje;
 import Clases.Ticket;
 import Clases.Usuario;
 import Clases.Vuelo;
 import Repositorio.RepositorioAsiento;
 import Repositorio.RepositorioUsuario;
 import Repositorio.RepositorioVuelo;
+import Serializer.AmigoSerializer;
+import Serializer.PasajeSerializer;
 import Serializer.UsuarioSerializer;
 import Serializer.VueloSerializer;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
@@ -145,8 +148,8 @@ public class AterrizarRestAPI extends ResultFactory {
   @Post("/misAmigos/:id")
   public Result dameMisAmigos(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     try {
-      final List<Usuario> amigos = this.repoUsuario.searchByID(id).getAmigos();
-      return ResultFactory.ok(UsuarioSerializer.toJson(amigos));
+      final Set<Usuario> amigos = this.repoUsuario.searchByID(id).getAmigos();
+      return ResultFactory.ok(AmigoSerializer.toJson(amigos));
     } catch (final Throwable _t) {
       if (_t instanceof UserException) {
         return ResultFactory.badRequest();
@@ -280,9 +283,30 @@ public class AterrizarRestAPI extends ResultFactory {
   
   @Post("/dameUsuario/:id")
   public Result dameUsuario(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nextraneous input \')\' expecting \'}\'"
-      + "\nType mismatch: cannot convert from Usuario to List<Usuario>");
+    try {
+      final Usuario usuario = this.repoUsuario.searchByID(id);
+      return ResultFactory.ok(UsuarioSerializer.toJson(usuario));
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
+  @Post("/misPasajes/:id")
+  public Result damePasajes(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final Set<Pasaje> pasajes = this.repoUsuario.searchByID(id).getPasajesComprados();
+      return ResultFactory.ok(PasajeSerializer.toJson(pasajes));
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
   }
   
   public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
@@ -418,6 +442,26 @@ public class AterrizarRestAPI extends ResultFactory {
             response.setContentType("application/json");
     		
     	    Result result = dameUsuario(id, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/misPasajes/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String id = matcher.group(1);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = damePasajes(id, target, baseRequest, request, response);
     	    result.process(response);
     	    
     		response.addHeader("Access-Control-Allow-Origin", "*");

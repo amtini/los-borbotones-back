@@ -1,12 +1,11 @@
 package Clases
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.time.LocalDate
 import Repositorio.Entidad
-import java.time.temporal.ChronoUnit
+import java.time.LocalDate
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class Vuelo implements Entidad{
+public class Vuelo implements Entidad{
 	String ID
 	
 	String ciudadDeOrigen

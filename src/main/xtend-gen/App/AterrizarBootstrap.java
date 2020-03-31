@@ -463,7 +463,7 @@ public class AterrizarBootstrap {
     final Procedure1<Asiento> _function_47 = new Procedure1<Asiento>() {
       public void apply(final Asiento it) {
         it.setVentana(false);
-        it.setDisponible(true);
+        it.setDisponible(false);
         it.setClaseDeAsiento(primeraClase);
       }
     };
@@ -472,7 +472,7 @@ public class AterrizarBootstrap {
     final Procedure1<Asiento> _function_48 = new Procedure1<Asiento>() {
       public void apply(final Asiento it) {
         it.setVentana(false);
-        it.setDisponible(true);
+        it.setDisponible(false);
         it.setClaseDeAsiento(primeraClase);
       }
     };

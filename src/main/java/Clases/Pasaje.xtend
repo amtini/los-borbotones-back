@@ -17,5 +17,4 @@ class Pasaje{
 		costo = costo_
 		comprado = comprado_
 	}
-	
 }

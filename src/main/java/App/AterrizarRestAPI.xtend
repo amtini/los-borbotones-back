@@ -16,6 +16,8 @@ import java.time.LocalDate
 import Serializer.VueloSerializer
 import Serializer.UsuarioSerializer
 import org.uqbar.xtrest.api.annotation.Delete
+import Serializer.AmigoSerializer
+import Serializer.PasajeSerializer
 
 @Controller
 class AterrizarRestAPI {
@@ -100,7 +102,7 @@ class AterrizarRestAPI {
 	def dameMisAmigos(){
 		try{
 			val amigos = repoUsuario.searchByID(id).amigos
-			return ok(UsuarioSerializer.toJson(amigos))
+			return ok(AmigoSerializer.toJson(amigos))
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -220,11 +222,27 @@ class AterrizarRestAPI {
 			
 			return ok(UsuarioSerializer.toJson(usuario))
 				//usuario.toJson
-			)
+			
 		}catch(UserException exception){
 			return badRequest()
 		}
 	}
+	
+	//dame mis pasajes
+	
+	@Post("/misPasajes/:id")
+	def damePasajes(){
+		try{
+			val pasajes = repoUsuario.searchByID(id).pasajesComprados
+			
+			return ok(PasajeSerializer.toJson(pasajes))
+				//usuario.toJson
+			
+		}catch(UserException exception){
+			return badRequest()
+		}
+	}
+	
 }
 
 @Accessors

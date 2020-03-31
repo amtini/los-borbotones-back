@@ -21,11 +21,11 @@ class Usuario implements Entidad{
 	int edad
 	double dinero
 	
-	List<Usuario> amigos = new ArrayList<Usuario>
+	Set<Usuario> amigos = new HashSet<Usuario>
 	
 	CarritoDeCompras carritoDeCompras
 	
-	@JsonIgnore Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
+	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
 	override getID() {
 		ID

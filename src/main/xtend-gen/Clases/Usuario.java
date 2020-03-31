@@ -6,12 +6,9 @@ import Clases.Pasaje;
 import Clases.Ticket;
 import Clases.Vuelo;
 import Repositorio.Entidad;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
@@ -35,11 +32,10 @@ public class Usuario implements Entidad {
   
   private double dinero;
   
-  private List<Usuario> amigos = new ArrayList<Usuario>();
+  private Set<Usuario> amigos = new HashSet<Usuario>();
   
   private CarritoDeCompras carritoDeCompras;
   
-  @JsonIgnore
   private Set<Pasaje> pasajesComprados = new HashSet<Pasaje>();
   
   public String getID() {
@@ -160,11 +156,11 @@ public class Usuario implements Entidad {
   }
   
   @Pure
-  public List<Usuario> getAmigos() {
+  public Set<Usuario> getAmigos() {
     return this.amigos;
   }
   
-  public void setAmigos(final List<Usuario> amigos) {
+  public void setAmigos(final Set<Usuario> amigos) {
     this.amigos = amigos;
   }
   

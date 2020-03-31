@@ -344,13 +344,13 @@ class AterrizarBootstrap {
 		
 		val asiento28 = new Asiento =>[
 			ventana = false
-			disponible = true
+			disponible = false
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento29 = new Asiento =>[
 			ventana = false
-			disponible = true
+			disponible = false
 			claseDeAsiento = primeraClase
 		]
 		
