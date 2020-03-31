@@ -22,7 +22,7 @@ class UsuarioSerializer extends StdSerializer<Usuario>{
 		gen.writeStringField("nombre", value.nombre);
 		gen.writeStringField("apellido", value.apellido);
 		gen.writeStringField("password", value.password);
-		gen.writeNumberField("edad", value.edad);	
+		gen.writeNumberField("edad", value.edad);
 		gen.writeNumberField("dinero", value.dinero);
 		gen.writeEndObject();
 	}

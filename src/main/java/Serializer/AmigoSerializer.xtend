@@ -34,7 +34,7 @@ class AmigoSerializer extends StdSerializer<Usuario>{
 	static def mapper(){
 		val ObjectMapper mapper = new ObjectMapper()
 		val SimpleModule module = new SimpleModule()
-		module.addSerializer(Usuario, new UsuarioSerializer(Usuario))
+		module.addSerializer(Usuario, new AmigoSerializer(Usuario))
 		mapper.registerModule(module)
 		mapper
 	}
