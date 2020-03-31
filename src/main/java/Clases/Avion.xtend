@@ -15,6 +15,10 @@ class Avion {
 	}
 	
 	def asientosDisponibles(){
-		asientos.filter[it.disponible == true]
+		asientos.filter[it.disponible == true].toList
+	}
+	
+	def asientoMasBarato(){
+		asientosDisponibles.minBy[precio]
 	}
 }

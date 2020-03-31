@@ -20,11 +20,11 @@ class VueloCompuesto extends Vuelo{
 	}
 	
 
-	def cantidadDeEscalas(){
+	override getCantidadEscalas(){
 		escalas.size
 	}
 	
 	def boolean tieneEscalas(){
-		cantidadDeEscalas > 1
+		getCantidadEscalas > 1
 	}
 }

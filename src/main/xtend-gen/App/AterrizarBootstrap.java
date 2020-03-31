@@ -737,9 +737,7 @@ public class AterrizarBootstrap {
       }
     };
     final Usuario JorgeLopez = ObjectExtensions.<Usuario>operator_doubleArrow(_usuario_5, _function_71);
-    AgustinMarioTini.agregarAmigo(NicolasDichiara);
     AgustinMarioTini.agregarAmigo(BrianZerial);
-    BrianZerial.agregarAmigo(NicolasDichiara);
     NicolasDichiara.agregarAmigo(BrianZerial);
     LocalDate _of = LocalDate.of(2020, 3, 29);
     final Pasaje pasajeBSaRioMMorena = new Pasaje(vueloBSaRio, asiento25, Double.valueOf(15000.0), _of);

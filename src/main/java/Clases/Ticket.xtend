@@ -23,6 +23,6 @@ class Ticket{
 	}
 	
 	@JsonProperty def costo(){
-		vuelo.precioDeVuelo + asiento.claseDeAsiento.precioClase
+		vuelo.precioDeVuelo + asiento.precio
 	}
 }

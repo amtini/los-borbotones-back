@@ -1,0 +1,5 @@
+package Serializer
+
+class InterfaceAPI {
+	
+}

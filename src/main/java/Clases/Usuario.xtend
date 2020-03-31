@@ -21,7 +21,7 @@ class Usuario implements Entidad{
 	int edad
 	double dinero
 	
-	@JsonIgnore List<Usuario> amigos = new ArrayList<Usuario>
+	List<Usuario> amigos = new ArrayList<Usuario>
 	
 	CarritoDeCompras carritoDeCompras
 	
@@ -48,7 +48,11 @@ class Usuario implements Entidad{
 	}
 	
 	def agregarAmigo(Usuario usuario){
-		amigos.add(usuario)
+		if(amigos.contains(usuario)){
+			println("El usuario ya es amigo")
+		}else{
+			amigos.add(usuario)
+		}
 	}
 	
 	def removerAmigo(Usuario usuario){

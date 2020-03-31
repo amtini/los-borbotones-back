@@ -31,8 +31,8 @@ public class Ticket {
   @JsonProperty
   public double costo() {
     double _precioDeVuelo = this.vuelo.precioDeVuelo();
-    float _precioClase = this.asiento.getClaseDeAsiento().getPrecioClase();
-    return (_precioDeVuelo + _precioClase);
+    float _precio = this.asiento.precio();
+    return (_precioDeVuelo + _precio);
   }
   
   @Pure

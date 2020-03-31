@@ -507,7 +507,7 @@ class AterrizarBootstrap {
         vueloARGaCHILEaCUBA.escalas.add(vueloBSaCHILE)
         vueloARGaCHILEaCUBA.escalas.add(vueloCHILEaCUBA)
 		
-		
+	
 		//usuarios
 	
 		val MartinMorena = new Usuario =>[
@@ -554,7 +554,7 @@ class AterrizarBootstrap {
 			edad = 24
 			dinero = 148654.0
 		]
-		
+	
 		val JorgeLopez = new Usuario =>[
 			usuario = "jlopez"
 			nombre = "Jorgue"
@@ -566,9 +566,7 @@ class AterrizarBootstrap {
 		
 		//amigos
 		
-		AgustinMarioTini.agregarAmigo(NicolasDichiara)
 		AgustinMarioTini.agregarAmigo(BrianZerial)	
-		BrianZerial.agregarAmigo(NicolasDichiara)
 		NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena

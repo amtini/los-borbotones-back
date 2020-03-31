@@ -16,6 +16,8 @@ class Vuelo implements Entidad{
 	Double duracionDeVuelo
 	Avion avion
 	
+	int cantidadEscalas
+	
 	Double precioBase
 	
 	override getID() {
@@ -30,9 +32,9 @@ class Vuelo implements Entidad{
 		(precioBase + aerolinea.precioAsiento) * avion.recargoUltimosPasajes
 	}
 	
-/* 	def double duracionDeViaje(){
-		ChronoUnit.HOURS.between(horarioDePartida,horarioDeLlegada)
-	}*/
+	def precioMinimoPasaje(){
+		precioDeVuelo() + avion.asientoMasBarato.precio
+	}
 	
 	def cumpleLosFiltros(String origen_, String destino_, LocalDate desde, LocalDate hasta){
 		ciudadDeDestino == destino_ && ciudadDeOrigen == origen_ && horarioDePartida >= desde && horarioDePartida <= hasta 

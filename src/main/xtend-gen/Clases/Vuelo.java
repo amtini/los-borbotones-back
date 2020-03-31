@@ -26,6 +26,8 @@ public class Vuelo implements Entidad {
   
   private Avion avion;
   
+  private int cantidadEscalas;
+  
   private Double precioBase;
   
   public String getID() {
@@ -43,11 +45,12 @@ public class Vuelo implements Entidad {
     return (_plus * _recargoUltimosPasajes);
   }
   
-  /**
-   * def double duracionDeViaje(){
-   * ChronoUnit.HOURS.between(horarioDePartida,horarioDeLlegada)
-   * }
-   */
+  public double precioMinimoPasaje() {
+    double _precioDeVuelo = this.precioDeVuelo();
+    float _precio = this.avion.asientoMasBarato().precio();
+    return (_precioDeVuelo + _precio);
+  }
+  
   public boolean cumpleLosFiltros(final String origen_, final String destino_, final LocalDate desde, final LocalDate hasta) {
     return (((Objects.equal(this.ciudadDeDestino, destino_) && Objects.equal(this.ciudadDeOrigen, origen_)) && (this.horarioDePartida.compareTo(desde) >= 0)) && (this.horarioDePartida.compareTo(hasta) <= 0));
   }
@@ -104,6 +107,15 @@ public class Vuelo implements Entidad {
   
   public void setAvion(final Avion avion) {
     this.avion = avion;
+  }
+  
+  @Pure
+  public int getCantidadEscalas() {
+    return this.cantidadEscalas;
+  }
+  
+  public void setCantidadEscalas(final int cantidadEscalas) {
+    this.cantidadEscalas = cantidadEscalas;
   }
   
   @Pure

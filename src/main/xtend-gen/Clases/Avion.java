@@ -2,6 +2,7 @@ package Clases;
 
 import Clases.Asiento;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -28,14 +29,23 @@ public class Avion {
     return _xifexpression;
   }
   
-  public Iterable<Asiento> asientosDisponibles() {
+  public List<Asiento> asientosDisponibles() {
     final Function1<Asiento, Boolean> _function = new Function1<Asiento, Boolean>() {
       public Boolean apply(final Asiento it) {
         boolean _isDisponible = it.isDisponible();
         return Boolean.valueOf((_isDisponible == true));
       }
     };
-    return IterableExtensions.<Asiento>filter(this.asientos, _function);
+    return IterableExtensions.<Asiento>toList(IterableExtensions.<Asiento>filter(this.asientos, _function));
+  }
+  
+  public Asiento asientoMasBarato() {
+    final Function1<Asiento, Float> _function = new Function1<Asiento, Float>() {
+      public Float apply(final Asiento it) {
+        return Float.valueOf(it.precio());
+      }
+    };
+    return IterableExtensions.<Asiento, Float>minBy(this.asientosDisponibles(), _function);
   }
   
   @Pure

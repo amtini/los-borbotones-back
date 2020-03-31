@@ -12,10 +12,9 @@ import org.uqbar.commons.model.exceptions.UserException
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.xtrest.api.annotation.Get
 import Clases.Ticket
-import Clases.Asiento
 import java.time.LocalDate
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import Serializer.VueloSerializer
+import Serializer.UsuarioSerializer
 
 @Controller
 class AterrizarRestAPI {
@@ -36,7 +35,7 @@ class AterrizarRestAPI {
             val usuarioLogeadoBody = body.fromJson(usuarioLogeadoRequest)
             try {
                 val usuarioLogeado = this.repoUsuario.verificarLogin(usuarioLogeadoBody.usuario, usuarioLogeadoBody.password)
-                return ok(usuarioLogeado.toJson)
+                return ok(usuarioLogeado.ID.toJson)
             } catch (UserException exception) {
                 return badRequest()
             }
@@ -96,21 +95,22 @@ class AterrizarRestAPI {
 	
 	//agregar o remover Amigos
 	
-	@Post("/usuario/agregarAmigo/:id/:nombreAmigo")
+	@Post("/usuario/agregarAmigo/:id/:usuarioAmigo")
 	def agregarAmigo(){
 		try{
-			repoUsuario.agregarAmigo(id, nombreAmigo)
-			return ok("amigo agregado exitosamente")
+			repoUsuario.agregarAmigo(id, usuarioAmigo)
+			return ok("Se agrego al usuario: "+usuarioAmigo+" como amigo")
 		} catch (UserException exception){
 			return badRequest()
 		}
 	}
 	
-	@Post("/usuario/eliminarAmigo/:id/:nombreAmigo")
+	@Post("/usuario/eliminarAmigo/:id/:id2")
 	def eliminarAmigo(){
 		try{
-			repoUsuario.agregarAmigo(id, nombreAmigo)
-			return ok("amigo agregado exitosamente")
+			repoUsuario.eliminarAmigo(id, id2)
+			val nombreUsuario = repoUsuario.searchByID(id2).usuario
+			return ok("Se elimino al usuario: "+nombreUsuario+" de la lista de amigos")
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -133,12 +133,12 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Post("/usuario/cancelarReserva/:idUsuario/:idVuelo/:idAsiento")
+	@Post("/usuario/cancelarReserva/:id1/:id2/:id3")
 	def cancelarReserva(){
 		try{
-			val usuario = repoUsuario.searchByID(idUsuario.fromJson(String))
-			val vuelo = repoVuelo.searchByID(idVuelo.fromJson(String))
-			val asiento = repoAsiento.searchByID(idAsiento.fromJson(String))
+			val usuario = repoUsuario.searchByID(id1.fromJson(String))
+			val vuelo = repoVuelo.searchByID(id2.fromJson(String))
+			val asiento = repoAsiento.searchByID(id3.fromJson(String))
 			
 			usuario.carritoDeCompras.removerTicketDelCarrito(vuelo, asiento)
 			
@@ -178,12 +178,12 @@ class AterrizarRestAPI {
 	
 	//dame vuelos y dame asientos
 	
-	@Post("/vuelos")
-	def dameVuelos(@Body String body){
+	@Get("/vuelos")
+	def dameVuelos(){
 		try{
-			val filtros = body.fromJson(filtrosRequest)
-			
-			return ok(/*repoVuelo.vuelosDisponibles.toJson)*/ repoVuelo.buscarVuelos(filtros.origen, filtros.destino, filtros.desde, filtros.hasta).toJson)
+			val vuelos = repoVuelo.elementos
+			/*TODO filtros		*/
+			return ok(VueloSerializer.toJson(vuelos))
 		}catch(UserException exception){
 			return badRequest()
 		}
@@ -192,9 +192,22 @@ class AterrizarRestAPI {
 	@Post("/asientosDeVuelo/:id")
 	def dameAsientos(){
 		try{
-			val asientos = repoVuelo.searchByID(id).avion.asientos
+			val asientos = repoVuelo.searchByID(id).avion.asientosDisponibles
 			
 			return ok(asientos.toJson)
+		}catch(UserException exception){
+			return badRequest()
+		}
+	}
+	
+	@Post("/dameUsuario/:id")
+	def dameUsuario(){
+		try{
+			val usuario = repoUsuario.searchByID(id)
+			
+			return ok(UsuarioSerializer.toJson(usuario)
+				//usuario.toJson
+			)
 		}catch(UserException exception){
 			return badRequest()
 		}

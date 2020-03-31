@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 import org.eclipse.xtend.lib.annotations.Accessors;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 @Accessors
@@ -34,7 +35,6 @@ public class Usuario implements Entidad {
   
   private double dinero;
   
-  @JsonIgnore
   private List<Usuario> amigos = new ArrayList<Usuario>();
   
   private CarritoDeCompras carritoDeCompras;
@@ -72,8 +72,15 @@ public class Usuario implements Entidad {
     this.carritoDeCompras.getTickets().forEach(_function);
   }
   
-  public boolean agregarAmigo(final Usuario usuario) {
-    return this.amigos.add(usuario);
+  public Object agregarAmigo(final Usuario usuario) {
+    Object _xifexpression = null;
+    boolean _contains = this.amigos.contains(usuario);
+    if (_contains) {
+      _xifexpression = InputOutput.<String>println("El usuario ya es amigo");
+    } else {
+      _xifexpression = Boolean.valueOf(this.amigos.add(usuario));
+    }
+    return _xifexpression;
   }
   
   public boolean removerAmigo(final Usuario usuario) {

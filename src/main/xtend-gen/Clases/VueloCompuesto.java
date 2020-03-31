@@ -33,13 +33,13 @@ public class VueloCompuesto extends Vuelo {
     return (_multiply * _recargoUltimosPasajes);
   }
   
-  public int cantidadDeEscalas() {
+  public int getCantidadEscalas() {
     return this.escalas.size();
   }
   
   public boolean tieneEscalas() {
-    int _cantidadDeEscalas = this.cantidadDeEscalas();
-    return (_cantidadDeEscalas > 1);
+    int _cantidadEscalas = this.getCantidadEscalas();
+    return (_cantidadEscalas > 1);
   }
   
   @Pure

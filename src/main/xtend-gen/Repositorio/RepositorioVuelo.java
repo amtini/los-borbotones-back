@@ -17,7 +17,7 @@ public class RepositorioVuelo extends Repositorio<Vuelo> {
   public List<Vuelo> vuelosDisponibles() {
     final Function1<Vuelo, Boolean> _function = new Function1<Vuelo, Boolean>() {
       public Boolean apply(final Vuelo vuelo) {
-        int _size = IterableExtensions.size(vuelo.getAvion().asientosDisponibles());
+        int _size = vuelo.getAvion().asientosDisponibles().size();
         return Boolean.valueOf((_size > 0));
       }
     };
