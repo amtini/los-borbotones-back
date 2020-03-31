@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import java.io.IOException;
+import java.util.List;
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
@@ -29,14 +30,14 @@ public class UsuarioSerializer extends StdSerializer<Usuario> {
     gen.writeEndObject();
   }
   
-  public static String toJson(final Usuario usuario) {
+  public static String toJson(final List<Usuario> usuarios) {
     try {
       String _xblockexpression = null;
       {
-        if ((usuario == null)) {
+        if (((usuarios == null) || usuarios.isEmpty())) {
           return "[ ]";
         }
-        _xblockexpression = UsuarioSerializer.mapper().writeValueAsString(usuario);
+        _xblockexpression = UsuarioSerializer.mapper().writeValueAsString(usuarios);
       }
       return _xblockexpression;
     } catch (Throwable _e) {

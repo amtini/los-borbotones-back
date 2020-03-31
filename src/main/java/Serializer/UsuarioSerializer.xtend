@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import java.io.IOException
 import org.eclipse.xtend.lib.annotations.Accessors
+import java.util.List
 
 @Accessors
 class UsuarioSerializer extends StdSerializer<Usuario>{
@@ -27,9 +28,9 @@ class UsuarioSerializer extends StdSerializer<Usuario>{
 		gen.writeEndObject();
 	}
 	
-	static def String toJson(Usuario usuario) {
-		if(usuario === null){return "[ ]"}
-		mapper().writeValueAsString(usuario)
+	static def String toJson(List<Usuario> usuarios) {
+		if(usuarios === null || usuarios.empty){return "[ ]"}
+		mapper().writeValueAsString(usuarios)
 	}
 	
 	static def mapper(){

@@ -26,6 +26,7 @@ import org.uqbar.commons.model.exceptions.UserException;
 import org.uqbar.xtrest.api.Result;
 import org.uqbar.xtrest.api.annotation.Body;
 import org.uqbar.xtrest.api.annotation.Controller;
+import org.uqbar.xtrest.api.annotation.Delete;
 import org.uqbar.xtrest.api.annotation.Get;
 import org.uqbar.xtrest.api.annotation.Post;
 import org.uqbar.xtrest.json.JSONUtils;
@@ -141,6 +142,20 @@ public class AterrizarRestAPI extends ResultFactory {
     }
   }
   
+  @Post("/misAmigos/:id")
+  public Result dameMisAmigos(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      final List<Usuario> amigos = this.repoUsuario.searchByID(id).getAmigos();
+      return ResultFactory.ok(UsuarioSerializer.toJson(amigos));
+    } catch (final Throwable _t) {
+      if (_t instanceof UserException) {
+        return ResultFactory.badRequest();
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+  }
+  
   @Post("/usuario/agregarAmigo/:id/:usuarioAmigo")
   public Result agregarAmigo(final String id, final String usuarioAmigo, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     try {
@@ -155,7 +170,7 @@ public class AterrizarRestAPI extends ResultFactory {
     }
   }
   
-  @Post("/usuario/eliminarAmigo/:id/:id2")
+  @Delete("/usuario/eliminarAmigo/:id/:id2")
   public Result eliminarAmigo(final String id, final String id2, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
     try {
       this.repoUsuario.eliminarAmigo(id, id2);
@@ -265,16 +280,9 @@ public class AterrizarRestAPI extends ResultFactory {
   
   @Post("/dameUsuario/:id")
   public Result dameUsuario(final String id, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
-    try {
-      final Usuario usuario = this.repoUsuario.searchByID(id);
-      return ResultFactory.ok(UsuarioSerializer.toJson(usuario));
-    } catch (final Throwable _t) {
-      if (_t instanceof UserException) {
-        return ResultFactory.badRequest();
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
+    throw new Error("Unresolved compilation problems:"
+      + "\nextraneous input \')\' expecting \'}\'"
+      + "\nType mismatch: cannot convert from Usuario to List<Usuario>");
   }
   
   public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
@@ -310,6 +318,26 @@ public class AterrizarRestAPI extends ResultFactory {
             response.setContentType("application/json");
     		
     	    Result result = login(body, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/misAmigos/(\\w+)").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		String id = matcher.group(1);
+    		
+            // set default content type (it can be overridden during next call)
+            response.setContentType("application/json");
+    		
+    	    Result result = dameMisAmigos(id, target, baseRequest, request, response);
     	    result.process(response);
     	    
     		response.addHeader("Access-Control-Allow-Origin", "*");
@@ -484,7 +512,7 @@ public class AterrizarRestAPI extends ResultFactory {
     {
     	Matcher matcher = 
     		Pattern.compile("/usuario/eliminarAmigo/(\\w+)/(\\w+)").matcher(target);
-    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    	if (request.getMethod().equalsIgnoreCase("Delete") && matcher.matches()) {
     		// take parameters from request
     		
     		// take variables from url

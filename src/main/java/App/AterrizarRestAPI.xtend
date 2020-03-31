@@ -15,6 +15,7 @@ import Clases.Ticket
 import java.time.LocalDate
 import Serializer.VueloSerializer
 import Serializer.UsuarioSerializer
+import org.uqbar.xtrest.api.annotation.Delete
 
 @Controller
 class AterrizarRestAPI {
@@ -93,6 +94,18 @@ class AterrizarRestAPI {
         }
 	}
 	
+	//dame mis amigos
+	
+	@Post("/misAmigos/:id")
+	def dameMisAmigos(){
+		try{
+			val amigos = repoUsuario.searchByID(id).amigos
+			return ok(UsuarioSerializer.toJson(amigos))
+		} catch (UserException exception){
+			return badRequest()
+		}
+	}
+	
 	//agregar o remover Amigos
 	
 	@Post("/usuario/agregarAmigo/:id/:usuarioAmigo")
@@ -105,7 +118,7 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Post("/usuario/eliminarAmigo/:id/:id2")
+	@Delete("/usuario/eliminarAmigo/:id/:id2")
 	def eliminarAmigo(){
 		try{
 			repoUsuario.eliminarAmigo(id, id2)
@@ -205,7 +218,7 @@ class AterrizarRestAPI {
 		try{
 			val usuario = repoUsuario.searchByID(id)
 			
-			return ok(UsuarioSerializer.toJson(usuario)
+			return ok(UsuarioSerializer.toJson(usuario))
 				//usuario.toJson
 			)
 		}catch(UserException exception){
