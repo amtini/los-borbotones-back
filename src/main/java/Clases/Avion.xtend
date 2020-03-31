@@ -11,11 +11,11 @@ class Avion {
 	Set<Asiento> asientos = new HashSet<Asiento>
 	
 	def recargoUltimosPasajes(){
-		if(asientos.length<=2){1.15}else{1}
+		if(asientosDisponibles.length<=2){1.15}else{1}
 	}
 	
 	def asientosDisponibles(){
-		asientos.filter[it.disponible == true].toList
+		asientos.filter[it.disponible].toList
 	}
 	
 	def asientoMasBarato(){

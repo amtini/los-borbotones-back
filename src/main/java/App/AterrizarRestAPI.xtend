@@ -18,6 +18,7 @@ import Serializer.UsuarioSerializer
 import org.uqbar.xtrest.api.annotation.Delete
 import Serializer.AmigoSerializer
 import Serializer.PasajeSerializer
+import Serializer.TicketSerializer
 
 @Controller
 class AterrizarRestAPI {
@@ -98,7 +99,7 @@ class AterrizarRestAPI {
 	
 	//dame mis amigos
 	
-	@Post("/misAmigos/:id")
+	@Post("/usuario/amigos/:id")
 	def dameMisAmigos(){
 		try{
 			val amigos = repoUsuario.searchByID(id).amigos
@@ -133,27 +134,29 @@ class AterrizarRestAPI {
 	
 	//reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
 	
-	@Post("/usuario/reservarVuelo/:idUsuario/:idVuelo/:idAsiento")
+	@Post("/usuario/reservarVuelo/:id1/:id2/:id3")
 	def reservarVuelo(){
 		try{
-			val usuario = repoUsuario.searchByID(idUsuario.fromJson(String))
-			val vuelo = repoVuelo.searchByID(idVuelo.fromJson(String))
-			val asiento = repoAsiento.searchByID(idAsiento.fromJson(String))
+			val usuario = repoUsuario.searchByID(id1)
+			val vuelo = repoVuelo.searchByID(id2)
+			val asiento = repoAsiento.searchByID(id3)
 			
-			usuario.carritoDeCompras.agregarTicketAlCarrito(new Ticket(vuelo, asiento))
+			val ticket = new Ticket(vuelo,asiento)
 			
-			return ok("se ha realizado la reserva")
+			usuario.carritoDeCompras.agregarTicketAlCarrito(ticket)
+			
+			return ok(usuario.carritoDeCompras.tickets.toJson)
 		} catch (UserException exception){
 			return badRequest()
 		}
 	}
 	
-	@Post("/usuario/cancelarReserva/:id1/:id2/:id3")
+	@Delete("/usuario/cancelarReserva/:id1/:id2/:id3")
 	def cancelarReserva(){
 		try{
-			val usuario = repoUsuario.searchByID(id1.fromJson(String))
-			val vuelo = repoVuelo.searchByID(id2.fromJson(String))
-			val asiento = repoAsiento.searchByID(id3.fromJson(String))
+			val usuario = repoUsuario.searchByID(id1)
+			val vuelo = repoVuelo.searchByID(id2)
+			val asiento = repoAsiento.searchByID(id3)
 			
 			usuario.carritoDeCompras.removerTicketDelCarrito(vuelo, asiento)
 			
@@ -171,6 +174,19 @@ class AterrizarRestAPI {
 			usuario.carritoDeCompras.limpiarCarritoDeCompras
 			
 			return ok("carrito de compras limpio")
+		} catch (UserException exception){
+			return badRequest()
+		}
+	}
+	
+	//mi carrito de compras
+	
+	@Post("/usuario/carritoDeCompras/:id")
+	def dameCarritoDeCompras(){
+		try{
+			val usuario = repoUsuario.searchByID(id)
+			
+			return ok(TicketSerializer.toJson(usuario.carritoDeCompras.tickets))
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -204,7 +220,7 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Post("/asientosDeVuelo/:id")
+	@Post("/vuelo/asientos/:id")
 	def dameAsientos(){
 		try{
 			val asientos = repoVuelo.searchByID(id).avion.asientosDisponibles
@@ -215,7 +231,7 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Post("/dameUsuario/:id")
+	@Post("/usuario/:id")
 	def dameUsuario(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
@@ -230,7 +246,7 @@ class AterrizarRestAPI {
 	
 	//dame mis pasajes
 	
-	@Post("/misPasajes/:id")
+	@Post("/usuario/pasajes/:id")
 	def damePasajes(){
 		try{
 			val pasajes = repoUsuario.searchByID(id).pasajesComprados

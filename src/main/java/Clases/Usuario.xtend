@@ -23,7 +23,7 @@ class Usuario implements Entidad{
 	
 	Set<Usuario> amigos = new HashSet<Usuario>
 	
-	CarritoDeCompras carritoDeCompras
+	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
 	
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
@@ -45,6 +45,7 @@ class Usuario implements Entidad{
 	
 	def comprarPasajes(){
 		carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))]
+		carritoDeCompras.tickets.clear
 	}
 	
 	def agregarAmigo(Usuario usuario){

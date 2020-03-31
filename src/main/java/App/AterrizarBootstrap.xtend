@@ -18,14 +18,17 @@ class AterrizarBootstrap {
 	def static void main(String[] args) {
 		
 		val primeraClase = new ClaseAsiento =>[
+			nombre = "Primera Clase"
 			precioClase = 35000
 		]
 		
 		val bussisnes = new ClaseAsiento =>[
+			nombre = "Empresario"
 			precioClase = 22000
 		]
 		
 		val turista = new ClaseAsiento =>[
+			nombre = "Turista"
 			precioClase = 10000
 		]
 		
@@ -92,8 +95,6 @@ class AterrizarBootstrap {
 			nombre = "Air France"
 			precioAsiento = 1000.0
 		]
-		
-		
 		
 		// vuelo 1
 		

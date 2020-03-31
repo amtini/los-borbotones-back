@@ -1,13 +1,13 @@
 package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.List
-import java.util.ArrayList
+import java.util.HashSet
+import java.util.Set
 
 @Accessors
 class CarritoDeCompras {
 	
-	List<Ticket> tickets = new ArrayList<Ticket>
+	Set<Ticket> tickets = new HashSet<Ticket>
 	
 	def agregarTicketAlCarrito(Ticket ticket){
 		tickets.add(ticket)
