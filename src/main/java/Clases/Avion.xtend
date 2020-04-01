@@ -20,5 +20,5 @@ class Avion {
 	
 	def asientoMasBarato(){
 		asientosDisponibles.minBy[precio]
-	}
+	}	
 }

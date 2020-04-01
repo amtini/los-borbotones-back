@@ -35,7 +35,7 @@ public class Vuelo implements Entidad{
 		precioDeVuelo() + avion.asientoMasBarato.precio
 	}
 	
-	def cumpleLosFiltros(String origen_, String destino_, LocalDate desde, LocalDate hasta, Boolean ventanilla){
-		ciudadDeDestino == destino_ && ciudadDeOrigen == origen_ && horarioDePartida >= desde && horarioDePartida <= hasta  && avion.asientosDisponibles.exists[ it.ventana == ventanilla]
+	def cumpleLosFiltros(String origen_, String destino_, LocalDate desde, LocalDate hasta, Boolean ventanilla, ClaseAsiento claseAsiento){
+		ciudadDeDestino == destino_ && ciudadDeOrigen == origen_ && horarioDePartida >= desde && horarioDePartida <= hasta  && avion.asientosDisponibles.exists[ it.ventana == ventanilla] && avion.asientosDisponibles.exists[it.claseDeAsiento == claseAsiento]
 	}	
 }

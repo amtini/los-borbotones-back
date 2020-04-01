@@ -18,6 +18,7 @@ import org.uqbar.xtrest.api.annotation.Delete
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
+import Clases.ClaseAsiento
 
 @Controller
 class AterrizarRestAPI {
@@ -209,7 +210,7 @@ class AterrizarRestAPI {
 	@Get("/vuelos")
 	def dameVuelos(@Body String body){
 		try{
-			val filtros = body.fromJson(FiltrosRequest)
+			val filtros = body.fromJson(FiltrosVuelo)
 			val vuelos = repoVuelo.vuelosFiltrados(filtros)
 			
 			/*TODO filtros		*/
@@ -257,16 +258,22 @@ class AterrizarRestAPI {
 			return badRequest()
 		}
 	}
-	
 }
 
 @Accessors
-class FiltrosRequest{
+class FiltrosVuelo{
 	String origen
 	String destino
 	LocalDate desde
 	LocalDate hasta
 	boolean ventanilla
+	ClaseAsiento claseAsiento
+}
+
+@Accessors
+class FiltrosAsientos{
+	boolean ventanilla
+	ClaseAsiento claseAsiento
 }
 
 @Accessors
