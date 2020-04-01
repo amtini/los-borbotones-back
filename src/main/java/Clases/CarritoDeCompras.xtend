@@ -9,9 +9,12 @@ class CarritoDeCompras {
 	
 	Set<Ticket> tickets = new HashSet<Ticket>
 	
-	def agregarTicketAlCarrito(Ticket ticket){
-		tickets.add(ticket)
-		ticket.reservar
+	def agregarTicketAlCarrito(Vuelo vuelo, Asiento asiento){
+		val ticket = new Ticket(vuelo,asiento)
+		if(!existeEnCarrito(vuelo,asiento)){
+			tickets.add(ticket)
+			ticket.reservar
+		}
 	}
 	
 	def removerTicketDelCarrito(Vuelo vuelo, Asiento asiento){
@@ -22,6 +25,10 @@ class CarritoDeCompras {
 	
 	def buscarTicket(Vuelo vuelo, Asiento asiento){
 		tickets.findFirst[it.vuelo == vuelo && it.asiento == asiento]
+	}
+	
+	def existeEnCarrito(Vuelo vuelo, Asiento asiento){
+		tickets.contains(buscarTicket(vuelo, asiento))
 	}
 	
 	def limpiarCarritoDeCompras(){

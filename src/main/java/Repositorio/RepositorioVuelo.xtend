@@ -3,6 +3,7 @@ package Repositorio
 import Clases.Vuelo
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.time.LocalDate
+import App.FiltrosRequest
 
 class RepositorioVuelo extends Repositorio<Vuelo>{
 	@Accessors String tipo = "V"
@@ -13,7 +14,8 @@ class RepositorioVuelo extends Repositorio<Vuelo>{
 		].toList
 	}
 	
-	def buscarVuelos(String origen, String destino, LocalDate desde, LocalDate hasta){
-		vuelosDisponibles.filter[ vuelo | vuelo.cumpleLosFiltros(origen, destino, desde, hasta)].toList
+	def vuelosFiltrados(FiltrosRequest filtros) {
+		vuelosDisponibles.filter[ vuelo | vuelo.cumpleLosFiltros(filtros.origen, filtros.destino , filtros.desde, filtros.hasta, filtros.ventanilla)].toSet
 	}
+	
 }

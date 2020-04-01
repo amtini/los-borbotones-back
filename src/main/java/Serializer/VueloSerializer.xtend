@@ -9,12 +9,18 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import java.io.IOException
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Set
+import java.time.format.DateTimeFormatter
+import java.time.LocalDate
 
 @Accessors
 class VueloSerializer extends StdSerializer<Vuelo>{
 	new(Class<Vuelo> s){
 		super(s)
 	}
+	
+	static val DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+	
+	static def getStringDateFromLocalDate(LocalDate date) { 	date.format(formatter) 	}
 	
 	override serialize(Vuelo value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
@@ -25,6 +31,7 @@ class VueloSerializer extends StdSerializer<Vuelo>{
 		gen.writeNumberField("duracionDeVuelo", value.duracionDeVuelo);	
 		gen.writeNumberField("escalas", value.cantidadEscalas);
 		gen.writeNumberField("precioMinimoPasaje", value.precioMinimoPasaje)
+		gen.writeStringField("horarioDeSalida", getStringDateFromLocalDate(value.horarioDePartida))
 		gen.writeEndObject();
 	}
 	

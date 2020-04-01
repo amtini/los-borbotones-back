@@ -1,24 +1,23 @@
 package App
 
+import Repositorio.RepositorioAsiento
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
-import Repositorio.RepositorioAsiento
-import org.uqbar.xtrest.api.annotation.Controller
-import org.uqbar.xtrest.api.annotation.Post
-import org.uqbar.xtrest.api.annotation.Body
-import org.uqbar.xtrest.json.JSONUtils
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-import org.uqbar.commons.model.exceptions.UserException
-import org.eclipse.xtend.lib.annotations.Accessors
-import org.uqbar.xtrest.api.annotation.Get
-import Clases.Ticket
-import java.time.LocalDate
-import Serializer.VueloSerializer
-import Serializer.UsuarioSerializer
-import org.uqbar.xtrest.api.annotation.Delete
 import Serializer.AmigoSerializer
 import Serializer.PasajeSerializer
 import Serializer.TicketSerializer
+import Serializer.UsuarioSerializer
+import Serializer.VueloSerializer
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
+import java.time.LocalDate
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.exceptions.UserException
+import org.uqbar.xtrest.api.annotation.Body
+import org.uqbar.xtrest.api.annotation.Controller
+import org.uqbar.xtrest.api.annotation.Delete
+import org.uqbar.xtrest.api.annotation.Get
+import org.uqbar.xtrest.api.annotation.Post
+import org.uqbar.xtrest.json.JSONUtils
 
 @Controller
 class AterrizarRestAPI {
@@ -36,7 +35,7 @@ class AterrizarRestAPI {
 	@Post("/login")
 	def login(@Body String body){
 		try {
-            val usuarioLogeadoBody = body.fromJson(usuarioLogeadoRequest)
+            val usuarioLogeadoBody = body.fromJson(UsuarioLogeadoRequest)
             try {
                 val usuarioLogeado = this.repoUsuario.verificarLogin(usuarioLogeadoBody.usuario, usuarioLogeadoBody.password)
                 return ok(usuarioLogeado.ID.toJson)
@@ -141,11 +140,9 @@ class AterrizarRestAPI {
 			val vuelo = repoVuelo.searchByID(id2)
 			val asiento = repoAsiento.searchByID(id3)
 			
-			val ticket = new Ticket(vuelo,asiento)
+			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, asiento)
 			
-			usuario.carritoDeCompras.agregarTicketAlCarrito(ticket)
-			
-			return ok(usuario.carritoDeCompras.tickets.toJson)
+			return ok("Se ha reservado el vuelo")
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -210,9 +207,11 @@ class AterrizarRestAPI {
 	//dame vuelos y dame asientos
 	
 	@Get("/vuelos")
-	def dameVuelos(){
+	def dameVuelos(@Body String body){
 		try{
-			val vuelos = repoVuelo.elementos
+			val filtros = body.fromJson(FiltrosRequest)
+			val vuelos = repoVuelo.vuelosFiltrados(filtros)
+			
 			/*TODO filtros		*/
 			return ok(VueloSerializer.toJson(vuelos))
 		}catch(UserException exception){
@@ -262,7 +261,7 @@ class AterrizarRestAPI {
 }
 
 @Accessors
-class filtrosRequest{
+class FiltrosRequest{
 	String origen
 	String destino
 	LocalDate desde
@@ -271,7 +270,7 @@ class filtrosRequest{
 }
 
 @Accessors
-class usuarioLogeadoRequest{
+class UsuarioLogeadoRequest{
 	String usuario
 	String password
 }

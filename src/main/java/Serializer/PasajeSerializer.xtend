@@ -9,6 +9,8 @@ import java.io.IOException
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Set
 import Clases.Pasaje
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 @Accessors
 class PasajeSerializer extends StdSerializer<Pasaje>{
@@ -16,12 +18,18 @@ class PasajeSerializer extends StdSerializer<Pasaje>{
 		super(s)
 	}
 	
+	static val DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+	
+	static def getStringDateFromLocalDate(LocalDate date) { 	date.format(formatter) 	}
+	
 	override serialize(Pasaje value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
 		gen.writeStringField("ciudadDeOrigen", value.vuelo.ciudadDeOrigen);
 		gen.writeStringField("ciudadDeDestino", value.vuelo.ciudadDeDestino);
 		gen.writeStringField("aerolinea", value.vuelo.aerolinea.nombre);
 		gen.writeNumberField("precioPasaje", value.costo)
+		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.vuelo.horarioDePartida))
+		gen.writeStringField("comprado", getStringDateFromLocalDate(value.comprado))
 		gen.writeEndObject();
 	}
 	

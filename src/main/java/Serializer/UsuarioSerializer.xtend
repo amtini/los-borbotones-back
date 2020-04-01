@@ -15,6 +15,8 @@ class UsuarioSerializer extends StdSerializer<Usuario>{
 		super(s)
 	}
 	
+	
+	
 	override serialize(Usuario value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
 		gen.writeStringField("usuario", value.usuario);
