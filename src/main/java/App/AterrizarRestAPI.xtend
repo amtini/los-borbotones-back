@@ -157,7 +157,6 @@ class AterrizarRestAPI {
 			val asiento = repoAsiento.searchByID(id3)
 			
 			usuario.carritoDeCompras.removerTicketDelCarrito(vuelo, asiento)
-			
 			return ok("se ha cancelado la reserva")
 		} catch (UserException exception){
 			return badRequest()
@@ -205,6 +204,16 @@ class AterrizarRestAPI {
 		}
 	}
 	
+	@Get("/usuario/costoTotalCarrito/:id")
+	def costoTotalCarrito(){
+		try{
+			val usuario = repoUsuario.searchByID(id)
+			return ok(usuario.carritoDeCompras.costoTotalDelCarrito.toJson)
+		}catch(UserException exception){
+			return badRequest()
+		}
+	}
+	
 	//dame vuelos y dame asientos
 	
 	@Post("/vuelos")
@@ -213,7 +222,7 @@ class AterrizarRestAPI {
 			val filtros = body.fromJson(FiltrosVuelo)
 			val vuelos = repoVuelo.vuelosFiltrados(filtros)
 			
-			/*TODO filtros		*/
+			/*TODO filtros */
 			return ok(VueloSerializer.toJson(vuelos))
 		}catch(UserException exception){
 			return badRequest()

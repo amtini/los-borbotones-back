@@ -35,7 +35,7 @@ class CarritoDeCompras {
 		tickets.clear
 	}
 	
-	def costoTotalDelCarrito(){
+	def double costoTotalDelCarrito(){
 		tickets.fold(0.0, [acum, ticket | acum + ticket.costo])
 	}
 }

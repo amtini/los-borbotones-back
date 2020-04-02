@@ -44,8 +44,11 @@ class Usuario implements Entidad{
 	}
 	
 	def comprarPasajes(){
-		carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))]
-		carritoDeCompras.tickets.clear
+		if(carritoDeCompras.costoTotalDelCarrito() < dinero){
+			dinero -= carritoDeCompras.costoTotalDelCarrito
+			carritoDeCompras.tickets.forEach[ticket  | pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))]
+			carritoDeCompras.tickets.clear
+		}
 	}
 	
 	def agregarAmigo(Usuario usuario){
