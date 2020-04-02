@@ -18,17 +18,17 @@ class AterrizarBootstrap {
 	def static void main(String[] args) {
 		
 		val primeraClase = new ClaseAsiento =>[
-			nombre = "Primera Clase"
+			nombre = "primera clase"
 			precioClase = 35000
 		]
 		
 		val bussisnes = new ClaseAsiento =>[
-			nombre = "Empresario"
+			nombre = "empresario"
 			precioClase = 22000
 		]
 		
 		val turista = new ClaseAsiento =>[
-			nombre = "Turista"
+			nombre = "turista"
 			precioClase = 10000
 		]
 		
@@ -120,7 +120,7 @@ class AterrizarBootstrap {
 			disponible = true
 			claseDeAsiento = bussisnes
 		]
-		
+	
 		val asiento3 = new Asiento =>[
 			ventana = false
 			disponible = true
@@ -166,6 +166,7 @@ class AterrizarBootstrap {
 			disponible = true
 			claseDeAsiento = primeraClase
 		]
+		
 		val asiento36 = new Asiento =>[
 			ventana = false
 			disponible = false
@@ -177,9 +178,7 @@ class AterrizarBootstrap {
 		AirbusA320.asientos.add(asiento6)
 		AirbusA320.asientos.add(asiento36)
 		
-		//avion 3
-		
-		// vuelo 1
+		// vuelo 3
 		
 		val vueloAFrancia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -227,9 +226,7 @@ class AterrizarBootstrap {
 		Tu204.asientos.add(asiento34)
 		Tu204.asientos.add(asiento35)
 		
-		//avion 4
-		
-		// vuelo 1
+		// vuelo 4
 		
 		val vueloBSaChile = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -262,9 +259,8 @@ class AterrizarBootstrap {
 		Il96.asientos.add(asiento10)
 		Il96.asientos.add(asiento11)
 		Il96.asientos.add(asiento12)
-		//avion 5
 		
-		// vuelo 1
+		// vuelo 5
 		
 		val vueloBSaMiami = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -311,9 +307,8 @@ class AterrizarBootstrap {
 		CRJ200.asientos.add(asiento15)
 		CRJ200.asientos.add(asiento26)
 		CRJ200.asientos.add(asiento27)
-		//avion 6
 		
-		// vuelo 1
+		// vuelo 6
 		
 		val vueloBSaItalia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"

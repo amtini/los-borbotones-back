@@ -3,6 +3,7 @@ package Clases
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Set
 import java.util.HashSet
+import App.FiltrosAsiento
 
 @Accessors
 class Avion {
@@ -20,5 +21,10 @@ class Avion {
 	
 	def asientoMasBarato(){
 		asientosDisponibles.minBy[precio]
-	}	
+	}
+	
+	def asientosFiltrados(FiltrosAsiento filtros) {
+		asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento.nombre == filtros.claseAsiento].toSet
+	}
+	
 }

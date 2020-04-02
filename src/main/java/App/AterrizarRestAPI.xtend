@@ -50,7 +50,7 @@ class AterrizarRestAPI {
 	
 	//cambiar password, edad y saldo
 	
-	@Post("/usuario/agregarSaldo/:id/:saldo")
+	@Get("/usuario/agregarSaldo/:id/:saldo")
 	def agregarSaldo(){
 		try {
             val usuario = repoUsuario.searchByID(id)
@@ -66,7 +66,7 @@ class AterrizarRestAPI {
         }
 	}
 	
-	@Post("/usuario/cambiarPassword/:id/:nuevaPassword")
+	@Get("/usuario/cambiarPassword/:id/:nuevaPassword")
 	def cambiarPassword(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
@@ -99,7 +99,7 @@ class AterrizarRestAPI {
 	
 	//dame mis amigos
 	
-	@Post("/usuario/amigos/:id")
+	@Get("/usuario/amigos/:id")
 	def dameMisAmigos(){
 		try{
 			val amigos = repoUsuario.searchByID(id).amigos
@@ -111,7 +111,7 @@ class AterrizarRestAPI {
 	
 	//agregar o remover Amigos
 	
-	@Post("/usuario/agregarAmigo/:id/:usuarioAmigo")
+	@Get("/usuario/agregarAmigo/:id/:usuarioAmigo")
 	def agregarAmigo(){
 		try{
 			repoUsuario.agregarAmigo(id, usuarioAmigo)
@@ -134,7 +134,7 @@ class AterrizarRestAPI {
 	
 	//reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
 	
-	@Post("/usuario/reservarVuelo/:id1/:id2/:id3")
+	@Get("/usuario/reservarVuelo/:id1/:id2/:id3")
 	def reservarVuelo(){
 		try{
 			val usuario = repoUsuario.searchByID(id1)
@@ -164,7 +164,7 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Post("/usuario/limpiarCarritoDeCompras/:id")
+	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
@@ -179,7 +179,7 @@ class AterrizarRestAPI {
 	
 	//mi carrito de compras
 	
-	@Post("/usuario/carritoDeCompras/:id")
+	@Get("/usuario/carritoDeCompras/:id")
 	def dameCarritoDeCompras(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
@@ -192,7 +192,7 @@ class AterrizarRestAPI {
 	
 	//comprarPasajes
 	
-	@Post("/usuario/finalizarCompra/:id")
+	@Get("/usuario/finalizarCompra/:id")
 	def finalizarCompra(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
@@ -207,7 +207,7 @@ class AterrizarRestAPI {
 	
 	//dame vuelos y dame asientos
 	
-	@Get("/vuelos")
+	@Post("/vuelos")
 	def dameVuelos(@Body String body){
 		try{
 			val filtros = body.fromJson(FiltrosVuelo)
@@ -221,9 +221,10 @@ class AterrizarRestAPI {
 	}
 	
 	@Post("/vuelo/asientos/:id")
-	def dameAsientos(){
+	def dameAsientos(@Body String body){
 		try{
-			val asientos = repoVuelo.searchByID(id).avion.asientosDisponibles
+			val filtros = body.fromJson(FiltrosAsiento)
+			val asientos = repoVuelo.asientosDeMiVuelo(id, filtros)
 			
 			return ok(asientos.toJson)
 		}catch(UserException exception){
@@ -231,7 +232,7 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	@Post("/usuario/:id")
+	@Get("/usuario/:id")
 	def dameUsuario(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
@@ -264,16 +265,16 @@ class AterrizarRestAPI {
 class FiltrosVuelo{
 	String origen
 	String destino
-	LocalDate desde
-	LocalDate hasta
+	//LocalDate desde
+	//LocalDate hasta
 	boolean ventanilla
-	ClaseAsiento claseAsiento
+	String claseAsiento
 }
 
 @Accessors
-class FiltrosAsientos{
+class FiltrosAsiento{
 	boolean ventanilla
-	ClaseAsiento claseAsiento
+	String claseAsiento
 }
 
 @Accessors

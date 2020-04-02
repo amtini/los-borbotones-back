@@ -3,6 +3,8 @@ package Clases
 import Repositorio.Entidad
 import java.time.LocalDate
 import org.eclipse.xtend.lib.annotations.Accessors
+import App.FiltrosAsiento
+import App.FiltrosVuelo
 
 @Accessors
 public class Vuelo implements Entidad{
@@ -15,7 +17,7 @@ public class Vuelo implements Entidad{
 	Double duracionDeVuelo
 	Avion avion
 	
-	int cantidadEscalas
+	int cantidadEscalas = 1
 	
 	Double precioBase
 	
@@ -35,7 +37,12 @@ public class Vuelo implements Entidad{
 		precioDeVuelo() + avion.asientoMasBarato.precio
 	}
 	
-	def cumpleLosFiltros(String origen_, String destino_, LocalDate desde, LocalDate hasta, Boolean ventanilla, ClaseAsiento claseAsiento){
-		ciudadDeDestino == destino_ && ciudadDeOrigen == origen_ && horarioDePartida >= desde && horarioDePartida <= hasta  && avion.asientosDisponibles.exists[ it.ventana == ventanilla] && avion.asientosDisponibles.exists[it.claseDeAsiento == claseAsiento]
-	}	
+	def cumpleLosFiltros(FiltrosVuelo filtros){
+		ciudadDeDestino == filtros.destino && ciudadDeOrigen == filtros.origen /* && horarioDePartida >= desde && horarioDePartida <= hasta */ && avion.asientosDisponibles.exists[ it.ventana == filtros.ventanilla] && avion.asientosDisponibles.exists[it.claseDeAsiento.nombre == filtros.claseAsiento]
+	}
+	
+	def dameAsientos(FiltrosAsiento filtros) {
+		avion.asientosFiltrados(filtros)
+	}
+	
 }

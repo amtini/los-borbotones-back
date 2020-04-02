@@ -3,6 +3,7 @@ package Repositorio
 import Clases.Vuelo
 import org.eclipse.xtend.lib.annotations.Accessors
 import App.FiltrosVuelo
+import App.FiltrosAsiento
 
 class RepositorioVuelo extends Repositorio<Vuelo>{
 	@Accessors String tipo = "V"
@@ -14,7 +15,11 @@ class RepositorioVuelo extends Repositorio<Vuelo>{
 	}
 	
 	def vuelosFiltrados(FiltrosVuelo filtros) {
-		vuelosDisponibles.filter[ vuelo | vuelo.cumpleLosFiltros(filtros.origen, filtros.destino , filtros.desde, filtros.hasta, filtros.ventanilla, filtros.claseAsiento)].toSet
+		vuelosDisponibles.filter[ vuelo | vuelo.cumpleLosFiltros(filtros)].toSet
+	}
+	
+	def asientosDeMiVuelo(String id, FiltrosAsiento filtros) {
+		searchByID(id).dameAsientos(filtros)
 	}
 	
 }
