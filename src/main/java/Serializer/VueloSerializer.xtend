@@ -31,7 +31,7 @@ class VueloSerializer extends StdSerializer<Vuelo>{
 		gen.writeNumberField("duracionDeVuelo", value.duracionDeVuelo);	
 		gen.writeNumberField("escalas", value.cantidadEscalas);
 		gen.writeNumberField("precioMinimoPasaje", value.precioMinimoPasaje)
-		gen.writeStringField("horarioDeSalida", getStringDateFromLocalDate(value.horarioDePartida))
+		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.horarioDePartida))
 		gen.writeEndObject();
 	}
 	
