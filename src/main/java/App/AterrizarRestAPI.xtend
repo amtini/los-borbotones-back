@@ -19,6 +19,7 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
 import Clases.ClaseAsiento
+import Serializer.AsientoSerializer
 
 @Controller
 class AterrizarRestAPI {
@@ -51,13 +52,13 @@ class AterrizarRestAPI {
 	//cambiar password, edad y saldo
 	
 	@Get("/usuario/agregarSaldo/:id/:saldo")
-	def agregarSaldo(){
+	def agregarSaldo(@Body String body){
 		try {
             val usuario = repoUsuario.searchByID(id)
             //val saldoAAgregar = 
             try {
                 usuario.agregarSaldo(saldo.fromJson(Double))
-                return ok("se agrego dinero")
+                return ok()
             } catch (UserException exception) {
                 return badRequest()
             }
@@ -73,7 +74,7 @@ class AterrizarRestAPI {
 		
 			try{
 				usuario.cambiarPassword(nuevaPassword.fromJson(String))
-		    	return ok("se agrego dinero")
+		    	return ok()
             } catch (UserException exception) {
                 return badRequest()
             }
@@ -82,13 +83,13 @@ class AterrizarRestAPI {
         }
 	}
 	
-	@Post("/usuario/cambiarEdad/:id/:nuevaEdad")
+	@Get("/usuario/cambiarEdad/:id/:nuevaEdad")
 	def cambiarEdad(){
 		try{
 			val usuario = repoUsuario.searchByID(id)
 			try{
 				usuario.cambiarEdad(nuevaEdad.fromJson(Integer))
-		    	return ok("se agrego dinero")
+		    	return ok()
             } catch (UserException exception) {
                 return badRequest()
             }
@@ -115,7 +116,7 @@ class AterrizarRestAPI {
 	def agregarAmigo(){
 		try{
 			repoUsuario.agregarAmigo(id, usuarioAmigo)
-			return ok("Se agrego al usuario: "+usuarioAmigo+" como amigo")
+			return ok()
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -125,8 +126,7 @@ class AterrizarRestAPI {
 	def eliminarAmigo(){
 		try{
 			repoUsuario.eliminarAmigo(id, id2)
-			val nombreUsuario = repoUsuario.searchByID(id2).usuario
-			return ok("Se elimino al usuario: "+nombreUsuario+" de la lista de amigos")
+			return ok()
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -143,7 +143,7 @@ class AterrizarRestAPI {
 			
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, asiento)
 			
-			return ok("Se ha reservado el vuelo")
+			return ok()
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -157,7 +157,7 @@ class AterrizarRestAPI {
 			val asiento = repoAsiento.searchByID(id3)
 			
 			usuario.carritoDeCompras.removerTicketDelCarrito(vuelo, asiento)
-			return ok("se ha cancelado la reserva")
+			return ok()
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -170,7 +170,7 @@ class AterrizarRestAPI {
 			
 			usuario.carritoDeCompras.limpiarCarritoDeCompras
 			
-			return ok("carrito de compras limpio")
+			return ok()
 		} catch (UserException exception){
 			return badRequest()
 		}
@@ -198,7 +198,7 @@ class AterrizarRestAPI {
 			
 			usuario.comprarPasajes
 			
-			return ok("pasajes comprados")
+			return ok()
 		}catch(UserException exception){
 			return badRequest()
 		}
@@ -223,6 +223,7 @@ class AterrizarRestAPI {
 			val vuelos = repoVuelo.vuelosFiltrados(filtros)
 			
 			/*TODO filtros */
+			
 			return ok(VueloSerializer.toJson(vuelos))
 		}catch(UserException exception){
 			return badRequest()
@@ -235,7 +236,7 @@ class AterrizarRestAPI {
 			val filtros = body.fromJson(FiltrosAsiento)
 			val asientos = repoVuelo.asientosDeMiVuelo(id, filtros)
 			
-			return ok(asientos.toJson)
+			return ok(AsientoSerializer.toJson(asientos))
 		}catch(UserException exception){
 			return badRequest()
 		}

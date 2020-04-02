@@ -24,7 +24,11 @@ class Avion {
 	}
 	
 	def asientosFiltrados(FiltrosAsiento filtros) {
-		asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento.nombre == filtros.claseAsiento].toSet
+		if(filtros.claseAsiento !== ""){
+			asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento.nombre == filtros.claseAsiento].toSet
+		}else{
+			asientosDisponibles.filter[it.ventana == filtros.ventanilla].toSet
+		}
 	}
 	
 }

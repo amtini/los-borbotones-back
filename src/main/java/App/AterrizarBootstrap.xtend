@@ -673,6 +673,7 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento34)
 		repoAsiento.create(asiento35)
 		repoAsiento.create(asiento36)
+		repoAsiento.create(asientoDeRapidoDelNorte)
 		
 		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento))
 	}

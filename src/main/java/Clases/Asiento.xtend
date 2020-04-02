@@ -10,7 +10,7 @@ class Asiento implements Entidad{
 	boolean ventana
 	boolean disponible
 	
-	ClaseAsiento claseDeAsiento
+	ClaseAsiento claseDeAsiento = new ClaseAsiento
 	
 	def precio(){
 		claseDeAsiento.precioClase
