@@ -73,7 +73,7 @@ class AterrizarRestAPI {
 			val usuario = repoUsuario.searchByID(id)
 		
 			try{
-				usuario.cambiarPassword(nuevaPassword.fromJson(String))
+				usuario.cambiarPassword(nuevaPassword)
 		    	return ok()
             } catch (UserException exception) {
                 return badRequest()
