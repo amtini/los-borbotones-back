@@ -256,7 +256,7 @@ class AterrizarRestAPI {
 	
 	//dame mis pasajes
 	
-	@Post("/usuario/pasajes/:id")
+	@Get("/usuario/pasajes/:id")
 	def damePasajes(){
 		try{
 			val pasajes = repoUsuario.searchByID(id).pasajesComprados
