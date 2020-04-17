@@ -5,15 +5,33 @@ import java.time.LocalDate
 import org.eclipse.xtend.lib.annotations.Accessors
 import App.FiltrosAsiento
 import App.FiltrosVuelo
+import javax.persistence.Id
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Column
+import javax.persistence.Temporal
+import javax.persistence.TemporalType
 
 @Accessors
 public class Vuelo implements Entidad{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	String ID
 	
+	@Column(length=150)
 	String ciudadDeOrigen
+	
+	@Column(length=150)
 	String ciudadDeDestino
+	
+	@Temporal(TemporalType.DATE)
 	LocalDate horarioDePartida
+	
+	
 	Aerolinea aerolinea
+	
+	
 	Double duracionDeVuelo
 	Avion avion
 	
