@@ -4,11 +4,27 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Set
 import java.util.HashSet
 import App.FiltrosAsiento
+import javax.persistence.Entity
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.Id
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Column
+import javax.persistence.OneToMany
+import javax.persistence.FetchType
 
+@Entity
+@Observable
 @Accessors
 class Avion {
+	@Id
+	@GeneratedValue//(strategy = GenerationType.AUTO)
+	Long id
+	
+	@Column(length=150)
 	String nombre
 	
+	@OneToMany(fetch=FetchType.LAZY)
 	Set<Asiento> asientos = new HashSet<Asiento>
 	
 	def recargoUltimosPasajes(){

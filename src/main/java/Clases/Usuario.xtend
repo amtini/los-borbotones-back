@@ -8,23 +8,44 @@ import java.util.HashSet
 import java.util.Set
 import java.time.LocalDate
 import com.fasterxml.jackson.annotation.JsonIgnore
+import javax.persistence.Id
+import javax.persistence.GenerationType
+import javax.persistence.Column
+import javax.persistence.Entity
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.GeneratedValue
+import javax.persistence.OneToMany
+import javax.persistence.FetchType
 
+@Entity
+@Observable
 @Accessors
 class Usuario implements Entidad{
 	
-	String ID
-	
+	@Id
+	@GeneratedValue //(strategy = GenerationType.AUTO)
+	//Long id
+	String ID //TODO ver lo del id
+		
+	@Column(length=150)
 	String usuario
+	@Column(length=150)
 	String nombre
+	@Column(length=150)
 	String apellido
+	@Column(length=150)
 	String password
+	@Column(length=150)
 	int edad
+	@Column(length=150)
 	double dinero
 	
+	@OneToMany(fetch=FetchType.LAZY)
 	Set<Usuario> amigos = new HashSet<Usuario>
 	
 	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
 	
+	@OneToMany(fetch=FetchType.LAZY)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
 	override getID() {

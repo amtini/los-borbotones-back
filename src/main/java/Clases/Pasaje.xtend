@@ -2,13 +2,30 @@ package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.time.LocalDate
+import javax.persistence.Entity
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.Id
+import javax.persistence.GeneratedValue
+import javax.persistence.Column
+import javax.persistence.Temporal
+import javax.persistence.TemporalType
 
+@Entity
+@Observable
 @Accessors
 class Pasaje{
+	@Id
+	@GeneratedValue //(strategy = GenerationType.AUTO)
+	Long id
+	
 	
 	Vuelo vuelo
 	Asiento asiento
+	
+	@Column(length=150)
 	Double costo
+	
+	@Temporal(TemporalType.DATE)
 	LocalDate comprado
 	
 	new(Vuelo vuelo_, Asiento asiento_, Double costo_, LocalDate comprado_) {

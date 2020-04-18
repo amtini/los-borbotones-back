@@ -17,7 +17,7 @@ public class Vuelo implements Entidad{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	String ID
+	String ID //TODO: VER EL STRING
 	
 	@Column(length=150)
 	String ciudadDeOrigen
@@ -30,13 +30,16 @@ public class Vuelo implements Entidad{
 	
 	
 	Aerolinea aerolinea
-	
-	
-	Double duracionDeVuelo
 	Avion avion
 	
+	@Column(length=150)
+	Double duracionDeVuelo
+	
+	
+	@Column(length=150)
 	int cantidadEscalas = 1
 	
+	@Column(length=150)
 	Double precioBase
 	
 	override getID() {

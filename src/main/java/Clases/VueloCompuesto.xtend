@@ -4,9 +4,23 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
 import java.util.List
 import java.time.temporal.ChronoUnit
+import javax.persistence.Entity
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.Id
+import javax.persistence.GeneratedValue
+import javax.persistence.OneToMany
+import javax.persistence.FetchType
 
+@Entity
+@Observable
 @Accessors
 class VueloCompuesto extends Vuelo{
+	
+	@Id
+	@GeneratedValue //(strategy = GenerationType.AUTO)
+	Long id
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	List<Vuelo> escalas = new ArrayList<Vuelo>
 	
 	override getDuracionDeVuelo(){
