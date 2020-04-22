@@ -20,6 +20,7 @@ import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
 import Clases.ClaseAsiento
 import Serializer.AsientoSerializer
+import Parsers.ParserStringToLong
 
 @Controller
 class AterrizarRestAPI {
@@ -27,6 +28,7 @@ class AterrizarRestAPI {
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
 	RepositorioAsiento repoAsiento
+	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 	
 	new(RepositorioUsuario repoU, RepositorioVuelo repoV, RepositorioAsiento repoA){
 		repoUsuario = repoU
@@ -245,7 +247,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/:id")
 	def dameUsuario(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsear(id))
 			
 			return ok(UsuarioSerializer.toJson(usuario))
 				//usuario.toJson

@@ -1,24 +1,24 @@
 package Clases
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.Set
-import java.util.HashSet
 import App.FiltrosAsiento
-import javax.persistence.Entity
-import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.Id
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
+import java.util.HashSet
+import java.util.Set
 import javax.persistence.Column
-import javax.persistence.OneToMany
+import javax.persistence.Entity
 import javax.persistence.FetchType
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.GenerationType
 
 @Entity
 @Observable
 @Accessors
 class Avion {
 	@Id
-	@GeneratedValue//(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id
 	
 	@Column(length=150)

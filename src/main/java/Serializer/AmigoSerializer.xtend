@@ -9,16 +9,20 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
+import Parsers.ParserStringToLong
 
 @Accessors
 class AmigoSerializer extends StdSerializer<Usuario>{
+	
+	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
+	
 	new(Class<Usuario> s){
 		super(s)
 	}
 	
 	override serialize(Usuario value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeStringField("id", value.ID);
+		gen.writeStringField("id", parserStringToLong.parsearDeLongAString(value.ID));
 		gen.writeStringField("nombre", value.nombre);
 		gen.writeStringField("apellido", value.apellido);
 		gen.writeNumberField("edad", value.edad);	

@@ -11,6 +11,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Set
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
+import Parsers.ParserStringToLong
 
 @Accessors
 class TicketSerializer extends StdSerializer<Ticket>{
@@ -18,14 +19,16 @@ class TicketSerializer extends StdSerializer<Ticket>{
 		super(s)
 	}
 	
+	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
+	
 	static val DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 	
 	static def getStringDateFromLocalDate(LocalDate date) { 	date.format(formatter) 	}
 	
 	override serialize(Ticket value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeStringField("asientoId", value.asiento.ID);
-		gen.writeStringField("vueloId", value.vuelo.ID);
+		gen.writeStringField("asientoId", parserStringToLong.parsearDeLongAString(value.asiento.ID));
+		gen.writeStringField("vueloId", parserStringToLong.parsearDeLongAString(value.vuelo.ID));
 		gen.writeStringField("ciudadDeOrigen", value.vuelo.ciudadDeOrigen);
 		gen.writeStringField("ciudadDeDestino", value.vuelo.ciudadDeDestino);
 		gen.writeStringField("aerolinea", value.vuelo.aerolinea.nombre);

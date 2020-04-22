@@ -9,16 +9,20 @@ import java.io.IOException
 import java.util.Set
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
+import Parsers.ParserStringToLong
 
 @Accessors
 class AsientoSerializer extends StdSerializer<Asiento>{
+	
+	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
+	
 	new(Class<Asiento> s){
 		super(s)
 	}
 	
 	override serialize(Asiento value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeStringField("id", value.ID);
+		gen.writeStringField("id", parserStringToLong.parsearDeLongAString(value.ID));
 		gen.writeStringField("claseAsiento", value.claseDeAsiento.nombre);
 		gen.writeBooleanField("ventanilla", value.ventana);
 		gen.writeNumberField("precioAsiento", value.precio)
