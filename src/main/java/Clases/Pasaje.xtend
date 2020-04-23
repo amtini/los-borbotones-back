@@ -25,7 +25,7 @@ class Pasaje {
 	@Column(length=150)
 	Double costo
 
-	@Temporal(TemporalType.DATE)
+	@Column
 	LocalDate comprado
 
 	new(Vuelo vuelo_, Asiento asiento_, Double costo_, LocalDate comprado_) {
