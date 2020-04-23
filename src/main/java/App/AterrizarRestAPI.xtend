@@ -56,7 +56,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/agregarSaldo/:id/:saldo")
 	def agregarSaldo(@Body String body){
 		try {
-            val usuario = repoUsuario.searchByID(id)
+            val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
             //val saldoAAgregar = 
             try {
                 usuario.agregarSaldo(saldo.fromJson(Double))
@@ -72,7 +72,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/cambiarPassword/:id/:nuevaPassword")
 	def cambiarPassword(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 		
 			try{
 				usuario.cambiarPassword(nuevaPassword)
@@ -88,7 +88,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/cambiarEdad/:id/:nuevaEdad")
 	def cambiarEdad(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			try{
 				usuario.cambiarEdad(nuevaEdad.fromJson(Integer))
 		    	return ok()
@@ -105,7 +105,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/amigos/:id")
 	def dameMisAmigos(){
 		try{
-			val amigos = repoUsuario.searchByID(id).amigos
+			val amigos = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id)).amigos
 			return ok(AmigoSerializer.toJson(amigos))
 		} catch (UserException exception){
 			return badRequest()
@@ -117,7 +117,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/agregarAmigo/:id/:usuarioAmigo")
 	def agregarAmigo(){
 		try{
-			repoUsuario.agregarAmigo(id, usuarioAmigo)
+			repoUsuario.agregarAmigo(parserStringToLong.parsearDeStringALong(id), usuarioAmigo)
 			return ok()
 		} catch (UserException exception){
 			return badRequest()
@@ -127,7 +127,7 @@ class AterrizarRestAPI {
 	@Delete("/usuario/eliminarAmigo/:id/:id2")
 	def eliminarAmigo(){
 		try{
-			repoUsuario.eliminarAmigo(id, id2)
+			repoUsuario.eliminarAmigo(parserStringToLong.parsearDeStringALong(id), parserStringToLong.parsearDeStringALong(id2))
 			return ok()
 		} catch (UserException exception){
 			return badRequest()
@@ -139,9 +139,9 @@ class AterrizarRestAPI {
 	@Get("/usuario/reservarVuelo/:id1/:id2/:id3")
 	def reservarVuelo(){
 		try{
-			val usuario = repoUsuario.searchByID(id1)
-			val vuelo = repoVuelo.searchByID(id2)
-			val asiento = repoAsiento.searchByID(id3)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
+			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
+			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
 			
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, asiento)
 			
@@ -154,9 +154,9 @@ class AterrizarRestAPI {
 	@Delete("/usuario/cancelarReserva/:id1/:id2/:id3")
 	def cancelarReserva(){
 		try{
-			val usuario = repoUsuario.searchByID(id1)
-			val vuelo = repoVuelo.searchByID(id2)
-			val asiento = repoAsiento.searchByID(id3)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
+			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
+			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
 			
 			usuario.carritoDeCompras.removerTicketDelCarrito(vuelo, asiento)
 			return ok()
@@ -168,7 +168,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			
 			usuario.carritoDeCompras.limpiarCarritoDeCompras
 			
@@ -183,7 +183,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/carritoDeCompras/:id")
 	def dameCarritoDeCompras(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			
 			return ok(TicketSerializer.toJson(usuario.carritoDeCompras.tickets))
 		} catch (UserException exception){
@@ -196,7 +196,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/finalizarCompra/:id")
 	def finalizarCompra(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			
 			usuario.comprarPasajes
 			
@@ -209,7 +209,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/costoTotalCarrito/:id")
 	def costoTotalCarrito(){
 		try{
-			val usuario = repoUsuario.searchByID(id)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			return ok(usuario.carritoDeCompras.costoTotalDelCarrito.toJson)
 		}catch(UserException exception){
 			return badRequest()
@@ -236,7 +236,7 @@ class AterrizarRestAPI {
 	def dameAsientos(@Body String body){
 		try{
 			val filtros = body.fromJson(FiltrosAsiento)
-			val asientos = repoVuelo.asientosDeMiVuelo(id, filtros)
+			val asientos = repoVuelo.asientosDeMiVuelo(parserStringToLong.parsearDeStringALong(id), filtros)
 			
 			return ok(AsientoSerializer.toJson(asientos))
 		}catch(UserException exception){
@@ -247,7 +247,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/:id")
 	def dameUsuario(){
 		try{
-			val usuario = repoUsuario.searchByID(parserStringToLong.parsear(id))
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			
 			return ok(UsuarioSerializer.toJson(usuario))
 				//usuario.toJson
@@ -262,7 +262,7 @@ class AterrizarRestAPI {
 	@Get("/usuario/pasajes/:id")
 	def damePasajes(){
 		try{
-			val pasajes = repoUsuario.searchByID(id).pasajesComprados
+			val pasajes = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id)).pasajesComprados
 			
 			return ok(PasajeSerializer.toJson(pasajes))
 				//usuario.toJson

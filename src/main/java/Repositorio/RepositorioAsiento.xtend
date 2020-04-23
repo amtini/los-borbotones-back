@@ -9,6 +9,17 @@ import javax.persistence.criteria.Root
 class RepositorioAsiento extends Repositorio<Asiento>{
 	@Accessors String tipo = "A"
 	
+	def Asiento searchByID(Long id) {
+		val criteria = entityManager.criteriaBuilder
+		val query = criteria.createQuery(getEntityType)
+		val from = query.from(getEntityType)
+		// evita n + 1 queries
+		//fromEntidad.fetch("proveedores")
+		query.select(from).where(criteria.equal(from.get("id"),id))
+		val finalQuery = entityManager.createQuery(query)
+		finalQuery.singleResult
+	}
+	
 	override getEntityType() {
 		Asiento
 	}
