@@ -2,11 +2,13 @@ package Clases
 
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
 import javax.persistence.Id
+import javax.persistence.OneToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.GenerationType
 
 @Entity
 @Observable
@@ -23,7 +25,8 @@ class Asiento {
 
 	// boolean ventana
 	boolean disponible
-
+	
+	@OneToOne(fetch=FetchType.LAZY)
 	ClaseAsiento claseDeAsiento = new ClaseAsiento
 
 	def precio() {

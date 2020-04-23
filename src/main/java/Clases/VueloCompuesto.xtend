@@ -4,9 +4,9 @@ import java.util.ArrayList
 import java.util.List
 import javax.persistence.Entity
 import javax.persistence.FetchType
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+//import javax.persistence.GeneratedValue
+//import javax.persistence.GenerationType
+//import javax.persistence.Id
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
@@ -16,9 +16,9 @@ import org.uqbar.commons.model.annotations.Observable
 @Accessors
 class VueloCompuesto extends Vuelo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
+//	Long id
 
 	@OneToMany(fetch=FetchType.LAZY)
 	List<Vuelo> escalas = new ArrayList<Vuelo>

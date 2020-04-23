@@ -1,15 +1,14 @@
 package Clases
 
-import org.eclipse.xtend.lib.annotations.Accessors
 import java.time.LocalDate
-import javax.persistence.Entity
-import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.Id
-import javax.persistence.GeneratedValue
 import javax.persistence.Column
-import javax.persistence.Temporal
-import javax.persistence.TemporalType
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
+import javax.persistence.Id
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.OneToOne
 
 @Entity
 @Observable
@@ -18,8 +17,11 @@ class Pasaje {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id
-
+	
+	@OneToOne
 	Vuelo vuelo
+	
+	@OneToOne
 	Asiento asiento
 
 	@Column(length=150)

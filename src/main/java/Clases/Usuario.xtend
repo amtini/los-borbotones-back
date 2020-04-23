@@ -12,6 +12,7 @@ import javax.persistence.Id
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.Transient
 
 @Entity
 @Observable
@@ -43,11 +44,13 @@ class Usuario {
 	@OneToMany(fetch=FetchType.LAZY)
 	Set<Usuario> amigos = new HashSet<Usuario>
 
-	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
 
 	@OneToMany(fetch=FetchType.LAZY)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
-
+	
+	@Transient
+	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
+	
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {
 		return (usuario == usuarioLogin && password == passwordLogin)
 	}
