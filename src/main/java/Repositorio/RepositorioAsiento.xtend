@@ -18,7 +18,7 @@ class RepositorioAsiento extends Repositorio<Asiento>{
 	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Asiento> query, Root<Asiento> campos, Long id) {
 		if (id !== null) {
-			query.where(criteria.equal(campos.get("id"), id))
+			query.where(criteria.equal(campos.get("ID"), id))
 		} 
 	}
 	

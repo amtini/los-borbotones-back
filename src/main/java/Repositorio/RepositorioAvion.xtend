@@ -18,7 +18,7 @@ class RepositorioAvion extends Repositorio<Avion> {
 	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Avion> query, Root<Avion> campos, Long id) {
 		if (id !== null) {
-			query.where(criteria.equal(campos.get("id"), id))
+			query.where(criteria.equal(campos.get("ID"), id))
 		} 
 	}
 	

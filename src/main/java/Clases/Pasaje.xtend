@@ -17,7 +17,7 @@ import javax.persistence.OneToOne
 class Pasaje {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id
+	Long ID
 	
 	@OneToOne
 	Vuelo vuelo

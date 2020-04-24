@@ -19,7 +19,7 @@ import javax.persistence.GenerationType
 class Avion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id
+	Long ID
 	
 	@Column(length=150)
 	String nombre

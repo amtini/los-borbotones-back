@@ -17,7 +17,7 @@ class RepositorioAerolinea extends Repositorio<Aerolinea>{
 	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Aerolinea> query, Root<Aerolinea> campos, Long id) {
 		if (id !== null) {
-			query.where(criteria.equal(campos.get("id"), id))
+			query.where(criteria.equal(campos.get("ID"), id))
 		} 
 	}
 	
