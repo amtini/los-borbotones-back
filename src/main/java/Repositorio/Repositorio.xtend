@@ -83,10 +83,6 @@ abstract class Repositorio<T> {
 		entityManagerFactory.createEntityManager
 	}
 
-	def delete(T element) {
-		// elementos.remove(element)
-	}
-
 //	def searchByID(Long id) {
 //		val criteria = entityManager.criteriaBuilder
 //		val query = criteria.createQuery(getEntityType)

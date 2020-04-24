@@ -13,9 +13,13 @@ import Clases.Pasaje
 import Repositorio.RepositorioAsiento
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
+import Repositorio.RepositorioClaseAsiento
+import Repositorio.RepositorioAerolinea
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
+		
+		//Clases de asientos
 		
 		val primeraClase = new ClaseAsiento =>[
 			nombre = "primera clase"
@@ -31,6 +35,8 @@ class AterrizarBootstrap {
 			nombre = "turista"
 			precioClase = 10000
 		]
+		
+		//Aviones
 		
 		val Boeing747 = new Avion =>[
 			nombre = "Boeing 747"
@@ -618,24 +624,19 @@ class AterrizarBootstrap {
 		val repoAsiento = new RepositorioAsiento
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
+		val repoClaseAsiento = new RepositorioClaseAsiento
+		val repoAerolinea = new RepositorioAerolinea
 		
-		repoVuelo.create(vueloBSaRio)
-        repoVuelo.create(vueloBSaJamaica)
-        repoVuelo.create(vueloAFrancia)
-        repoVuelo.create(vueloBSaChile)
-        repoVuelo.create(vueloBSaMiami)
-        repoVuelo.create(vueloBSaItalia)
-        repoVuelo.create(vueloBSaAustralia)
-        repoVuelo.create(vueloBSaInglaterra)
-        repoVuelo.create(vueloARGaCHILEaCUBA)
-        
-        repoUsuario.create(MartinMorena)
-        repoUsuario.create(LucasPerez)
-        repoUsuario.create(NicolasDichiara)
-        repoUsuario.create(BrianZerial)
-        repoUsuario.create(AgustinMarioTini)
-        repoUsuario.create(JorgeLopez)
+		repoClaseAsiento.create(primeraClase)
+		repoClaseAsiento.create(bussisnes)
+		repoClaseAsiento.create(turista)
 		
+		repoAerolinea.create(AerolineasArgentinas)
+		repoAerolinea.create(AirFrance)
+		repoAerolinea.create(Luftansa)
+		repoAerolinea.create(LanChile)
+		repoAerolinea.create(CopaAirlans)
+		repoAerolinea.create(Varig)
 		
 		repoAsiento.create(asiento1)
 		repoAsiento.create(asiento2)
@@ -674,6 +675,23 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento35)
 		repoAsiento.create(asiento36)
 		repoAsiento.create(asientoDeRapidoDelNorte)
+		
+		repoVuelo.create(vueloBSaRio)
+        repoVuelo.create(vueloBSaJamaica)
+        repoVuelo.create(vueloAFrancia)
+        repoVuelo.create(vueloBSaChile)
+        repoVuelo.create(vueloBSaMiami)
+        repoVuelo.create(vueloBSaItalia)
+        repoVuelo.create(vueloBSaAustralia)
+        repoVuelo.create(vueloBSaInglaterra)
+        repoVuelo.create(vueloARGaCHILEaCUBA)
+        
+        repoUsuario.create(MartinMorena)
+        repoUsuario.create(LucasPerez)
+        repoUsuario.create(NicolasDichiara)
+        repoUsuario.create(BrianZerial)
+        repoUsuario.create(AgustinMarioTini)
+        repoUsuario.create(JorgeLopez)
 		
 		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento))
 	}

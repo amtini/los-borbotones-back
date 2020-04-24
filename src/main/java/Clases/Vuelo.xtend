@@ -4,14 +4,15 @@ import App.FiltrosAsiento
 import App.FiltrosVuelo
 import java.time.LocalDate
 import javax.persistence.Column
+import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.ManyToOne
 import org.eclipse.xtend.lib.annotations.Accessors
-import javax.persistence.Entity
 import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.CascadeType
 
 @Entity
 @Observable
@@ -34,7 +35,7 @@ class Vuelo{
 	@ManyToOne(fetch=FetchType.LAZY)
 	Aerolinea aerolinea
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	Avion avion
 
 	@Column(length=150)
