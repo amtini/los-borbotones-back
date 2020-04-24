@@ -8,18 +8,6 @@ import Clases.Pasaje
 
 
 class RepositorioPasaje extends Repositorio<Pasaje>  {
-
-	
-		def Pasaje searchByID(Long id) {
-		val criteria = entityManager.criteriaBuilder
-		val query = criteria.createQuery(getEntityType)
-		val from = query.from(getEntityType)
-		// evita n + 1 queries
-		//fromEntidad.fetch("proveedores")
-		query.select(from).where(criteria.equal(from.get("id"),id))
-		val finalQuery = entityManager.createQuery(query)
-		finalQuery.singleResult
-	}
 	
 	override getEntityType() {
 		Pasaje
@@ -28,6 +16,12 @@ class RepositorioPasaje extends Repositorio<Pasaje>  {
 
 	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Pasaje> query, Root<Pasaje> camposCandidato, Pasaje t) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Pasaje> query, Root<Pasaje> campos, Long id) {
+		if (id !== null) {
+			query.where(criteria.equal(campos.get("id"), id))
+		} 
 	}
 	
 }

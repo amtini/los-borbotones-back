@@ -8,17 +8,6 @@ import javax.persistence.criteria.Root
 
 class RepositorioUsuario extends Repositorio<Usuario>{
 	
-	
-	def Usuario searchByID(Long id) {
-		val criteria = entityManager.criteriaBuilder
-		val query = criteria.createQuery(getEntityType)
-		val from = query.from(getEntityType)
-		// evita n + 1 queries
-		//fromEntidad.fetch("proveedores")
-		query.select(from).where(criteria.equal(from.get("id"),id))
-		val finalQuery = entityManager.createQuery(query)
-		finalQuery.singleResult
-	}
 
 	def verificarLogin(String usuarioLogin, String passwordLogin){
 		allInstances.findFirst(usuario | usuario.verificarUsuario(usuarioLogin, passwordLogin))
@@ -50,6 +39,12 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 	
 	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposCandidato, Usuario t) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposUsuario, Long id) {
+		if (id !== null) {
+			query.where(criteria.equal(camposUsuario.get("ID"), id))
+		} 
 	}
 	
 }

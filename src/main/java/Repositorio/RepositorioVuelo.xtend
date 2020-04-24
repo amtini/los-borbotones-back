@@ -9,18 +9,6 @@ import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
 class RepositorioVuelo extends Repositorio<Vuelo>{
-
-	
-	def Vuelo searchByID(Long id) {
-		val criteria = entityManager.criteriaBuilder
-		val query = criteria.createQuery(getEntityType)
-		val from = query.from(getEntityType)
-		// evita n + 1 queries
-		//fromEntidad.fetch("proveedores")
-		query.select(from).where(criteria.equal(from.get("id"),id))
-		val finalQuery = entityManager.createQuery(query)
-		finalQuery.singleResult
-	}
 	
 	def vuelosDisponibles(){
 		allInstances.filter[
@@ -44,6 +32,10 @@ class RepositorioVuelo extends Repositorio<Vuelo>{
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-	
+	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Vuelo> query, Root<Vuelo> camposUsuario, Long id) {
+		if (id !== null) {
+			query.where(criteria.equal(camposUsuario.get("ID"), id))
+		} 
+	}
 	
 }

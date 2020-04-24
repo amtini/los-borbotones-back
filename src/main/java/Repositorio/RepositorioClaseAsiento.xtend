@@ -1,6 +1,5 @@
 package Repositorio
 
-import Clases.Asiento
 import Clases.ClaseAsiento
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
@@ -16,15 +15,10 @@ class RepositorioClaseAsiento extends Repositorio<ClaseAsiento>{
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-	def ClaseAsiento searchByID(Long id) {
-		val criteria = entityManager.criteriaBuilder
-		val query = criteria.createQuery(getEntityType)
-		val from = query.from(getEntityType)
-		// evita n + 1 queries
-		//fromEntidad.fetch("proveedores")
-		query.select(from).where(criteria.equal(from.get("id"),id))
-		val finalQuery = entityManager.createQuery(query)
-		finalQuery.singleResult
+	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<ClaseAsiento> query, Root<ClaseAsiento> campos, Long id) {
+		if (id !== null) {
+			query.where(criteria.equal(campos.get("id"), id))
+		} 
 	}
 	
 }
