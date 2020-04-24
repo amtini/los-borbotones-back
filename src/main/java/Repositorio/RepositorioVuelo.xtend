@@ -1,7 +1,7 @@
 package Repositorio
 
 import Clases.Vuelo
-import org.eclipse.xtend.lib.annotations.Accessors
+
 import App.FiltrosVuelo
 import App.FiltrosAsiento
 import javax.persistence.criteria.CriteriaBuilder
@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
 class RepositorioVuelo extends Repositorio<Vuelo>{
-	@Accessors String tipo = "V"
+
 	
 	def Vuelo searchByID(Long id) {
 		val criteria = entityManager.criteriaBuilder

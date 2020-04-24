@@ -1,15 +1,16 @@
 package Repositorio
 
-import Clases.Asiento
-
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
-class RepositorioAsiento extends Repositorio<Asiento>{
+import Clases.Pasaje
+
+
+class RepositorioPasaje extends Repositorio<Pasaje>  {
+
 	
-	
-	def Asiento searchByID(Long id) {
+		def Pasaje searchByID(Long id) {
 		val criteria = entityManager.criteriaBuilder
 		val query = criteria.createQuery(getEntityType)
 		val from = query.from(getEntityType)
@@ -21,12 +22,12 @@ class RepositorioAsiento extends Repositorio<Asiento>{
 	}
 	
 	override getEntityType() {
-		Asiento
+		Pasaje
 	}
 	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Asiento> query, Root<Asiento> camposAsiento, Asiento t) {
+
+	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Pasaje> query, Root<Pasaje> camposCandidato, Pasaje t) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
-	
 	
 }

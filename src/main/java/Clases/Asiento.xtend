@@ -22,7 +22,7 @@ class Asiento {
 	
 	@Column(columnDefinition="TINYINT")
 	// @Type  //(type = "org.hibernate.type.NumericBooleanType") TODO: en teoria deberiamos usar este no estoy seguropara el booleano, lo dejo para chekear
-	public boolean ventana = true;
+	public boolean ventana 
 	
 	@Column(columnDefinition="TINYINT")
 	// boolean ventana

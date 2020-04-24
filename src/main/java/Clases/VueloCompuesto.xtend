@@ -10,6 +10,7 @@ import javax.persistence.FetchType
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.CascadeType
 
 @Entity
 @Observable
@@ -20,7 +21,7 @@ class VueloCompuesto extends Vuelo {
 //	@GeneratedValue(strategy = GenerationType.AUTO)
 //	Long id
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	List<Vuelo> escalas = new ArrayList<Vuelo>
 
 	override getDuracionDeVuelo() {

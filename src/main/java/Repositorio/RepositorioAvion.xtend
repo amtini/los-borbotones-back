@@ -1,15 +1,14 @@
 package Repositorio
 
 import Clases.Avion
-import org.eclipse.xtend.lib.annotations.Accessors
+
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
 class RepositorioAvion extends Repositorio<Avion> {
 		
-		@Accessors 
-		String tipo = "V"
+		
 	
 		def Avion searchByID(Long id) {
 		val criteria = entityManager.criteriaBuilder

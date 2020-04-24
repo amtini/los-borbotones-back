@@ -35,7 +35,7 @@ class Vuelo{
 	@ManyToOne(fetch=FetchType.LAZY)
 	Aerolinea aerolinea
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	Avion avion
 
 	@Column(length=150)

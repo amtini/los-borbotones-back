@@ -250,7 +250,6 @@ class AterrizarRestAPI {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			
 			return ok(UsuarioSerializer.toJson(usuario))
-				//usuario.toJson
 			
 		}catch(UserException exception){
 			return badRequest()

@@ -1,13 +1,13 @@
 package Repositorio
 
 import Clases.Usuario
-import org.eclipse.xtend.lib.annotations.Accessors
+
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
 class RepositorioUsuario extends Repositorio<Usuario>{
-	@Accessors String tipo = "U"
+	
 	
 	def Usuario searchByID(Long id) {
 		val criteria = entityManager.criteriaBuilder

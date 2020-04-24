@@ -16,6 +16,7 @@ import Repositorio.RepositorioVuelo
 import Repositorio.RepositorioClaseAsiento
 import Repositorio.RepositorioAerolinea
 import Repositorio.RepositorioAvion
+import Repositorio.RepositorioPasaje
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -466,7 +467,7 @@ class AterrizarBootstrap {
 	
 	
 	
-	//vuelo compuesto
+	//vuelo compuesto vueloARGaCHILEaCUBA
 	
 	val RapidoDelNorte = new Avion =>[ nombre = "Rapido del Norte"]
 
@@ -628,6 +629,7 @@ class AterrizarBootstrap {
 		val repoClaseAsiento = new RepositorioClaseAsiento
 		val repoAerolinea = new RepositorioAerolinea
 		val repoAvion = new RepositorioAvion
+		val repoPasaje = new RepositorioPasaje
 		
 		repoClaseAsiento.create(primeraClase)
 		repoClaseAsiento.create(bussisnes)
@@ -686,9 +688,10 @@ class AterrizarBootstrap {
 		repoAvion.create(Boeing777)
 		repoAvion.create(Boeing767)
 		repoAvion.create(Boeing757)
+		repoAvion.create(RapidoDelNorte)
 		
 		
-		repoVuelo.create(vueloBSaRio)
+		repoVuelo.create(vueloBSaRio) //TODO
         repoVuelo.create(vueloBSaJamaica)
         repoVuelo.create(vueloAFrancia)
         repoVuelo.create(vueloBSaChile)
@@ -698,9 +701,25 @@ class AterrizarBootstrap {
         repoVuelo.create(vueloBSaInglaterra)
         repoVuelo.create(vueloARGaCHILEaCUBA)
         
+        repoPasaje.create(pasajeBSaRioMMorena)
+        repoPasaje.create(pasajeBSaCHILEMMorena)
+        repoPasaje.create(pasajeBSaJamaicaLPerez)
+        repoPasaje.create(pasajeBSaFranciaLPerez)
+        repoPasaje.create(pasajeBSaMiamiDiachiara)
+        repoPasaje.create(pasajeBSaItaliaDiachiara)
+        repoPasaje.create(pasajeBSaItaliaBrian)
+        repoPasaje.create(pasajeBSaAustraliaBrian)
+         repoPasaje.create(vueloAFranciaAMTini)
+        repoPasaje.create(vueloBSaInglaterraAMTini)
+        repoPasaje.create(vueloBSaInglaterraJLopez)
+        repoPasaje.create(vueloBSaAustraliaJLopez)
+
+        
+        
+        
         repoUsuario.create(MartinMorena)
         repoUsuario.create(LucasPerez)
-        repoUsuario.create(NicolasDichiara)
+    //    repoUsuario.create(NicolasDichiara)
         repoUsuario.create(BrianZerial)
         repoUsuario.create(AgustinMarioTini)
         repoUsuario.create(JorgeLopez)
