@@ -15,6 +15,7 @@ import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
 import Repositorio.RepositorioClaseAsiento
 import Repositorio.RepositorioAerolinea
+import Repositorio.RepositorioAvion
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -626,6 +627,7 @@ class AterrizarBootstrap {
 		val repoVuelo = new RepositorioVuelo
 		val repoClaseAsiento = new RepositorioClaseAsiento
 		val repoAerolinea = new RepositorioAerolinea
+		val repoAvion = new RepositorioAvion
 		
 		repoClaseAsiento.create(primeraClase)
 		repoClaseAsiento.create(bussisnes)
@@ -676,6 +678,16 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento36)
 		repoAsiento.create(asientoDeRapidoDelNorte)
 		
+		repoAvion.create(Boeing747)
+		repoAvion.create(AirbusA320)
+		repoAvion.create(Tu204)
+		repoAvion.create(Il96)
+		repoAvion.create(CRJ200)
+		repoAvion.create(Boeing777)
+		repoAvion.create(Boeing767)
+		repoAvion.create(Boeing757)
+		
+		
 		repoVuelo.create(vueloBSaRio)
         repoVuelo.create(vueloBSaJamaica)
         repoVuelo.create(vueloAFrancia)
@@ -692,6 +704,8 @@ class AterrizarBootstrap {
         repoUsuario.create(BrianZerial)
         repoUsuario.create(AgustinMarioTini)
         repoUsuario.create(JorgeLopez)
+        
+ 
 		
 		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento))
 	}
