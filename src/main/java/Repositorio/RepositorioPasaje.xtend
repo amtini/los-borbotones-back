@@ -24,6 +24,5 @@ class RepositorioPasaje extends Repositorio<Pasaje>  {
 	}
 	
 	override fetch(Root<Pasaje> from) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 }

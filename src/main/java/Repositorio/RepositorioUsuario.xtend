@@ -48,7 +48,6 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 	}
 	
 	override fetch(Root<Usuario> from) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 }
