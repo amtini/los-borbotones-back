@@ -9,7 +9,6 @@ import Serializer.TicketSerializer
 import Serializer.UsuarioSerializer
 import Serializer.VueloSerializer
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-import java.time.LocalDate
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.xtrest.api.annotation.Body
@@ -18,7 +17,6 @@ import org.uqbar.xtrest.api.annotation.Delete
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
-import Clases.ClaseAsiento
 import Serializer.AsientoSerializer
 import Parsers.ParserStringToLong
 
@@ -254,6 +252,8 @@ class AterrizarRestAPI {
 	@Get("/usuario/pasajes/:id")
 	def damePasajes() {
 		try {
+			
+			
 			val pasajes = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id)).pasajesComprados
 
 			return ok(PasajeSerializer.toJson(pasajes))

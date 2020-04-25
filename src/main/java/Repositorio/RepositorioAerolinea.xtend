@@ -21,4 +21,8 @@ class RepositorioAerolinea extends Repositorio<Aerolinea>{
 		} 
 	}
 	
+	override fetch(Root<Aerolinea> from) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.CascadeType
+import javax.persistence.OneToOne
 
 @Entity
 @Observable
@@ -35,7 +36,7 @@ class Vuelo{
 	@ManyToOne(fetch=FetchType.LAZY)
 	Aerolinea aerolinea
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	Avion avion
 
 	@Column(length=150)

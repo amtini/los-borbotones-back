@@ -18,7 +18,7 @@ import javax.persistence.Transient
 @Observable
 @Accessors
 class Usuario {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long ID // TODO ver lo del id
@@ -40,10 +40,9 @@ class Usuario {
 	
 	@Column(length=150)
 	double dinero
-
+	
 	@OneToMany(fetch=FetchType.LAZY)
 	Set<Usuario> amigos = new HashSet<Usuario>
-
 
 	@OneToMany(fetch=FetchType.LAZY)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>

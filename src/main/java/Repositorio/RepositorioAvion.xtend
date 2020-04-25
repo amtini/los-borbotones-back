@@ -22,4 +22,6 @@ class RepositorioAvion extends Repositorio<Avion> {
 		} 
 	}
 	
+	override fetch(Root<Avion> from) {
+	}
 }

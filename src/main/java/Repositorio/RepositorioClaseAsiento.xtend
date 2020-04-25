@@ -21,4 +21,8 @@ class RepositorioClaseAsiento extends Repositorio<ClaseAsiento>{
 		} 
 	}
 	
+	override fetch(Root<ClaseAsiento> from) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }

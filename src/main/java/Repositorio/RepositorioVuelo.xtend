@@ -38,4 +38,9 @@ class RepositorioVuelo extends Repositorio<Vuelo>{
 		} 
 	}
 	
+	override fetch(Root<Vuelo> from) {
+		from.fetch("avion").fetch("asientos").fetch("claseDeAsiento")
+		from.fetch("aerolinea")
+	}
+	
 }

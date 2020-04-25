@@ -15,6 +15,8 @@ import javax.persistence.OneToOne
 @Observable
 @Accessors
 class Pasaje {
+	new(){}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long ID

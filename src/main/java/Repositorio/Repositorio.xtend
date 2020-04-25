@@ -22,6 +22,7 @@ abstract class Repositorio<T> {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
 			val from = query.from(entityType)
+			fetch(from)
 			query.select(from)
 			entityManager.createQuery(query).resultList
 		} finally {
@@ -42,6 +43,8 @@ abstract class Repositorio<T> {
 			entityManager?.close
 		}
 	}
+	
+	def void fetch(Root<T> from)
 
 	abstract def void generateWhere(CriteriaBuilder criteria, CriteriaQuery<T> query, Root<T> camposCandidato, T t) // ESTA ES LA ABTRACT QUE SE CREA PARA LUEGO REDEFINIR ESTE METODO
 
@@ -87,13 +90,11 @@ abstract class Repositorio<T> {
 		val criteria = entityManager.criteriaBuilder
 		val query = criteria.createQuery(getEntityType)
 		val from = query.from(getEntityType)
-		// evita n + 1 queries
-		//fromEntidad.fetch("proveedores")
 		generateWhereId(criteria, query, from, id)
 		val finalQuery = entityManager.createQuery(query)
 		finalQuery.singleResult
 	}
-	
+
 	def void generateWhereId(CriteriaBuilder builder, CriteriaQuery<T> query, Root<T> root, Long long1)
-	
+
 }

@@ -21,7 +21,7 @@ class VueloCompuesto extends Vuelo {
 //	@GeneratedValue(strategy = GenerationType.AUTO)
 //	Long id
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	List<Vuelo> escalas = new ArrayList<Vuelo>
 
 	override getDuracionDeVuelo() {

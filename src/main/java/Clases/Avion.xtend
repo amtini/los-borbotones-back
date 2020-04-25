@@ -46,5 +46,4 @@ class Avion {
 			asientosDisponibles.filter[it.ventana == filtros.ventanilla].toSet
 		}
 	}
-	
 }
