@@ -543,7 +543,7 @@ class AterrizarBootstrap {
 		
 		val BrianZerial = new Usuario =>[
 			usuario = "bzerial"
-			nombre = "Braian"
+			nombre = "Brian"
 			apellido = "Zerial"
 			password = "bzerial"
 			edad = 30
