@@ -1,8 +1,6 @@
 package Clases
 
-import java.time.LocalDate
-import java.util.HashSet
-import java.util.Set
+
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -12,10 +10,12 @@ import javax.persistence.Id
 import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.Transient
 import javax.persistence.ManyToMany
 import javax.persistence.OneToOne
 import javax.persistence.CascadeType
+import java.util.Set
+import java.util.HashSet
+import java.time.LocalDate
 
 @Entity
 @Observable
@@ -51,7 +51,7 @@ class Usuario {
 	@OneToMany(fetch=FetchType.LAZY)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
 	
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {

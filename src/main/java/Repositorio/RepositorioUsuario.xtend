@@ -13,10 +13,12 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 		allInstances.findFirst(usuario | usuario.verificarUsuario(usuarioLogin, passwordLogin))
 	}
 	
-	def agregarAmigo(Long id, String usuarioAmigo){		
+	def agregarAmigo(Usuario usuario, String usuarioAmigo){
 		if(existeUsuarioNombre(usuarioAmigo)){
-			this.searchByID(id).agregarAmigo(verificarAmigo(usuarioAmigo))
+			usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
+			update(usuario)
 		}
+		
 	}
 	
 	def eliminarAmigo(Long id, Long id2){

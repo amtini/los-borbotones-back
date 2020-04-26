@@ -58,6 +58,7 @@ class AterrizarRestAPI {
 			// val saldoAAgregar = 
 			try {
 				usuario.agregarSaldo(saldo.fromJson(Double))
+				repoUsuario.update(usuario)
 				return ok()
 			} catch (UserException exception) {
 				return badRequest()
@@ -74,6 +75,7 @@ class AterrizarRestAPI {
 
 			try {
 				usuario.cambiarPassword(nuevaPassword)
+				repoUsuario.update(usuario)
 				return ok()
 			} catch (UserException exception) {
 				return badRequest()
@@ -89,6 +91,7 @@ class AterrizarRestAPI {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			try {
 				usuario.cambiarEdad(nuevaEdad.fromJson(Integer))
+				repoUsuario.update(usuario)
 				return ok()
 			} catch (UserException exception) {
 				return badRequest()
@@ -113,7 +116,8 @@ class AterrizarRestAPI {
 	@Get("/usuario/agregarAmigo/:id/:usuarioAmigo")
 	def agregarAmigo() {
 		try {
-			repoUsuario.agregarAmigo(parserStringToLong.parsearDeStringALong(id), usuarioAmigo)
+			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
+			repoUsuario.agregarAmigo(usuario, usuarioAmigo)
 			return ok()
 		} catch (UserException exception) {
 			return badRequest()
