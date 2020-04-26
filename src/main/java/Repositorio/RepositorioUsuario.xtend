@@ -16,9 +16,9 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 	def agregarAmigo(Usuario usuario, String usuarioAmigo){
 		if(existeUsuarioNombre(usuarioAmigo)){
 			usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
+			println(verificarAmigo(usuarioAmigo))
 			update(usuario)
 		}
-		
 	}
 	
 	def eliminarAmigo(Long id, Long id2){
@@ -27,6 +27,8 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 			
 		}
 	}
+	
+	//hacer search by EXAMPLE, en este caso el nombre del usuario a agregar a amigos
 	
 	def verificarAmigo(String usuarioAmigo){
 		allInstances.findFirst[usuario | usuario.usuario == usuarioAmigo]
