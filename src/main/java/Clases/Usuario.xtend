@@ -13,7 +13,7 @@ import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.Transient
-
+import javax.persistence.ManyToMany
 
 @Entity
 @Observable
@@ -42,7 +42,7 @@ class Usuario {
 	@Column(length=150)
 	double dinero
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	//@ElementCollection
 	Set<Usuario> amigos = new HashSet<Usuario>
 

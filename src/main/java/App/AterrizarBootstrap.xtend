@@ -572,7 +572,7 @@ class AterrizarBootstrap {
 		
 		AgustinMarioTini.agregarAmigo(BrianZerial)
 		AgustinMarioTini.agregarAmigo(NicolasDichiara)	
-		//NicolasDichiara.agregarAmigo(BrianZerial)
+		NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena
 		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio,asiento25,15000.0,LocalDate.of(2020,03,29))
