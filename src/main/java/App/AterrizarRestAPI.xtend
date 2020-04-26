@@ -144,6 +144,8 @@ class AterrizarRestAPI {
 			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
 			
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, asiento)
+			repoUsuario.update(usuario)
+			repoAsiento.update(asiento)
 			
 			return ok()
 		} catch (UserException exception) {
@@ -243,7 +245,6 @@ class AterrizarRestAPI {
 	@Get("/usuario/:id")
 	def dameUsuario() {
 		try {
-			println("voy a ir a buscar el usuario")
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			return ok(UsuarioSerializer.toJson(usuario))
 

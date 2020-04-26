@@ -10,6 +10,7 @@ import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.GenerationType
+import javax.persistence.CascadeType
 
 @Entity
 @Observable
@@ -20,7 +21,7 @@ class CarritoDeCompras {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long ID
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	List<Ticket> tickets = new ArrayList<Ticket>
 	
 	def agregarTicketAlCarrito(Vuelo vuelo, Asiento asiento){

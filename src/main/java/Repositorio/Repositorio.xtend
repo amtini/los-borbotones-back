@@ -29,9 +29,9 @@ abstract class Repositorio<T> {
 			entityManager?.close
 		}
 	}
-	
+
 	def void fetch(Root<T> from)
-	
+
 	def create(T t) {
 		val entityManager = this.entityManager
 		try {

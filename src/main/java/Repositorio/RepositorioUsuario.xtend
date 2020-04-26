@@ -6,49 +6,54 @@ import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
 
-class RepositorioUsuario extends Repositorio<Usuario>{
-	
+class RepositorioUsuario extends Repositorio<Usuario> {
 
-	def verificarLogin(String usuarioLogin, String passwordLogin){
-		allInstances.findFirst(usuario | usuario.verificarUsuario(usuarioLogin, passwordLogin))
+	def verificarLogin(String usuarioLogin, String passwordLogin) {
+		allInstances.findFirst(usuario|usuario.verificarUsuario(usuarioLogin, passwordLogin))
 	}
-	
-	def agregarAmigo(Usuario usuario, String usuarioAmigo){
-		if(existeUsuarioNombre(usuarioAmigo)){
-			usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
-			println(verificarAmigo(usuarioAmigo))
-			update(usuario)
-		}
+
+	def agregarAmigo(Usuario usuario, String usuarioAmigo) {
+		usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
+		update(usuario)
 	}
-	
-	def eliminarAmigo(Long id, Long id2){
-		if(searchByID(id2) !== null && this.searchByID(id).amigos.contains(searchByID(id2))){
+
+	def eliminarAmigo(Long id, Long id2) {
+		if (searchByID(id2) !== null && this.searchByID(id).amigos.contains(searchByID(id2))) {
 			this.searchByID(id).removerAmigo(searchByID(id2))
-			
+
 		}
 	}
-	
-	//hacer search by EXAMPLE, en este caso el nombre del usuario a agregar a amigos
-	
-	def verificarAmigo(String usuarioAmigo){
-		allInstances.findFirst[usuario | usuario.usuario == usuarioAmigo]
+
+	// hacer search by EXAMPLE, en este caso el nombre del usuario a agregar a amigos
+	def verificarAmigo(String usuarioAmigo) {
+		searchUsuarioPorNombre(usuarioAmigo)
 	}
-	
-	def existeUsuarioNombre(String nombreAmigo){
-		allInstances.contains(verificarAmigo(nombreAmigo))
-	}
-	
+
 	override getEntityType() {
 		Usuario
 	}
-	
-	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposUsuario, Long id) {
+
+	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposUsuario,
+		Long id) {
 		if (id !== null) {
 			query.where(criteria.equal(camposUsuario.get("ID"), id))
-		} 
+		}
 	}
-	
+
 	override fetch(Root<Usuario> from) {
 	}
 	
+	def searchUsuarioPorNombre(String unString) {
+		val entityManager = this.entityManager
+		try {
+			val criteria = entityManager.criteriaBuilder
+			val query = criteria.createQuery(entityType)
+			val from = query.from(entityType)
+			query.select(from)
+			query.where(criteria.equal(from.get("usuario"), unString))
+			entityManager.createQuery(query).singleResult
+		} finally {
+			entityManager?.close
+		}
+	}
 }

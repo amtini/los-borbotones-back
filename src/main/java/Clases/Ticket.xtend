@@ -13,6 +13,9 @@ import javax.persistence.GenerationType
 @Observable
 @Accessors
 class Ticket{
+	
+	new(){}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long ID
