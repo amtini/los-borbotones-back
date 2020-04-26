@@ -1,19 +1,33 @@
 package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.HashSet
-import java.util.Set
+import java.util.ArrayList
+import java.util.List
+import javax.persistence.OneToMany
+import javax.persistence.FetchType
+import javax.persistence.Entity
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.GenerationType
 
+@Entity
+@Observable
 @Accessors
 class CarritoDeCompras {
 	
-	Set<Ticket> tickets = new HashSet<Ticket>
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	Long ID
+
+	@OneToMany(fetch=FetchType.LAZY)
+	List<Ticket> tickets = new ArrayList<Ticket>
 	
 	def agregarTicketAlCarrito(Vuelo vuelo, Asiento asiento){
 		val ticket = new Ticket(vuelo,asiento)
 		if(!existeEnCarrito(vuelo,asiento)){
 			tickets.add(ticket)
-			ticket.reservar
+			ticket.reservar //TODO
 		}
 	}
 	

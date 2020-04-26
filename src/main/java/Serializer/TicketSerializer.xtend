@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import java.io.IOException
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.Set
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
 import Parsers.ParserStringToLong
+import java.util.List
 
 @Accessors
 class TicketSerializer extends StdSerializer<Ticket>{
@@ -38,7 +38,7 @@ class TicketSerializer extends StdSerializer<Ticket>{
 		gen.writeEndObject();
 	}
 	
-	static def String toJson(Set<Ticket> tickets) {
+	static def String toJson(List<Ticket> tickets) {
 		if(tickets === null || tickets.empty){return "[ ]"}
 		mapper().writeValueAsString(tickets)
 	}

@@ -304,7 +304,7 @@ class AterrizarBootstrap {
 			claseDeAsiento = bussisnes
 		]
 		
-			val asiento27 = new Asiento =>[
+		val asiento27 = new Asiento =>[
 			ventana = false
 			disponible = false
 			claseDeAsiento = bussisnes
@@ -572,7 +572,7 @@ class AterrizarBootstrap {
 		
 		AgustinMarioTini.agregarAmigo(BrianZerial)
 		AgustinMarioTini.agregarAmigo(NicolasDichiara)	
-		//NicolasDichiara.agregarAmigo(BrianZerial)
+		NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena
 		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio,asiento25,15000.0,LocalDate.of(2020,03,29))
@@ -619,8 +619,6 @@ class AterrizarBootstrap {
 		
 		JorgeLopez.pasajesComprados.add(vueloBSaInglaterraJLopez)
 		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
-		
-		
 		
 		//REPOOO
 		
@@ -721,7 +719,7 @@ class AterrizarBootstrap {
         repoUsuario.create(MartinMorena)
         repoUsuario.create(LucasPerez)
         repoUsuario.create(BrianZerial)
-         repoUsuario.create(NicolasDichiara)
+        repoUsuario.create(NicolasDichiara)
         repoUsuario.create(AgustinMarioTini) //TODO
         repoUsuario.create(JorgeLopez)
          

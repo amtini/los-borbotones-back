@@ -28,10 +28,6 @@ class RepositorioVuelo extends Repositorio<Vuelo>{
 		Vuelo
 	}
 	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Vuelo> query, Root<Vuelo> camposCandidato, Vuelo t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Vuelo> query, Root<Vuelo> camposUsuario, Long id) {
 		if (id !== null) {
 			query.where(criteria.equal(camposUsuario.get("ID"), id))

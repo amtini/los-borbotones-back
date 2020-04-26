@@ -29,25 +29,9 @@ abstract class Repositorio<T> {
 			entityManager?.close
 		}
 	}
-
-	def searchByExample(T t) {
-		val entityManager = this.entityManager
-		try {
-			val criteria = entityManager.criteriaBuilder
-			val query = criteria.createQuery(entityType)
-			val from = query.from(entityType)
-			query.select(from)
-			generateWhere(criteria, query, from, t) // ESTO ES LO QUE TIENE DE DIFERENTE CADA IF ASI QUE HACE UN METODO ABTRACTO Y LO REDEFINO EN CADA UNA DE LAS CLASES
-			entityManager.createQuery(query).resultList
-		} finally {
-			entityManager?.close
-		}
-	}
 	
 	def void fetch(Root<T> from)
-
-	abstract def void generateWhere(CriteriaBuilder criteria, CriteriaQuery<T> query, Root<T> camposCandidato, T t) // ESTA ES LA ABTRACT QUE SE CREA PARA LUEGO REDEFINIR ESTE METODO
-
+	
 	def create(T t) {
 		val entityManager = this.entityManager
 		try {

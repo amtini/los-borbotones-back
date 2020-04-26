@@ -22,6 +22,7 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 	def eliminarAmigo(Long id, Long id2){
 		if(searchByID(id2) !== null && this.searchByID(id).amigos.contains(searchByID(id2))){
 			this.searchByID(id).removerAmigo(searchByID(id2))
+			
 		}
 	}
 	
@@ -35,10 +36,6 @@ class RepositorioUsuario extends Repositorio<Usuario>{
 	
 	override getEntityType() {
 		Usuario
-	}
-	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposCandidato, Usuario t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Usuario> query, Root<Usuario> camposUsuario, Long id) {

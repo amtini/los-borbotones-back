@@ -138,9 +138,9 @@ class AterrizarRestAPI {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
 			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
-
+			
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, asiento)
-
+			
 			return ok()
 		} catch (UserException exception) {
 			return badRequest()

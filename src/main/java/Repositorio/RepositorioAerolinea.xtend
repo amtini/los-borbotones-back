@@ -11,10 +11,6 @@ class RepositorioAerolinea extends Repositorio<Aerolinea>{
 		Aerolinea
 	}
 	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<Aerolinea> query, Root<Aerolinea> camposCandidato, Aerolinea t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Aerolinea> query, Root<Aerolinea> campos, Long id) {
 		if (id !== null) {
 			query.where(criteria.equal(campos.get("ID"), id))

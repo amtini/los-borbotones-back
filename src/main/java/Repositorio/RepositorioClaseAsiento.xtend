@@ -11,10 +11,6 @@ class RepositorioClaseAsiento extends Repositorio<ClaseAsiento>{
 		ClaseAsiento
 	}
 	
-	override generateWhere(CriteriaBuilder criteria, CriteriaQuery<ClaseAsiento> query, Root<ClaseAsiento> camposCandidato, ClaseAsiento t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
 	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<ClaseAsiento> query, Root<ClaseAsiento> campos, Long id) {
 		if (id !== null) {
 			query.where(criteria.equal(campos.get("ID"), id))

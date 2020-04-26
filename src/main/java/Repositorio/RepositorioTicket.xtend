@@ -1,23 +1,23 @@
 package Repositorio
 
-import Clases.Avion
-
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
+import Clases.Ticket
 
-class RepositorioAvion extends Repositorio<Avion> {
+class RepositorioTicket extends Repositorio<Ticket>  {
 	
 	override getEntityType() {
-		Avion
+		Ticket
 	}
 	
-	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Avion> query, Root<Avion> campos, Long id) {
-		if (id !== null) {
+	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Ticket> query, Root<Ticket> campos, Long id) {
+		if (id !== null) { 
 			query.where(criteria.equal(campos.get("ID"), id))
 		} 
 	}
 	
-	override fetch(Root<Avion> from) {
+	override fetch(Root<Ticket> from) {
 	}
+	
 }
