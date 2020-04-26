@@ -13,8 +13,7 @@ import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.Transient
-import javax.persistence.ElementCollection
-import javax.persistence.CascadeType
+
 
 @Entity
 @Observable
@@ -74,8 +73,7 @@ class Usuario {
 
 	def agregarAmigo(Usuario usuario) {
 
-        
-        
+
 		if (amigos.contains(usuario)) {
 			println("El usuario ya es amigo")
 		} else {

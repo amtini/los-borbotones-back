@@ -547,7 +547,7 @@ class AterrizarBootstrap {
 			apellido = "Zerial"
 			password = "bzerial"
 			edad = 30
-			dinero = 74358.0
+			dinero = 1074358.0
 		]
 		
 		val AgustinMarioTini = new Usuario =>[
@@ -570,8 +570,9 @@ class AterrizarBootstrap {
 		
 		//amigos
 		
-		AgustinMarioTini.agregarAmigo(BrianZerial)	
-		NicolasDichiara.agregarAmigo(BrianZerial)
+		AgustinMarioTini.agregarAmigo(BrianZerial)
+		AgustinMarioTini.agregarAmigo(NicolasDichiara)	
+		//NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena
 		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio,asiento25,15000.0,LocalDate.of(2020,03,29))
@@ -691,7 +692,7 @@ class AterrizarBootstrap {
 		repoAvion.create(RapidoDelNorte)
 		
 		
-		repoVuelo.create(vueloBSaRio) //TODO
+		repoVuelo.create(vueloBSaRio) 
         repoVuelo.create(vueloBSaJamaica)
         repoVuelo.create(vueloAFrancia)
         repoVuelo.create(vueloBSaChile)
@@ -719,10 +720,11 @@ class AterrizarBootstrap {
         
         repoUsuario.create(MartinMorena)
         repoUsuario.create(LucasPerez)
-    //    repoUsuario.create(NicolasDichiara)
         repoUsuario.create(BrianZerial)
-        repoUsuario.create(AgustinMarioTini)
+         repoUsuario.create(NicolasDichiara)
+        repoUsuario.create(AgustinMarioTini) //TODO
         repoUsuario.create(JorgeLopez)
+         
         
  
 		
