@@ -43,12 +43,12 @@ class Usuario {
 	
 	@Column(length=150)
 	double dinero
-
+	
 	@ManyToMany(fetch=FetchType.LAZY)
 	//@ElementCollection
 	Set<Usuario> amigos = new HashSet<Usuario>
-
-	@OneToMany(fetch=FetchType.LAZY)
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 	
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
@@ -57,7 +57,7 @@ class Usuario {
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {
 		return (usuario == usuarioLogin && password == passwordLogin)
 	}
-
+	
 	def limpiarCarrito() {
 		pasajesComprados.empty
 	}
@@ -68,7 +68,6 @@ class Usuario {
 			carritoDeCompras.tickets.forEach [ ticket |
 				pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))
 			]
-			carritoDeCompras.tickets.clear
 		}
 	}
 

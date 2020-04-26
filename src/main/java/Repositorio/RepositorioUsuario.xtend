@@ -42,7 +42,7 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 
 	override fetch(Root<Usuario> from) {
 	}
-	
+
 	def searchUsuarioPorNombre(String unString) {
 		val entityManager = this.entityManager
 		try {

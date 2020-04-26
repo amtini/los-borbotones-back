@@ -6,10 +6,10 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.ManyToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.OneToOne
+import javax.persistence.FetchType
 
 @Entity
 @Observable
@@ -21,10 +21,10 @@ class Pasaje {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long ID
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	Vuelo vuelo
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	Asiento asiento
 
 	@Column(length=150)

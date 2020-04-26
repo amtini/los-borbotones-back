@@ -32,10 +32,9 @@ class CarritoDeCompras {
 		}
 	}
 	
-	def removerTicketDelCarrito(Vuelo vuelo, Asiento asiento){
-		val ticket = this.buscarTicket(vuelo, asiento)
-		tickets.remove(ticket)
+	def removerTicketDelCarrito(Ticket ticket){
 		ticket.cancelarReserva
+		tickets.remove(ticket)
 	}
 	
 	def buscarTicket(Vuelo vuelo, Asiento asiento){
@@ -48,6 +47,10 @@ class CarritoDeCompras {
 	
 	def limpiarCarritoDeCompras(){
 		tickets.clear
+	}
+	
+	def cancelarReservaDeTodosLosAsientos(){
+		tickets.forEach(ticket | ticket.cancelarReserva)
 	}
 	
 	def double costoTotalDelCarrito(){
