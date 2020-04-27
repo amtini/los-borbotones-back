@@ -1,6 +1,5 @@
 package Clases
 
-
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -21,47 +20,46 @@ import java.time.LocalDate
 @Observable
 @Accessors
 class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long ID // TODO ver lo del id
-	
 	@Column(length=150)
 	String usuario
-	
+
 	@Column(length=150)
 	String nombre
-	
+
 	@Column(length=150)
 	String apellido
-	
+
 	@Column(length=150)
 	String password
-	
+
 	@Column(length=150)
 	int edad
-	
+
 	@Column(length=150)
 	double dinero
-	
+
 	@ManyToMany(fetch=FetchType.LAZY)
-	//@ElementCollection
+	// @ElementCollection
 	Set<Usuario> amigos = new HashSet<Usuario>
-	
+
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
-	
+
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
-	
+
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {
 		return (usuario == usuarioLogin && password == passwordLogin)
 	}
-	
+
 	def limpiarCarrito() {
 		pasajesComprados.empty
 	}
-	
+
 	def comprarPasajes() {
 		if (carritoDeCompras.costoTotalDelCarrito() < dinero) {
 			dinero -= carritoDeCompras.costoTotalDelCarrito
@@ -73,7 +71,6 @@ class Usuario {
 
 	def agregarAmigo(Usuario usuario) {
 		if (amigos.contains(usuario)) {
-			println("El usuario ya es amigo")
 		} else {
 			amigos.add(usuario)
 		}

@@ -12,33 +12,34 @@ import javax.persistence.GenerationType
 @Entity
 @Observable
 @Accessors
-class Ticket{
-	
-	new(){}
-	
+class Ticket {
+
+	new() {
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long ID
-	
+
 	@OneToOne(fetch=FetchType.LAZY)
 	Vuelo vuelo
 	@OneToOne(fetch=FetchType.LAZY)
 	Asiento asiento
-	
+
 	new(Vuelo vuelo_, Asiento asiento_) {
 		vuelo = vuelo_
 		asiento = asiento_
 	}
-	
-	def reservar(){
+
+	def reservar() {
 		asiento.disponible = false
 	}
-	
-	def cancelarReserva(){
+
+	def cancelarReserva() {
 		asiento.disponible = true
 	}
-	
-	def costo(){
+
+	def costo() {
 		vuelo.precioDeVuelo + asiento.precio
 	}
 }

@@ -32,13 +32,12 @@ class CarritoDeCompras {
 		}
 	}
 	
-	def removerTicketDelCarrito(Ticket ticket){		//esto es lo que no anda
-		ticket.cancelarReserva						//lo deja disponible denuevo al tiket
+	def removerTicketDelCarrito(Ticket ticket){	
 		tickets.remove(ticket)
 	}
 	
 	def buscarTicket(Vuelo vuelo, Asiento asiento){
-		tickets.findFirst[it.vuelo == vuelo && it.asiento == asiento]
+		tickets.findFirst[it.vuelo.ID == vuelo.ID && it.asiento.ID == asiento.ID]
 	}
 	
 	def existeEnCarrito(Vuelo vuelo, Asiento asiento){

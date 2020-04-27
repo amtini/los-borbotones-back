@@ -66,6 +66,27 @@ abstract class Repositorio<T> {
 		}
 	}
 
+	def delete(T t) {
+		val entityManager = this.entityManager
+		try {
+			entityManager => [
+				transaction.begin
+				if (contains(t)) {
+					remove(t)
+				} else {
+					remove(merge(t))
+				}
+				transaction.commit
+			]
+		} catch (PersistenceException e) {
+			e.printStackTrace
+			entityManager.transaction.rollback
+			throw new RuntimeException("Ocurrió un error, la operación no puede completarse", e)
+		} finally {
+			entityManager?.close
+		}
+	}
+
 	def getEntityManager() {
 		entityManagerFactory.createEntityManager
 	}
