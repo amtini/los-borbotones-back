@@ -18,9 +18,15 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 	}
 
 	def eliminarAmigo(Long id, Long id2) {
-		if (searchByID(id2) !== null && this.searchByID(id).amigos.contains(searchByID(id2))) {
-			this.searchByID(id).removerAmigo(searchByID(id2))
-
+		val usuario = searchByID(id)
+		val amigo = searchByID(id2)
+		println("estoy afuera del if")
+		if (usuario.amigos.map(a|a.ID).toList.contains(amigo.ID)) {
+			println("estoy adentro del if")
+			usuario.removerAmigo(amigo)
+			println("removi amigo")
+			update(usuario)
+			println("updatie el usuario")
 		}
 	}
 

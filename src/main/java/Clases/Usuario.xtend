@@ -77,7 +77,8 @@ class Usuario {
 	}
 
 	def removerAmigo(Usuario usuario) {
-		amigos.remove(usuario)
+		val amigo = amigos.findFirst[it.ID == usuario.ID]
+		amigos.remove(amigo)
 	}
 
 	def cambiarPassword(String pass) {
