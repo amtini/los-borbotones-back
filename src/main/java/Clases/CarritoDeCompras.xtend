@@ -24,7 +24,7 @@ class CarritoDeCompras {
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	List<Ticket> tickets = new ArrayList<Ticket>
 	
-	def agregarTicketAlCarrito(Vuelo vuelo, Asiento asiento){
+	def agregarTicketAlCarrito(Vuelo vuelo, Asiento asiento){		
 		val ticket = new Ticket(vuelo,asiento)
 		if(!existeEnCarrito(vuelo,asiento)){
 			tickets.add(ticket)
@@ -32,8 +32,8 @@ class CarritoDeCompras {
 		}
 	}
 	
-	def removerTicketDelCarrito(Ticket ticket){
-		ticket.cancelarReserva
+	def removerTicketDelCarrito(Ticket ticket){		//esto es lo que no anda
+		ticket.cancelarReserva						//lo deja disponible denuevo al tiket
 		tickets.remove(ticket)
 	}
 	

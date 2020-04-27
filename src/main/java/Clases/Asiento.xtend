@@ -10,6 +10,7 @@ import javax.persistence.Id
 import javax.persistence.ManyToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.OneToOne
 
 @Entity
 @Observable
@@ -21,13 +22,15 @@ class Asiento {
 	Long ID // TODO: hay que ver como cambiar este string a Long
 
 	@Column(columnDefinition="TINYINT")
-	// @Type  //(type = "org.hibernate.type.NumericBooleanType") TODO: en teoria deberiamos usar este no estoy seguropara el booleano, lo dejo para chekear
 	public boolean ventana 
 
 	@Column(columnDefinition="TINYINT")
 	// boolean ventana
 	boolean disponible
 
+//	@OneToOne(fetch=FetchType.LAZY)
+//	Aerolinea aerolinea
+	
 	@ManyToOne(fetch=FetchType.LAZY)
 	ClaseAsiento claseDeAsiento
 

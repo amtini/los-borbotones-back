@@ -164,13 +164,34 @@ class AterrizarRestAPI {
 	def cancelarReserva() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
-			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
+			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))        //vuelo?
 			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
 			
-			val ticket = repoTicket.searchTicketByAsiento(asiento.ID.toString)
+			val ticket = repoTicket.searchTicketByAsiento(asiento.ID.toString)		//con esto encontras un asiento 
+			//tiket asiento id, vuelo id
+			
+			println(usuario)
+			println(vuelo)
+			println(asiento)
+			println(ticket)
+			
+			
+//			Clases.Usuario@2c8b67d3
+//			Clases.Vuelo@629ee218
+//			Clases.Asiento@10af9553
+
+			
+		//	usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
+			
+			usuario.carritoDeCompras.cancelarReservaDeTodosLosAsientos
+			repoAsiento.actualizarAsientos(usuario.carritoDeCompras.tickets)
+			usuario.carritoDeCompras.limpiarCarritoDeCompras
+			repoUsuario.update(usuario)
+			
+		/* 	val ticket = repoTicket.searchTicketByAsiento(asiento.ID.toString)
 			usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
 			repoUsuario.update(usuario)
-			repoAsiento.update(asiento)
+			repoAsiento.update(asiento)*/
 			
 			return ok()
 		} catch (UserException exception) {
