@@ -13,20 +13,22 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 	}
 
 	def agregarAmigo(Usuario usuario, String usuarioAmigo) {
-		usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
-		update(usuario)
+		if(puedoAgregarAmigo(usuario,usuarioAmigo)){
+			usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
+			update(usuario)
+		}
+	}
+	
+	def puedoAgregarAmigo(Usuario usuario, String usuarioAmigo){
+		return usuario.usuario != usuarioAmigo
 	}
 
 	def eliminarAmigo(Long id, Long id2) {
 		val usuario = searchByID(id)
 		val amigo = searchByID(id2)
-		println("estoy afuera del if")
 		if (usuario.amigos.map(a|a.ID).toList.contains(amigo.ID)) {
-			println("estoy adentro del if")
 			usuario.removerAmigo(amigo)
-			println("removi amigo")
 			update(usuario)
-			println("updatie el usuario")
 		}
 	}
 

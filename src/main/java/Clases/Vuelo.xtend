@@ -23,7 +23,7 @@ class Vuelo{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	Long ID // TODO: VER EL STRING
-	
+
 	@Column(length=150)
 	String ciudadDeOrigen
 
