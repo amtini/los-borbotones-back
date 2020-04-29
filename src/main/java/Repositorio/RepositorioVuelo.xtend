@@ -80,9 +80,9 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 	
 	def filtroFechas(Set<Vuelo> vuelos, LocalDate desde, LocalDate hasta){
 		if(hasta !== null){
-			vuelos.filter[it | it.horarioDePartida > desde && it.horarioDePartida < hasta]
+			vuelos.filter[it | it.horarioDePartida >= desde && it.horarioDePartida <= hasta]
 		}else{
-			vuelos.filter[it | it.horarioDePartida > desde]
+			vuelos.filter[it | it.horarioDePartida >= desde]
 		}
 	}
 	
