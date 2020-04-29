@@ -242,7 +242,9 @@ class AterrizarRestAPI {
 			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento)				//vuelosFiltrados(filtros)
 
 			/*TODO filtros */
-			return ok(VueloSerializer.toJson(vuelos.toSet))
+			val vuelosJson = VueloSerializer.toJson(vuelos.toSet)
+			repoVuelo.closeSession()
+			return ok(vuelosJson)
 		} catch (UserException exception) {
 			return badRequest()
 		}
@@ -253,7 +255,7 @@ class AterrizarRestAPI {
 		try {
 			val filtros = body.fromJson(FiltrosAsiento)
 			val asientos = repoVuelo.asientosDeMiVuelo(parserStringToLong.parsearDeStringALong(id), filtros)
-
+			
 			return ok(AsientoSerializer.toJson(asientos))
 		} catch (UserException exception) {
 			return badRequest()

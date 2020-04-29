@@ -78,5 +78,8 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 			
 		}
 	}
-
+	
+	def closeSession() {
+		entityManager?.close
+	}
 }
