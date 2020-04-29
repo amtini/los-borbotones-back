@@ -12,6 +12,7 @@ import java.util.Set
 import java.time.format.DateTimeFormatter
 import java.time.LocalDate
 import Parsers.ParserStringToLong
+import java.util.List
 
 @Accessors
 class VueloSerializer extends StdSerializer<Vuelo>{

@@ -120,31 +120,32 @@ class AterrizarBootstrap {
 		//agregamos los asientos al avion 
 		val asiento1 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
-		
+	
 		val asiento2 = new Asiento =>[
-			ventana = true
-			disponible = true
+			ventana = false
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 	
 		val asiento3 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento25 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = turista
 		]
 		
 		Boeing747.asientos.add(asiento1)
 		Boeing747.asientos.add(asiento2)
 		Boeing747.asientos.add(asiento3)
+		Boeing747.asientos.add(asiento25)
 		
 		// vuelo 2
 		
@@ -160,25 +161,25 @@ class AterrizarBootstrap {
 		
 		val asiento4 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento5 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento6 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento36 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -201,31 +202,31 @@ class AterrizarBootstrap {
 		
 		val asiento7 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento8 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento9 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento34 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento35 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
@@ -249,19 +250,19 @@ class AterrizarBootstrap {
 		
 		val asiento10 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento11 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento12 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
@@ -283,31 +284,31 @@ class AterrizarBootstrap {
 		
 		val asiento13 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento14 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento15 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento26 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento27 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
@@ -331,31 +332,31 @@ class AterrizarBootstrap {
 		
 		val asiento16 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento17 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento18 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento28 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento29 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -381,30 +382,30 @@ class AterrizarBootstrap {
 		
 		val asiento19 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento20 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento21 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 			val asiento30 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 			val asiento31 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -430,31 +431,31 @@ class AterrizarBootstrap {
 		
 		val asiento22 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento23 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento24 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento32 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento33 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -474,7 +475,7 @@ class AterrizarBootstrap {
 
         val asientoDeRapidoDelNorte = new Asiento =>[
             ventana = false
-            disponible = true
+            habilitado = true
             claseDeAsiento = bussisnes
         ]
 
@@ -646,6 +647,8 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento1)
 		repoAsiento.create(asiento2)
 		repoAsiento.create(asiento3)
+		repoAsiento.create(asiento25)
+		
 		repoAsiento.create(asiento4)
 		repoAsiento.create(asiento5)
 		repoAsiento.create(asiento6)
@@ -667,7 +670,7 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento22)
 		repoAsiento.create(asiento23)
 		repoAsiento.create(asiento24)
-		repoAsiento.create(asiento25)
+		
 		repoAsiento.create(asiento26)
 		repoAsiento.create(asiento27)
 		repoAsiento.create(asiento28)

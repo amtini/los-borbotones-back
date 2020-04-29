@@ -32,7 +32,7 @@ class Avion {
 	}
 	
 	def asientosDisponibles(){
-		asientos.filter[it.disponible].toList
+		asientos.filter[it.habilitado].toList
 	}
 	
 	def asientoMasBarato(){

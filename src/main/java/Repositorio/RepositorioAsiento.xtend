@@ -26,5 +26,4 @@ class RepositorioAsiento extends Repositorio<Asiento> {
 	def actualizarAsientos(List<Ticket> tickets) {
 		tickets.forEach(ticket|update(ticket.asiento))
 	}
-
 }

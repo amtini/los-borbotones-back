@@ -32,11 +32,11 @@ class Ticket {
 	}
 
 	def reservar() {
-		asiento.disponible = false
+		asiento.habilitado = false
 	}
 
 	def cancelarReserva() {
-		asiento.disponible = true
+		asiento.habilitado = true
 	}
 
 	def costo() {

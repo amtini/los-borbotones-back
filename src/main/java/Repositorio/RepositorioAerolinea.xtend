@@ -19,5 +19,4 @@ class RepositorioAerolinea extends Repositorio<Aerolinea>{
 	
 	override fetch(Root<Aerolinea> from) {
 	}
-	
 }
