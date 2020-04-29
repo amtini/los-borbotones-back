@@ -10,6 +10,7 @@ import javax.persistence.criteria.Root
 import java.time.LocalDate
 import javax.persistence.criteria.JoinType
 import javax.persistence.EntityManager
+import java.util.function.Predicate
 
 class RepositorioVuelo extends Repositorio<Vuelo> {
 	
@@ -44,22 +45,34 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 		from.fetch("aerolinea")
 	}
 
-	def searchFiltros(String origen, String destino, Boolean ventanilla, String claseAsiento, Boolean disponible) { // , LocalDate fechaDesde, LocalDate fechaHasta
+	def searchFiltros(String origen, String destino, Boolean ventanilla, String claseAsiento, Boolean disponible, LocalDate desde, LocalDate hasta) { // , LocalDate fechaDesde, LocalDate fechaHasta
 		val entityManager = this.entityManager
+		
+		
+		
 		try {
 			
 			val criteria = entityManager.criteriaBuilder // criteria =  aerolinea.avion_asiento av ON v.Avion_ID =  av.Avion_ID
 			val query = criteria.createQuery(entityType) // vuelo
 			val from = query.from(entityType) // voy hacer select from avion y lo meto en una variable que se llama from
 			
-			//from.fetch("avion", JoinType.LEFT)
-			val tAvion = from.join("avion", JoinType.LEFT)
-			//tAvion.fetch("asientos", JoinType.LEFT)
-			val tAsiento = tAvion.joinSet("asientos", JoinType.LEFT)
-			//tAsiento.fetch("claseDeAsiento", JoinType.LEFT)  //ir a buscar o traerme como tenemos un objeto que lazy contra otro no te lo trae
 			
-			val tClaseAsiento = tAsiento.join("claseDeAsiento", JoinType.LEFT)
+			
+			val tAvion = from.join("avion", JoinType.INNER)
+			val tAsiento = tAvion.joinSet("asientos", JoinType.INNER)
+			
+			val tClaseAsiento = tAsiento.join("claseDeAsiento", JoinType.INNER)
+			
+			
+			
+			
 			query.where(criteria.equal(tAsiento.get("ventana"), ventanilla))
+			
+			
+			
+			query.where(criteria.equal(tAsiento.get("habilitado"), disponible ))
+			
+			
 			
 			if (!claseAsiento.isNullOrEmpty) {
 				query.where(criteria.equal(tClaseAsiento.get("nombre"), claseAsiento))
@@ -75,11 +88,16 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 				query.where(criteria.equal(from.get("ciudadDeDestino"), destino))
 			}
 			
-			query.where(criteria.equal(tAsiento.get("habilitado"), disponible ))
-
+			//query.where(criteria.greaterThan(from.get("horarioDePartida"), desde))
+			
+			//if(hasta !== null){query.where(criteria.lessThan(from.get("horarioDePartida"), desde))}
+			
+			
+			
 			instance = entityManager
 			
 			val result = entityManager.createQuery(query).resultList.toSet
+			
 			
 			return result // devuelvo todo
 		} finally {

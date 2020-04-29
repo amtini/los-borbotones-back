@@ -20,6 +20,12 @@ import org.uqbar.xtrest.json.JSONUtils
 import Serializer.AsientoSerializer
 import Parsers.ParserStringToLong
 import Repositorio.RepositorioTicket
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import com.fasterxml.jackson.annotation.JsonFormat
+import Parsers.ParserDate
 
 @Controller
 class AterrizarRestAPI {
@@ -235,13 +241,19 @@ class AterrizarRestAPI {
 	}
 
 	// dame vuelos y dame asientos
-	@Post("/vuelos")
-	def dameVuelos(@Body String body) {
+	@Get("/vuelos")
+	def dameVuelos(String origen,  String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
 		val disponible = true
 		try {
-			val filtros = body.fromJson(FiltrosVuelo)
-			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento, disponible)				//vuelosFiltrados(filtros)
-
+			val filtros = new FiltrosVuelo(origen,destino, desde, hasta, ventanilla, claseAsiento)
+			println(filtros.origen)
+			println(filtros.destino)
+			println(filtros.desde)
+			println(filtros.hasta)
+			
+			
+			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento, disponible, filtros.desde, filtros.hasta)				//vuelosFiltrados(filtros)
+			
 			/*TODO filtros */
 			val vuelosJson = VueloSerializer.toJson(vuelos.toSet)
 			repoVuelo.closeSession()
@@ -293,11 +305,19 @@ class AterrizarRestAPI {
 class FiltrosVuelo {
 	String origen
 	String destino
-	// LocalDate desde
-	// LocalDate hasta
+	LocalDate desde
+	LocalDate hasta
 	boolean ventanilla
 	String claseAsiento
 	
+	new(String _origen,  String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento){
+		origen = _origen
+		destino = _destino
+		desde = ParserDate.ParseStringToDate(_desde)
+		hasta = ParserDate.ParseStringToDate(_hasta)
+		ventanilla = Boolean.parseBoolean(_ventanilla)
+		claseAsiento = _claseAsiento
+	}
 }
 
 @Accessors
