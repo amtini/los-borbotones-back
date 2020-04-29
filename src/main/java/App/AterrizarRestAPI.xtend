@@ -239,10 +239,10 @@ class AterrizarRestAPI {
 	def dameVuelos(@Body String body) {
 		try {
 			val filtros = body.fromJson(FiltrosVuelo)
-			val vuelos = repoVuelo.vuelosFiltrados(filtros)
+			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento)				//vuelosFiltrados(filtros)
 
 			/*TODO filtros */
-			return ok(VueloSerializer.toJson(vuelos))
+			return ok(VueloSerializer.toJson(vuelos.toSet))
 		} catch (UserException exception) {
 			return badRequest()
 		}
