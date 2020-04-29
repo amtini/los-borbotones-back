@@ -11,6 +11,7 @@ import java.time.LocalDate
 import javax.persistence.criteria.JoinType
 import javax.persistence.EntityManager
 import java.util.function.Predicate
+import java.util.Set
 
 class RepositorioVuelo extends Repositorio<Vuelo> {
 	
@@ -56,29 +57,17 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 			val query = criteria.createQuery(entityType) // vuelo
 			val from = query.from(entityType) // voy hacer select from avion y lo meto en una variable que se llama from
 			
-			
-			
 			val tAvion = from.join("avion", JoinType.INNER)
 			val tAsiento = tAvion.joinSet("asientos", JoinType.INNER)
-			
 			val tClaseAsiento = tAsiento.join("claseDeAsiento", JoinType.INNER)
-			
-			
-			
 			
 			query.where(criteria.equal(tAsiento.get("ventana"), ventanilla))
 			
-			
-			
 			query.where(criteria.equal(tAsiento.get("habilitado"), disponible ))
-			
-			
 			
 			if (!claseAsiento.isNullOrEmpty) {
 				query.where(criteria.equal(tClaseAsiento.get("nombre"), claseAsiento))
 			}
-			
-			// filtros
 			
 			if (!origen.isNullOrEmpty) {
 				query.where(criteria.equal(from.get("ciudadDeOrigen"), origen))
@@ -88,20 +77,22 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 				query.where(criteria.equal(from.get("ciudadDeDestino"), destino))
 			}
 			
-			//query.where(criteria.greaterThan(from.get("horarioDePartida"), desde))
-			
-			//if(hasta !== null){query.where(criteria.lessThan(from.get("horarioDePartida"), desde))}
-			
-			
-			
 			instance = entityManager
 			
 			val result = entityManager.createQuery(query).resultList.toSet
 			
 			
-			return result // devuelvo todo
+			return filtroFechas(result,desde,hasta)
 		} finally {
 			
+		}
+	}
+	
+	def filtroFechas(Set<Vuelo> vuelos, LocalDate desde, LocalDate hasta){
+		if(hasta !== null){
+			vuelos.filter[it | it.horarioDePartida > desde && it.horarioDePartida < hasta]
+		}else{
+			vuelos.filter[it | it.horarioDePartida > desde]
 		}
 	}
 	
