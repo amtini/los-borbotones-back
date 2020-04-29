@@ -56,7 +56,7 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 			val tAsiento = tAvion.joinSet("asientos", JoinType.INNER)
 			//tAsiento.fetch("claseDeAsiento", JoinType.LEFT)  //ir a bsucar o traerme como tenemos un objeto que lazy contra otro no te lo trae
 			val tClaseAsiento = tAsiento.join("claseDeAsiento", JoinType.INNER)
-			
+
 
 
 
@@ -75,7 +75,7 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 
 			return entityManager.createQuery(query).resultList // devuelvo todo
 		} finally {
-			entityManager?.close
+			
 		}
 	}
 
