@@ -243,7 +243,6 @@ class AterrizarRestAPI {
 	// dame vuelos y dame asientos
 	@Get("/vuelos")
 	def dameVuelos(String origen,  String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
-		val disponible = true
 		try {
 			val filtros = new FiltrosVuelo(origen,destino, desde, hasta, ventanilla, claseAsiento)
 			println(filtros.origen)
@@ -252,7 +251,7 @@ class AterrizarRestAPI {
 			println(filtros.hasta)
 			
 			
-			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento, disponible, filtros.desde, filtros.hasta)				//vuelosFiltrados(filtros)
+			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento, filtros.disponible, filtros.desde, filtros.hasta)				//vuelosFiltrados(filtros)
 			
 			/*TODO filtros */
 			val vuelosJson = VueloSerializer.toJson(vuelos.toSet)
@@ -309,6 +308,7 @@ class FiltrosVuelo {
 	LocalDate hasta
 	boolean ventanilla
 	String claseAsiento
+	Boolean disponible = true
 	
 	new(String _origen,  String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento){
 		origen = _origen
