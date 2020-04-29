@@ -16,16 +16,6 @@ import java.util.Set
 class RepositorioVuelo extends Repositorio<Vuelo> {
 	
 	EntityManager instance
-	
-	def vuelosDisponibles() {
-		allInstances.filter [ vuelo |
-			vuelo.avion.asientosDisponibles.size > 0
-		].toList
-	}
-
-	def vuelosFiltrados(FiltrosVuelo filtros) {
-		vuelosDisponibles.filter[vuelo|vuelo.cumpleLosFiltros(filtros)].toSet
-	}
 
 	def asientosDeMiVuelo(Long id, FiltrosAsiento filtros) {
 		searchByID(id).dameAsientos(filtros)
