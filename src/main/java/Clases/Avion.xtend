@@ -39,6 +39,10 @@ class Avion {
 		asientosDisponibles.minBy[precio]
 	}
 	
+	def filtroClaseAsiento(String claseAsiento, Boolean ventanilla){
+		asientosDisponibles.exists[asiento | asiento.claseDeAsiento.nombre == claseAsiento && asiento.ventana == ventanilla]
+	}
+	
 	def asientosFiltrados(FiltrosAsiento filtros) {
 		if(filtros.claseAsiento !== ""){
 			asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento.nombre == filtros.claseAsiento].toSet

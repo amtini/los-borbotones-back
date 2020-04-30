@@ -31,49 +31,51 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 		from.fetch("aerolinea")
 	}
 
-	def searchFiltros(String origen, String destino, Boolean ventanilla, String claseAsiento, Boolean disponible,
-		LocalDate desde, LocalDate hasta) { // , LocalDate fechaDesde, LocalDate fechaHasta
+	def searchFiltros(String origen, String destino, Boolean ventanilla, String claseAsiento, Boolean disponible, LocalDate desde, LocalDate hasta) { 
 		val entityManager = singletonDeEntityManager.getEntityManager
 		try {
-			val criteria = entityManager.criteriaBuilder // criteria =  aerolinea.avion_asiento av ON v.Avion_ID =  av.Avion_ID
-			val query = criteria.createQuery(entityType) // vuelo
-			val from = query.from(entityType) // voy hacer select from avion y lo meto en una variable que se llama from
+			val criteria = entityManager.criteriaBuilder 
+			val query = criteria.createQuery(entityType) 
+			val from = query.from(entityType) 
 			val tAvion = from.join("avion", JoinType.INNER)
-			val tAsiento = tAvion.joinSet("asientos", JoinType.INNER)
-			val tClaseAsiento = tAsiento.join("claseDeAsiento", JoinType.INNER)
-
+			val tAsiento = tAvion.joinSet("asientos", JoinType.INNER)			
+			
+			query.where(criteria.equal(tAsiento.get("habilitado"), disponible)) 
+			
 			query.where(criteria.equal(tAsiento.get("ventana"), ventanilla))
-
-			query.where(criteria.equal(tAsiento.get("habilitado"), disponible))
-
-			if (!claseAsiento.isNullOrEmpty) {
-				query.where(criteria.equal(tClaseAsiento.get("nombre"), claseAsiento))
+			
+			if (!origen.isNullOrEmpty) {		
+				query.where(criteria.equal(from.get("ciudadDeOrigen"), origen))		
 			}
-
-			if (!origen.isNullOrEmpty) {
-				query.where(criteria.equal(from.get("ciudadDeOrigen"), origen))
-			}
-
-			if (!destino.isNullOrEmpty) {
-				query.where(criteria.equal(from.get("ciudadDeDestino"), destino))
+			
+			if (!destino.isNullOrEmpty) {		
+				query.where(criteria.equal(from.get("ciudadDeDestino"), destino))		
 			}
 
 			val result = entityManager.createQuery(query).resultList.toSet
 
-			return filtroFechas(result, desde, hasta)
+			return filtroFechas(result, desde, hasta, claseAsiento, ventanilla)
 
 		} finally {
 			
 		}
 	}
 
-	def filtroFechas(Set<Vuelo> vuelos, LocalDate desde, LocalDate hasta) {
-		println("Estoy en el filtro de fechas con el hasta " + hasta)
-		if (hasta !== null) {
-			println("Estoy en el filtro de fechas y entre al if con el hasta " + hasta)
-			vuelos.filter[it|it.horarioDePartida >= desde && it.horarioDePartida <= hasta]
-		} else {
-			vuelos.filter[it|it.horarioDePartida >= desde]
+	def filtroFechas(Set<Vuelo> vuelos, LocalDate desde, LocalDate hasta, String claseAsiento, Boolean ventanilla) {
+		
+		if(!claseAsiento.isNullOrEmpty){
+		
+			if (hasta !== null) {
+				vuelos.filter[it|it.horarioDePartida >= desde && it.horarioDePartida <= hasta && it.avion.filtroClaseAsiento(claseAsiento, ventanilla)]
+			} else {
+				vuelos.filter[it|it.horarioDePartida >= desde && it.avion.filtroClaseAsiento(claseAsiento, ventanilla)]
+			}
+		}else{
+			if (hasta !== null) {
+				vuelos.filter[it|it.horarioDePartida >= desde && it.horarioDePartida <= hasta]
+			} else {
+				vuelos.filter[it|it.horarioDePartida >= desde]
+			}
 		}
 	}
 }
