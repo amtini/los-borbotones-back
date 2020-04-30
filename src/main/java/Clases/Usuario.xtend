@@ -70,8 +70,6 @@ class Usuario {
 	}
 
 	def agregarAmigo(Usuario usuarioNuevo) {
-		println(usuarioNuevo.usuario)
-		println(usuario)
 		if (amigos.contains(usuarioNuevo) && usuario != usuarioNuevo.usuario) {
 		} else {
 			amigos.add(usuarioNuevo)
