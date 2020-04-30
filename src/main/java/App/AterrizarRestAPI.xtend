@@ -1,14 +1,19 @@
 package App
 
+import Parsers.ParserDate
+import Parsers.ParserStringToLong
 import Repositorio.RepositorioAsiento
+import Repositorio.RepositorioTicket
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
 import Serializer.AmigoSerializer
+import Serializer.AsientoSerializer
 import Serializer.PasajeSerializer
 import Serializer.TicketSerializer
 import Serializer.UsuarioSerializer
 import Serializer.VueloSerializer
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
+import java.time.LocalDate
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.xtrest.api.annotation.Body
@@ -17,15 +22,6 @@ import org.uqbar.xtrest.api.annotation.Delete
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
-import Serializer.AsientoSerializer
-import Parsers.ParserStringToLong
-import Repositorio.RepositorioTicket
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import com.fasterxml.jackson.annotation.JsonFormat
-import Parsers.ParserDate
 
 @Controller
 class AterrizarRestAPI {
@@ -242,20 +238,17 @@ class AterrizarRestAPI {
 
 	// dame vuelos y dame asientos
 	@Get("/vuelos")
-	def dameVuelos(String origen,  String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
+	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
 		try {
-			val filtros = new FiltrosVuelo(origen,destino, desde, hasta, ventanilla, claseAsiento)
+			val filtros = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
 			println(filtros.origen)
 			println(filtros.destino)
 			println(filtros.desde)
 			println(filtros.hasta)
-			
-			
-			val vuelos = repoVuelo.searchFiltros(filtros.origen,filtros.destino,filtros.ventanilla,filtros.claseAsiento, filtros.disponible, filtros.desde, filtros.hasta)				//vuelosFiltrados(filtros)
-			
-			/*TODO filtros */
+
+			val vuelos = repoVuelo.searchFiltros(filtros.origen, filtros.destino, filtros.ventanilla,
+				filtros.claseAsiento, filtros.disponible, filtros.desde, filtros.hasta) // vuelosFiltrados(filtros)
 			val vuelosJson = VueloSerializer.toJson(vuelos.toSet)
-			repoVuelo.closeSession()
 			return ok(vuelosJson)
 		} catch (UserException exception) {
 			return badRequest()
@@ -267,7 +260,7 @@ class AterrizarRestAPI {
 		try {
 			val filtros = body.fromJson(FiltrosAsiento)
 			val asientos = repoVuelo.asientosDeMiVuelo(parserStringToLong.parsearDeStringALong(id), filtros)
-			
+
 			return ok(AsientoSerializer.toJson(asientos))
 		} catch (UserException exception) {
 			return badRequest()
@@ -309,8 +302,8 @@ class FiltrosVuelo {
 	boolean ventanilla
 	String claseAsiento
 	Boolean disponible = true
-	
-	new(String _origen,  String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento){
+
+	new(String _origen, String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento) {
 		origen = _origen
 		destino = _destino
 		desde = ParserDate.ParseStringToDate(_desde)

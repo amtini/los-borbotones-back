@@ -1,18 +1,17 @@
 package Serializer
 
 import Clases.Vuelo
+import Parsers.ParserStringToLong
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.databind.ser.std.StdSerializer
 import java.io.IOException
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.Set
-import java.time.format.DateTimeFormatter
 import java.time.LocalDate
-import Parsers.ParserStringToLong
-import java.util.List
+import java.time.format.DateTimeFormatter
+import java.util.Set
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class VueloSerializer extends StdSerializer<Vuelo>{

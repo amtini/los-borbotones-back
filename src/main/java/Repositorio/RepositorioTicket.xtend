@@ -1,10 +1,10 @@
 package Repositorio
 
+import Clases.Ticket
+import java.util.List
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
-import Clases.Ticket
-import java.util.List
 
 class RepositorioTicket extends Repositorio<Ticket> {
 
@@ -22,7 +22,7 @@ class RepositorioTicket extends Repositorio<Ticket> {
 	}
 
 	def searchTicketByAsiento(String asientoId) {
-		val entityManager = this.entityManager
+		val entityManager = singletonDeEntityManager.getEntityManager
 		try {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)

@@ -1,7 +1,6 @@
 package Repositorio
 
 import Clases.Usuario
-
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
@@ -13,13 +12,13 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 	}
 
 	def agregarAmigo(Usuario usuario, String usuarioAmigo) {
-		if(puedoAgregarAmigo(usuario,usuarioAmigo)){
+		if (puedoAgregarAmigo(usuario, usuarioAmigo)) {
 			usuario.agregarAmigo(verificarAmigo(usuarioAmigo))
 			update(usuario)
 		}
 	}
-	
-	def puedoAgregarAmigo(Usuario usuario, String usuarioAmigo){
+
+	def puedoAgregarAmigo(Usuario usuario, String usuarioAmigo) {
 		return usuario.usuario != usuarioAmigo
 	}
 
@@ -52,7 +51,7 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 	}
 
 	def searchUsuarioPorNombre(String unString) {
-		val entityManager = this.entityManager
+		val entityManager = singletonDeEntityManager.getEntityManager
 		try {
 			val criteria = entityManager.criteriaBuilder
 			val query = criteria.createQuery(entityType)
@@ -60,6 +59,7 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 			query.select(from)
 			query.where(criteria.equal(from.get("usuario"), unString))
 			entityManager.createQuery(query).singleResult
+
 		} finally {
 			entityManager?.close
 		}
