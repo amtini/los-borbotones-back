@@ -83,7 +83,7 @@ abstract class Repositorio<T> {
 			entityManager.transaction.rollback
 			throw new RuntimeException("Ocurrió un error, la operación no puede completarse", e)
 		} finally {
-			entityManager?.close
+			
 		}
 	}
 
@@ -96,7 +96,7 @@ abstract class Repositorio<T> {
 			generateWhereId(criteria, query, from, id)
 			entityManager.createQuery(query).singleResult
 		} finally {
-			entityManager?.close
+			
 		}
 	}
 

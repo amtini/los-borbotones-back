@@ -32,7 +32,7 @@ class RepositorioTicket extends Repositorio<Ticket> {
 			query.where(criteria.equal(from.get("asiento"), asientoId))
 			entityManager.createQuery(query).singleResult
 		} finally {
-			entityManager?.close
+			
 		}
 	}
 

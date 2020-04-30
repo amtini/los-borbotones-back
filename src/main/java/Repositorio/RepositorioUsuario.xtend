@@ -61,7 +61,7 @@ class RepositorioUsuario extends Repositorio<Usuario> {
 			entityManager.createQuery(query).singleResult
 
 		} finally {
-			entityManager?.close
+			
 		}
 	}
 }

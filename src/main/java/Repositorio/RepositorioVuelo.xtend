@@ -63,7 +63,7 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 			return filtroFechas(result, desde, hasta)
 
 		} finally {
-			entityManager?.close
+			
 		}
 	}
 
