@@ -56,16 +56,13 @@ class Usuario {
 		return (usuario == usuarioLogin && password == passwordLogin)
 	}
 
-	def limpiarCarrito() {
-		pasajesComprados.empty
-	}
-
 	def comprarPasajes() {
 		if (carritoDeCompras.costoTotalDelCarrito() < dinero) {
 			dinero -= carritoDeCompras.costoTotalDelCarrito
 			carritoDeCompras.tickets.forEach [ ticket |
 				pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))
 			]
+			carritoDeCompras.limpiarCarritoDeCompras
 		}
 	}
 
