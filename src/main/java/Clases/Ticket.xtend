@@ -1,28 +1,45 @@
 package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import com.fasterxml.jackson.annotation.JsonProperty
+import javax.persistence.FetchType
+import javax.persistence.OneToOne
+import javax.persistence.Entity
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.GenerationType
 
+@Entity
+@Observable
 @Accessors
-class Ticket{
-	
+class Ticket {
+
+	new() {
+	}
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	Long ID
+
+	@OneToOne(fetch=FetchType.LAZY)
 	Vuelo vuelo
+	@OneToOne(fetch=FetchType.LAZY)
 	Asiento asiento
-	
+
 	new(Vuelo vuelo_, Asiento asiento_) {
 		vuelo = vuelo_
 		asiento = asiento_
 	}
-	
-	@JsonProperty def reservar(){
-		asiento.disponible = false
+
+	def reservar() {
+		asiento.habilitado = false
 	}
-	
-	@JsonProperty def cancelarReserva(){
-		asiento.disponible = true
+
+	def cancelarReserva() {
+		asiento.habilitado = true
 	}
-	
-	@JsonProperty def costo(){
-		vuelo.precioDeVuelo + asiento.claseDeAsiento.precioClase
+
+	def costo() {
+		vuelo.precioDeVuelo + asiento.precio
 	}
 }

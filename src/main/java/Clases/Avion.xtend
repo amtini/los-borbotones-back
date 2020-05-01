@@ -1,20 +1,57 @@
 package Clases
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import java.util.Set
+import App.FiltrosAsiento
 import java.util.HashSet
+import java.util.Set
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.GenerationType
 
+@Entity
+@Observable
 @Accessors
 class Avion {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Long ID
+	
+	@Column(length=150)
 	String nombre
 	
+	@OneToMany(fetch=FetchType.LAZY)
 	Set<Asiento> asientos = new HashSet<Asiento>
 	
 	def recargoUltimosPasajes(){
-		if(asientos.length<=2){1.15}else{1}
+		if(asientosDisponibles.length<=2){1.15}else{1}
 	}
 	
 	def asientosDisponibles(){
-		asientos.filter[it.disponible == true]
+		asientos.filter[it.habilitado].toList
+	}
+	
+	def asientoMasBarato(){
+		asientosDisponibles.minBy[precio]
+	}
+	
+	def filtroAsientosVuelo(String claseAsiento, Boolean ventanilla){
+		if(!claseAsiento.isNullOrEmpty){
+			asientosDisponibles.exists[asiento | asiento.claseDeAsiento.nombre == claseAsiento && asiento.ventana == ventanilla]
+		}else{
+			asientosDisponibles.exists[asiento | asiento.ventana == ventanilla]
+		}
+	}
+	
+	def asientosFiltrados(FiltrosAsiento filtros) {
+		if(filtros.claseAsiento !== ""){
+			asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento.nombre == filtros.claseAsiento].toSet
+		}else{
+			asientosDisponibles.filter[it.ventana == filtros.ventanilla].toSet
+		}
 	}
 }

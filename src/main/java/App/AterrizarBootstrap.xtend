@@ -13,21 +13,33 @@ import Clases.Pasaje
 import Repositorio.RepositorioAsiento
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
+import Repositorio.RepositorioClaseAsiento
+import Repositorio.RepositorioAerolinea
+import Repositorio.RepositorioAvion
+import Repositorio.RepositorioPasaje
+import Repositorio.RepositorioTicket
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
 		
+		//Clases de asientos
+		
 		val primeraClase = new ClaseAsiento =>[
+			nombre = "primera clase"
 			precioClase = 35000
 		]
 		
 		val bussisnes = new ClaseAsiento =>[
+			nombre = "empresario"
 			precioClase = 22000
 		]
 		
 		val turista = new ClaseAsiento =>[
+			nombre = "turista"
 			precioClase = 10000
 		]
+		
+		//Aviones
 		
 		val Boeing747 = new Avion =>[
 			nombre = "Boeing 747"
@@ -93,8 +105,6 @@ class AterrizarBootstrap {
 			precioAsiento = 1000.0
 		]
 		
-		
-		
 		// vuelo 1
 		
 		val vueloBSaRio = new Vuelo =>[
@@ -110,31 +120,32 @@ class AterrizarBootstrap {
 		//agregamos los asientos al avion 
 		val asiento1 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
-		
+	
 		val asiento2 = new Asiento =>[
-			ventana = true
-			disponible = true
+			ventana = false
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
-		
+	
 		val asiento3 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento25 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = turista
 		]
 		
 		Boeing747.asientos.add(asiento1)
 		Boeing747.asientos.add(asiento2)
 		Boeing747.asientos.add(asiento3)
+		Boeing747.asientos.add(asiento25)
 		
 		// vuelo 2
 		
@@ -150,24 +161,25 @@ class AterrizarBootstrap {
 		
 		val asiento4 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento5 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento6 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
+		
 		val asiento36 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -176,9 +188,7 @@ class AterrizarBootstrap {
 		AirbusA320.asientos.add(asiento6)
 		AirbusA320.asientos.add(asiento36)
 		
-		//avion 3
-		
-		// vuelo 1
+		// vuelo 3
 		
 		val vueloAFrancia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -192,31 +202,31 @@ class AterrizarBootstrap {
 		
 		val asiento7 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento8 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento9 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento34 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento35 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
@@ -226,9 +236,7 @@ class AterrizarBootstrap {
 		Tu204.asientos.add(asiento34)
 		Tu204.asientos.add(asiento35)
 		
-		//avion 4
-		
-		// vuelo 1
+		// vuelo 4
 		
 		val vueloBSaChile = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -242,28 +250,27 @@ class AterrizarBootstrap {
 		
 		val asiento10 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento11 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento12 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		Il96.asientos.add(asiento10)
 		Il96.asientos.add(asiento11)
 		Il96.asientos.add(asiento12)
-		//avion 5
 		
-		// vuelo 1
+		// vuelo 5
 		
 		val vueloBSaMiami = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -277,31 +284,31 @@ class AterrizarBootstrap {
 		
 		val asiento13 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento14 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento15 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento26 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
-			val asiento27 = new Asiento =>[
+		val asiento27 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = bussisnes
 		]
 		
@@ -310,9 +317,8 @@ class AterrizarBootstrap {
 		CRJ200.asientos.add(asiento15)
 		CRJ200.asientos.add(asiento26)
 		CRJ200.asientos.add(asiento27)
-		//avion 6
 		
-		// vuelo 1
+		// vuelo 6
 		
 		val vueloBSaItalia = new Vuelo =>[
 		   ciudadDeOrigen = "Buenos Aires"
@@ -326,31 +332,31 @@ class AterrizarBootstrap {
 		
 		val asiento16 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento17 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento18 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento28 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento29 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -376,30 +382,30 @@ class AterrizarBootstrap {
 		
 		val asiento19 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = turista
 		]
 		
 		val asiento20 = new Asiento =>[
 			ventana = true
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento21 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 			val asiento30 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 			val asiento31 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -425,31 +431,31 @@ class AterrizarBootstrap {
 		
 		val asiento22 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento23 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = bussisnes
 		]
 		
 		val asiento24 = new Asiento =>[
 			ventana = false
-			disponible = true
+			habilitado = true
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento32 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
 		val asiento33 = new Asiento =>[
 			ventana = false
-			disponible = false
+			habilitado = false
 			claseDeAsiento = primeraClase
 		]
 		
@@ -463,13 +469,13 @@ class AterrizarBootstrap {
 	
 	
 	
-	//vuelo compuesto
+	//vuelo compuesto vueloARGaCHILEaCUBA
 	
 	val RapidoDelNorte = new Avion =>[ nombre = "Rapido del Norte"]
 
         val asientoDeRapidoDelNorte = new Asiento =>[
             ventana = false
-            disponible = true
+            habilitado = true
             claseDeAsiento = bussisnes
         ]
 
@@ -507,7 +513,7 @@ class AterrizarBootstrap {
         vueloARGaCHILEaCUBA.escalas.add(vueloBSaCHILE)
         vueloARGaCHILEaCUBA.escalas.add(vueloCHILEaCUBA)
 		
-		
+	
 		//usuarios
 	
 		val MartinMorena = new Usuario =>[
@@ -539,11 +545,11 @@ class AterrizarBootstrap {
 		
 		val BrianZerial = new Usuario =>[
 			usuario = "bzerial"
-			nombre = "Braian"
+			nombre = "Brian"
 			apellido = "Zerial"
 			password = "bzerial"
 			edad = 30
-			dinero = 74358.0
+			dinero = 1074358.0
 		]
 		
 		val AgustinMarioTini = new Usuario =>[
@@ -554,7 +560,7 @@ class AterrizarBootstrap {
 			edad = 24
 			dinero = 148654.0
 		]
-		
+	
 		val JorgeLopez = new Usuario =>[
 			usuario = "jlopez"
 			nombre = "Jorgue"
@@ -566,9 +572,8 @@ class AterrizarBootstrap {
 		
 		//amigos
 		
-		AgustinMarioTini.agregarAmigo(NicolasDichiara)
-		AgustinMarioTini.agregarAmigo(BrianZerial)	
-		BrianZerial.agregarAmigo(NicolasDichiara)
+		AgustinMarioTini.agregarAmigo(BrianZerial)
+		AgustinMarioTini.agregarAmigo(NicolasDichiara)	
 		NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena
@@ -617,35 +622,33 @@ class AterrizarBootstrap {
 		JorgeLopez.pasajesComprados.add(vueloBSaInglaterraJLopez)
 		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
 		
-		
-		
 		//REPOOO
 		
 		val repoAsiento = new RepositorioAsiento
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
+		val repoClaseAsiento = new RepositorioClaseAsiento
+		val repoAerolinea = new RepositorioAerolinea
+		val repoAvion = new RepositorioAvion
+		val repoPasaje = new RepositorioPasaje
+		val repoTicket = new RepositorioTicket
 		
-		repoVuelo.create(vueloBSaRio)
-        repoVuelo.create(vueloBSaJamaica)
-        repoVuelo.create(vueloAFrancia)
-        repoVuelo.create(vueloBSaChile)
-        repoVuelo.create(vueloBSaMiami)
-        repoVuelo.create(vueloBSaItalia)
-        repoVuelo.create(vueloBSaAustralia)
-        repoVuelo.create(vueloBSaInglaterra)
-        repoVuelo.create(vueloARGaCHILEaCUBA)
-        
-        repoUsuario.create(MartinMorena)
-        repoUsuario.create(LucasPerez)
-        repoUsuario.create(NicolasDichiara)
-        repoUsuario.create(BrianZerial)
-        repoUsuario.create(AgustinMarioTini)
-        repoUsuario.create(JorgeLopez)
+		repoClaseAsiento.create(primeraClase)
+		repoClaseAsiento.create(bussisnes)
+		repoClaseAsiento.create(turista)
 		
+		repoAerolinea.create(AerolineasArgentinas)
+		repoAerolinea.create(AirFrance)
+		repoAerolinea.create(Luftansa)
+		repoAerolinea.create(LanChile)
+		repoAerolinea.create(CopaAirlans)
+		repoAerolinea.create(Varig)
 		
 		repoAsiento.create(asiento1)
 		repoAsiento.create(asiento2)
 		repoAsiento.create(asiento3)
+		repoAsiento.create(asiento25)
+		
 		repoAsiento.create(asiento4)
 		repoAsiento.create(asiento5)
 		repoAsiento.create(asiento6)
@@ -667,7 +670,7 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento22)
 		repoAsiento.create(asiento23)
 		repoAsiento.create(asiento24)
-		repoAsiento.create(asiento25)
+		
 		repoAsiento.create(asiento26)
 		repoAsiento.create(asiento27)
 		repoAsiento.create(asiento28)
@@ -679,7 +682,55 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento34)
 		repoAsiento.create(asiento35)
 		repoAsiento.create(asiento36)
+		repoAsiento.create(asientoDeRapidoDelNorte)
 		
-		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento))
+		repoAvion.create(Boeing747)
+		repoAvion.create(AirbusA320)
+		repoAvion.create(Tu204)
+		repoAvion.create(Il96)
+		repoAvion.create(CRJ200)
+		repoAvion.create(Boeing777)
+		repoAvion.create(Boeing767)
+		repoAvion.create(Boeing757)
+		repoAvion.create(RapidoDelNorte)
+		
+		
+		repoVuelo.create(vueloBSaRio) 
+        repoVuelo.create(vueloBSaJamaica)
+        repoVuelo.create(vueloAFrancia)
+        repoVuelo.create(vueloBSaChile)
+        repoVuelo.create(vueloBSaMiami)
+        repoVuelo.create(vueloBSaItalia)
+        repoVuelo.create(vueloBSaAustralia)
+        repoVuelo.create(vueloBSaInglaterra)
+        repoVuelo.create(vueloARGaCHILEaCUBA)
+        
+        repoPasaje.create(pasajeBSaRioMMorena)
+        repoPasaje.create(pasajeBSaCHILEMMorena)
+        repoPasaje.create(pasajeBSaJamaicaLPerez)
+        repoPasaje.create(pasajeBSaFranciaLPerez)
+        repoPasaje.create(pasajeBSaMiamiDiachiara)
+        repoPasaje.create(pasajeBSaItaliaDiachiara)
+        repoPasaje.create(pasajeBSaItaliaBrian)
+        repoPasaje.create(pasajeBSaAustraliaBrian)
+         repoPasaje.create(vueloAFranciaAMTini)
+        repoPasaje.create(vueloBSaInglaterraAMTini)
+        repoPasaje.create(vueloBSaInglaterraJLopez)
+        repoPasaje.create(vueloBSaAustraliaJLopez)
+
+        
+        
+        
+        repoUsuario.create(MartinMorena)
+        repoUsuario.create(LucasPerez)
+        repoUsuario.create(BrianZerial)
+        repoUsuario.create(NicolasDichiara)
+        repoUsuario.create(AgustinMarioTini) //TODO
+        repoUsuario.create(JorgeLopez)
+         
+        
+ 
+		
+		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento, repoTicket))
 	}
 }
