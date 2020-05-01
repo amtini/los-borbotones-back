@@ -32,7 +32,7 @@ class TicketSerializer extends StdSerializer<Ticket>{
 		gen.writeStringField("ciudadDeOrigen", value.vuelo.ciudadDeOrigen);
 		gen.writeStringField("ciudadDeDestino", value.vuelo.ciudadDeDestino);
 		gen.writeStringField("aerolinea", value.vuelo.aerolinea.nombre);
-		gen.writeStringField("claseDeAsiento", value.asiento.claseDeAsiento.nombre)
+		gen.writeStringField("claseDeAsiento", value.asiento.claseDeAsiento)
 		gen.writeNumberField("precioTicket", value.costo)
 		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.vuelo.horarioDePartida))
 		gen.writeEndObject();

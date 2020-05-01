@@ -2,11 +2,9 @@ package Clases
 
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.ManyToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 
@@ -25,10 +23,8 @@ class Asiento {
 	@Column
 	boolean habilitado
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	ClaseAsiento claseDeAsiento
+	@Column
+	String claseDeAsiento
 	
-	def precio() {
-		claseDeAsiento.precioClase
-	}
+	double precio
 }

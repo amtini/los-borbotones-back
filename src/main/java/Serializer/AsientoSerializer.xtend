@@ -23,7 +23,7 @@ class AsientoSerializer extends StdSerializer<Asiento>{
 	override serialize(Asiento value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
 		gen.writeStringField("id", parserStringToLong.parsearDeLongAString(value.ID));
-		gen.writeStringField("claseAsiento", value.claseDeAsiento.nombre);
+		gen.writeStringField("claseAsiento", value.claseDeAsiento);
 		gen.writeBooleanField("ventanilla", value.ventana);
 		gen.writeNumberField("precioAsiento", value.precio)
 		gen.writeEndObject();

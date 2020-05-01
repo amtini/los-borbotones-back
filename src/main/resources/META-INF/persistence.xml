@@ -14,7 +14,6 @@
 		<class>Pasaje</class>
 		<class>Asiento</class>
 		<class>VueloCompuesto</class>
-		<class>ClaseAsiento</class>
 		<class>Usuario</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
@@ -29,5 +28,4 @@
 			<property name="hibernate.connection.pool_size" value="100" />
 		</properties>
 	</persistence-unit>
-
 </persistence>

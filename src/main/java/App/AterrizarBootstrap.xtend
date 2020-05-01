@@ -1,7 +1,6 @@
 package App
 
 import org.uqbar.xtrest.api.XTRest
-import Clases.ClaseAsiento
 import Clases.Avion
 import Clases.Asiento
 import Clases.Aerolinea
@@ -13,10 +12,8 @@ import Clases.Pasaje
 import Repositorio.RepositorioAsiento
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
-import Repositorio.RepositorioClaseAsiento
 import Repositorio.RepositorioAerolinea
 import Repositorio.RepositorioAvion
-import Repositorio.RepositorioPasaje
 import Repositorio.RepositorioTicket
 
 class AterrizarBootstrap {
@@ -24,20 +21,6 @@ class AterrizarBootstrap {
 		
 		//Clases de asientos
 		
-		val primeraClase = new ClaseAsiento =>[
-			nombre = "primera clase"
-			precioClase = 35000
-		]
-		
-		val bussisnes = new ClaseAsiento =>[
-			nombre = "empresario"
-			precioClase = 22000
-		]
-		
-		val turista = new ClaseAsiento =>[
-			nombre = "turista"
-			precioClase = 10000
-		]
 		
 		//Aviones
 		
@@ -121,25 +104,29 @@ class AterrizarBootstrap {
 		val asiento1 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 25000
 		]
 	
 		val asiento2 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 15000
 		]
 	
 		val asiento3 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 20000
 		]
 		
 		val asiento25 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio = 35000
 		]
 		
 		Boeing747.asientos.add(asiento1)
@@ -162,25 +149,29 @@ class AterrizarBootstrap {
 		val asiento4 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 17584
 		]
 		
 		val asiento5 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 18465
 		]
 		
 		val asiento6 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 12937
 		]
 		
 		val asiento36 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 12622
 		]
 		
 		AirbusA320.asientos.add(asiento4)
@@ -203,31 +194,36 @@ class AterrizarBootstrap {
 		val asiento7 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 26233
 		]
 		
 		val asiento8 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 23737
 		]
 		
 		val asiento9 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 26263
 		]
 		
 		val asiento34 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 32534
 		]
 		
 		val asiento35 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 25354
 		]
 		
 		Tu204.asientos.add(asiento7)
@@ -251,19 +247,22 @@ class AterrizarBootstrap {
 		val asiento10 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 72364
 		]
 		
 		val asiento11 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio =  7374
 		]
 		
 		val asiento12 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 29289
 		]
 		
 		Il96.asientos.add(asiento10)
@@ -285,31 +284,36 @@ class AterrizarBootstrap {
 		val asiento13 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio = 9384
 		]
 		
 		val asiento14 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio = 16437
 		]
 		
 		val asiento15 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio = 28534
 		]
 		
 		val asiento26 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 24373
 		]
 		
 		val asiento27 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 26343
 		]
 		
 		CRJ200.asientos.add(asiento13)
@@ -333,31 +337,36 @@ class AterrizarBootstrap {
 		val asiento16 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 22834
 		]
 		
 		val asiento17 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio = 23846
 		]
 		
 		val asiento18 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 13498
 		]
 		
 		val asiento28 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 15832
 		]
 		
 		val asiento29 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 32154
 		]
 		
 		
@@ -383,30 +392,35 @@ class AterrizarBootstrap {
 		val asiento19 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = turista
+			claseDeAsiento = "turista"
+			precio = 16854
 		]
 		
 		val asiento20 = new Asiento =>[
 			ventana = true
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 16234
 		]
 		
 		val asiento21 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 26563
 		]
 		
 			val asiento30 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 36563
 		]
 			val asiento31 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 26553
 		]
 		
 		Boeing767.asientos.add(asiento19)
@@ -432,31 +446,36 @@ class AterrizarBootstrap {
 		val asiento22 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 27349
 		]
 		
 		val asiento23 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = bussisnes
+			claseDeAsiento = "empresario"
+			precio = 25340
 		]
 		
 		val asiento24 = new Asiento =>[
 			ventana = false
 			habilitado = true
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 16554
 		]
 		
 		val asiento32 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 23485
 		]
 		
 		val asiento33 = new Asiento =>[
 			ventana = false
 			habilitado = false
-			claseDeAsiento = primeraClase
+			claseDeAsiento = "primeraClase"
+			precio = 35648
 		]
 		
 		
@@ -476,7 +495,8 @@ class AterrizarBootstrap {
         val asientoDeRapidoDelNorte = new Asiento =>[
             ventana = false
             habilitado = true
-            claseDeAsiento = bussisnes
+            claseDeAsiento = "empresario"
+            precio = 42512
         ]
 
         RapidoDelNorte.asientos.add(asientoDeRapidoDelNorte)
@@ -513,7 +533,6 @@ class AterrizarBootstrap {
         vueloARGaCHILEaCUBA.escalas.add(vueloBSaCHILE)
         vueloARGaCHILEaCUBA.escalas.add(vueloCHILEaCUBA)
 		
-	
 		//usuarios
 	
 		val MartinMorena = new Usuario =>[
@@ -627,15 +646,9 @@ class AterrizarBootstrap {
 		val repoAsiento = new RepositorioAsiento
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
-		val repoClaseAsiento = new RepositorioClaseAsiento
 		val repoAerolinea = new RepositorioAerolinea
 		val repoAvion = new RepositorioAvion
-		val repoPasaje = new RepositorioPasaje
 		val repoTicket = new RepositorioTicket
-		
-		repoClaseAsiento.create(primeraClase)
-		repoClaseAsiento.create(bussisnes)
-		repoClaseAsiento.create(turista)
 		
 		repoAerolinea.create(AerolineasArgentinas)
 		repoAerolinea.create(AirFrance)
@@ -705,7 +718,7 @@ class AterrizarBootstrap {
         repoVuelo.create(vueloBSaInglaterra)
         repoVuelo.create(vueloARGaCHILEaCUBA)
         
-        repoPasaje.create(pasajeBSaRioMMorena)
+        /*repoPasaje.create(pasajeBSaRioMMorena)
         repoPasaje.create(pasajeBSaCHILEMMorena)
         repoPasaje.create(pasajeBSaJamaicaLPerez)
         repoPasaje.create(pasajeBSaFranciaLPerez)
@@ -716,20 +729,17 @@ class AterrizarBootstrap {
          repoPasaje.create(vueloAFranciaAMTini)
         repoPasaje.create(vueloBSaInglaterraAMTini)
         repoPasaje.create(vueloBSaInglaterraJLopez)
-        repoPasaje.create(vueloBSaAustraliaJLopez)
+        repoPasaje.create(vueloBSaAustraliaJLopez)*/
 
-        
-        
-        
         repoUsuario.create(MartinMorena)
         repoUsuario.create(LucasPerez)
         repoUsuario.create(BrianZerial)
         repoUsuario.create(NicolasDichiara)
         repoUsuario.create(AgustinMarioTini) //TODO
         repoUsuario.create(JorgeLopez)
-         
         
- 
+        
+ 		
 		
 		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento, repoTicket))
 	}

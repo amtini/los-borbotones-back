@@ -46,7 +46,7 @@ class Usuario {
 	// @ElementCollection
 	Set<Usuario> amigos = new HashSet<Usuario>
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 
 	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)

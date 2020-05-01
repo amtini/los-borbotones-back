@@ -41,7 +41,7 @@ class Avion {
 	
 	def filtroAsientosVuelo(String claseAsiento, Boolean ventanilla){
 		if(!claseAsiento.isNullOrEmpty){
-			asientosDisponibles.exists[asiento | asiento.claseDeAsiento.nombre == claseAsiento && asiento.ventana == ventanilla]
+			asientosDisponibles.exists[asiento | asiento.claseDeAsiento == claseAsiento && asiento.ventana == ventanilla]
 		}else{
 			asientosDisponibles.exists[asiento | asiento.ventana == ventanilla]
 		}
@@ -49,9 +49,10 @@ class Avion {
 	
 	def asientosFiltrados(FiltrosAsiento filtros) {
 		if(filtros.claseAsiento !== ""){
-			asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento.nombre == filtros.claseAsiento].toSet
+			asientosDisponibles.filter[it.ventana == filtros.ventanilla && it.claseDeAsiento == filtros.claseAsiento].toSet
 		}else{
 			asientosDisponibles.filter[it.ventana == filtros.ventanilla].toSet
 		}
 	}
+	
 }

@@ -1,6 +1,5 @@
 package Clases
 
-import App.FiltrosAsiento
 import java.time.LocalDate
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -52,10 +51,8 @@ class Vuelo{
 
 	def precioMinimoPasaje() {
 		precioDeVuelo() + avion.asientoMasBarato.precio
-	}
-
-	def dameAsientos(FiltrosAsiento filtros) {
-		avion.asientosFiltrados(filtros)
-	}
+	}	
+	
+	
 
 }

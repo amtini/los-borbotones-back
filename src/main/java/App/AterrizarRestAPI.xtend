@@ -196,9 +196,6 @@ class AterrizarRestAPI {
 		}
 	}
 
-	// TERMINA ACA
-	//
-	// REVISAR URGENTE 
 	// mi carrito de compras
 	@Get("/usuario/carritoDeCompras/:id")
 	def dameCarritoDeCompras() {
@@ -241,8 +238,9 @@ class AterrizarRestAPI {
 	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
 		try {
 			val filtros = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
-			println(filtros.ventanilla)
-
+			
+			
+			
 			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtros.origen, filtros.destino, filtros.ventanilla, filtros.claseAsiento, filtros.disponible, filtros.desde, filtros.hasta).toSet))
 		} catch (UserException exception) {
 			return badRequest()
