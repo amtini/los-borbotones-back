@@ -11,9 +11,8 @@ import Clases.Usuario
 import Clases.Pasaje
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
-import Repositorio.RepositorioAerolinea
-import Repositorio.RepositorioAvion
 import Repositorio.RepositorioTicket
+import Repositorio.RepositorioAerolinea
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -605,13 +604,11 @@ class AterrizarBootstrap {
 		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
 		
 		//REPOOO
-	
+		
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
-		val repoAerolinea = new RepositorioAerolinea
-		val repoAvion = new RepositorioAvion
 		val repoTicket = new RepositorioTicket
-		
+		val repoAerolinea = new RepositorioAerolinea
 		
 		Boeing747.asientos.add(asiento1)
 		Boeing747.asientos.add(asiento2)
@@ -657,16 +654,6 @@ class AterrizarBootstrap {
 		repoAerolinea.create(LanChile)
 		repoAerolinea.create(CopaAirlans)
 		repoAerolinea.create(Varig)
-		
-		repoAvion.create(Boeing747)
-		repoAvion.create(AirbusA320)
-		repoAvion.create(Tu204)
-		repoAvion.create(Il96)
-		repoAvion.create(CRJ200)
-		repoAvion.create(Boeing777)
-		repoAvion.create(Boeing767)
-		repoAvion.create(Boeing757)
-		repoAvion.create(RapidoDelNorte)
 		
 		
 		repoVuelo.create(vueloBSaRio) 

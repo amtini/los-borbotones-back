@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne
 import javax.persistence.OneToOne
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import javax.persistence.CascadeType
 
 @Entity
 @Observable
@@ -30,10 +31,10 @@ class Vuelo{
 	@Column
 	LocalDate horarioDePartida
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	Aerolinea aerolinea
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	Avion avion
 
 	@Column(length=150)
