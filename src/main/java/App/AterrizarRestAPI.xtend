@@ -2,7 +2,6 @@ package App
 
 import Parsers.ParserDate
 import Parsers.ParserStringToLong
-import Repositorio.RepositorioAsiento
 import Repositorio.RepositorioTicket
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
@@ -28,14 +27,14 @@ class AterrizarRestAPI {
 	extension JSONUtils = new JSONUtils
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
-	RepositorioAsiento repoAsiento
+	//RepositorioAsiento repoAsiento
 	RepositorioTicket repoTicket
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
-	new(RepositorioUsuario repoU, RepositorioVuelo repoV, RepositorioAsiento repoA, RepositorioTicket repoT) {
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV, /*RepositorioAsiento repoA,*/ RepositorioTicket repoT) {
 		repoUsuario = repoU
 		repoVuelo = repoV
-		repoAsiento = repoA
+		//repoAsiento = repoA
 		repoTicket = repoT
 	}
 
@@ -146,11 +145,10 @@ class AterrizarRestAPI {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
-			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
 
-			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, asiento)
+			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 			repoUsuario.update(usuario)
-			repoAsiento.update(asiento)
+			//repoAsiento.update(asiento)
 
 			return ok()
 		} catch (UserException exception) {
@@ -163,11 +161,9 @@ class AterrizarRestAPI {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
-			val asiento = repoAsiento.searchByID(parserStringToLong.parsearDeStringALong(id3))
-			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, asiento)
+			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 
 			ticket.cancelarReserva()
-			repoAsiento.update(ticket.asiento)
 			usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
 			repoUsuario.update(usuario)
 			repoTicket.delete(ticket)
@@ -185,7 +181,7 @@ class AterrizarRestAPI {
 			val tickets = usuario.carritoDeCompras.tickets.clone
 
 			usuario.carritoDeCompras.cancelarReservaDeTodosLosAsientos
-			repoAsiento.actualizarAsientos(tickets)
+			//repoAsiento.actualizarAsientos(tickets)
 			usuario.carritoDeCompras.limpiarCarritoDeCompras
 			repoUsuario.update(usuario)
 			repoTicket.eliminarTickets(tickets)
@@ -213,10 +209,12 @@ class AterrizarRestAPI {
 	def finalizarCompra() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-
+			val tickets = usuario.carritoDeCompras.tickets.clone
 			usuario.comprarPasajes
+			
 			repoUsuario.update(usuario)
-
+			repoTicket.eliminarTickets(tickets)
+			
 			return ok()
 		} catch (UserException exception) {
 			return badRequest()

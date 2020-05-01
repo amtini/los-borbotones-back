@@ -37,7 +37,6 @@ class RepositorioTicket extends Repositorio<Ticket> {
 	}
 
 	def eliminarTickets(List<Ticket> tickets) {
-		tickets.forEach[ticket|println("voy a eliminar el ticket" + ticket.ID)]
 		tickets.forEach[ticket|delete(ticket)]
 	}
 

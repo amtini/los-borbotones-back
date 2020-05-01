@@ -12,6 +12,7 @@ import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.GenerationType
+import javax.persistence.CascadeType
 
 @Entity
 @Observable
@@ -24,8 +25,12 @@ class Avion {
 	@Column(length=150)
 	String nombre
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	Set<Asiento> asientos = new HashSet<Asiento>
+	
+	def seleccionarAsiento(Long id){
+		asientos.findFirst(it|it.ID == id)
+	}
 	
 	def recargoUltimosPasajes(){
 		if(asientosDisponibles.length<=2){1.15}else{1}

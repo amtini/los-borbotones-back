@@ -8,6 +8,7 @@ import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.GenerationType
+import javax.persistence.CascadeType
 
 @Entity
 @Observable

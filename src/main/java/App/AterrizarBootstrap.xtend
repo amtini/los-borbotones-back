@@ -9,7 +9,6 @@ import java.time.LocalDate
 import Clases.VueloCompuesto
 import Clases.Usuario
 import Clases.Pasaje
-import Repositorio.RepositorioAsiento
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
 import Repositorio.RepositorioAerolinea
@@ -129,10 +128,7 @@ class AterrizarBootstrap {
 			precio = 35000
 		]
 		
-		Boeing747.asientos.add(asiento1)
-		Boeing747.asientos.add(asiento2)
-		Boeing747.asientos.add(asiento3)
-		Boeing747.asientos.add(asiento25)
+		
 		
 		// vuelo 2
 		
@@ -174,10 +170,6 @@ class AterrizarBootstrap {
 			precio = 12622
 		]
 		
-		AirbusA320.asientos.add(asiento4)
-		AirbusA320.asientos.add(asiento5)
-		AirbusA320.asientos.add(asiento6)
-		AirbusA320.asientos.add(asiento36)
 		
 		// vuelo 3
 		
@@ -226,11 +218,6 @@ class AterrizarBootstrap {
 			precio = 25354
 		]
 		
-		Tu204.asientos.add(asiento7)
-		Tu204.asientos.add(asiento8)
-		Tu204.asientos.add(asiento9)
-		Tu204.asientos.add(asiento34)
-		Tu204.asientos.add(asiento35)
 		
 		// vuelo 4
 		
@@ -265,9 +252,6 @@ class AterrizarBootstrap {
 			precio = 29289
 		]
 		
-		Il96.asientos.add(asiento10)
-		Il96.asientos.add(asiento11)
-		Il96.asientos.add(asiento12)
 		
 		// vuelo 5
 		
@@ -316,11 +300,6 @@ class AterrizarBootstrap {
 			precio = 26343
 		]
 		
-		CRJ200.asientos.add(asiento13)
-		CRJ200.asientos.add(asiento14)
-		CRJ200.asientos.add(asiento15)
-		CRJ200.asientos.add(asiento26)
-		CRJ200.asientos.add(asiento27)
 		
 		// vuelo 6
 		
@@ -370,11 +349,6 @@ class AterrizarBootstrap {
 		]
 		
 		
-		Boeing777.asientos.add(asiento16)
-		Boeing777.asientos.add(asiento17)
-		Boeing777.asientos.add(asiento18)
-		Boeing777.asientos.add(asiento28)
-		Boeing777.asientos.add(asiento29)
 		//avion 7
 		
 		// vuelo 1
@@ -423,11 +397,6 @@ class AterrizarBootstrap {
 			precio = 26553
 		]
 		
-		Boeing767.asientos.add(asiento19)
-		Boeing767.asientos.add(asiento20)
-		Boeing767.asientos.add(asiento21)
-		Boeing767.asientos.add(asiento30)
-		Boeing767.asientos.add(asiento31)
 		
 		//avion 8
 		
@@ -479,11 +448,6 @@ class AterrizarBootstrap {
 		]
 		
 		
-		Boeing757.asientos.add(asiento22)
-		Boeing757.asientos.add(asiento23)
-		Boeing757.asientos.add(asiento24)
-		Boeing757.asientos.add(asiento32)
-		Boeing757.asientos.add(asiento33)
 	
 	
 	
@@ -498,8 +462,7 @@ class AterrizarBootstrap {
             claseDeAsiento = "empresario"
             precio = 42512
         ]
-
-        RapidoDelNorte.asientos.add(asientoDeRapidoDelNorte)
+		
 
         val vueloARGaCHILEaCUBA = new VueloCompuesto  =>[
             ciudadDeOrigen = "Buenos Aires"
@@ -642,13 +605,51 @@ class AterrizarBootstrap {
 		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
 		
 		//REPOOO
-		
-		val repoAsiento = new RepositorioAsiento
+	
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
 		val repoAerolinea = new RepositorioAerolinea
 		val repoAvion = new RepositorioAvion
 		val repoTicket = new RepositorioTicket
+		
+		
+		Boeing747.asientos.add(asiento1)
+		Boeing747.asientos.add(asiento2)
+		Boeing747.asientos.add(asiento3)
+		Boeing747.asientos.add(asiento25)
+		AirbusA320.asientos.add(asiento4)
+		AirbusA320.asientos.add(asiento5)
+		AirbusA320.asientos.add(asiento6)
+		AirbusA320.asientos.add(asiento36)
+		Tu204.asientos.add(asiento7)
+		Tu204.asientos.add(asiento8)
+		Tu204.asientos.add(asiento9)
+		Tu204.asientos.add(asiento34)
+		Tu204.asientos.add(asiento35)
+		Il96.asientos.add(asiento10)
+		Il96.asientos.add(asiento11)
+		Il96.asientos.add(asiento12)
+		CRJ200.asientos.add(asiento13)
+		CRJ200.asientos.add(asiento14)
+		CRJ200.asientos.add(asiento15)
+		CRJ200.asientos.add(asiento26)
+		CRJ200.asientos.add(asiento27)
+		Boeing777.asientos.add(asiento16)
+		Boeing777.asientos.add(asiento17)
+		Boeing777.asientos.add(asiento18)
+		Boeing777.asientos.add(asiento28)
+		Boeing777.asientos.add(asiento29)
+		Boeing767.asientos.add(asiento19)
+		Boeing767.asientos.add(asiento20)
+		Boeing767.asientos.add(asiento21)
+		Boeing767.asientos.add(asiento30)
+		Boeing767.asientos.add(asiento31)
+		Boeing757.asientos.add(asiento22)
+		Boeing757.asientos.add(asiento23)
+		Boeing757.asientos.add(asiento24)
+		Boeing757.asientos.add(asiento32)
+		Boeing757.asientos.add(asiento33)
+        RapidoDelNorte.asientos.add(asientoDeRapidoDelNorte)
 		
 		repoAerolinea.create(AerolineasArgentinas)
 		repoAerolinea.create(AirFrance)
@@ -657,7 +658,7 @@ class AterrizarBootstrap {
 		repoAerolinea.create(CopaAirlans)
 		repoAerolinea.create(Varig)
 		
-		repoAsiento.create(asiento1)
+		/*repoAsiento.create(asiento1)
 		repoAsiento.create(asiento2)
 		repoAsiento.create(asiento3)
 		repoAsiento.create(asiento25)
@@ -695,7 +696,7 @@ class AterrizarBootstrap {
 		repoAsiento.create(asiento34)
 		repoAsiento.create(asiento35)
 		repoAsiento.create(asiento36)
-		repoAsiento.create(asientoDeRapidoDelNorte)
+		repoAsiento.create(asientoDeRapidoDelNorte)*/
 		
 		repoAvion.create(Boeing747)
 		repoAvion.create(AirbusA320)
@@ -741,6 +742,6 @@ class AterrizarBootstrap {
         
  		
 		
-		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento, repoTicket))
+		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoTicket))
 	}
 }
