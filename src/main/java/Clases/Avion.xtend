@@ -3,16 +3,13 @@ package Clases
 import App.FiltrosAsiento
 import java.util.HashSet
 import java.util.Set
-import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import javax.persistence.GenerationType
-import javax.persistence.CascadeType
+import org.mongodb.morphia.annotations.Embedded
 
 @Entity
 @Observable
@@ -22,10 +19,9 @@ class Avion {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long ID
 	
-	@Column(length=150)
 	String nombre
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@Embedded
 	Set<Asiento> asientos = new HashSet<Asiento>
 	
 	def seleccionarAsiento(Long id){

@@ -148,7 +148,7 @@ class AterrizarRestAPI {
 
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 			repoUsuario.update(usuario)
-			//repoAsiento.update(asiento)
+			repoVuelo.update(vuelo)
 
 			return ok()
 		} catch (UserException exception) {
@@ -164,6 +164,7 @@ class AterrizarRestAPI {
 			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 
 			ticket.cancelarReserva()
+			repoVuelo.update(vuelo)
 			usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
 			repoUsuario.update(usuario)
 			repoTicket.delete(ticket)

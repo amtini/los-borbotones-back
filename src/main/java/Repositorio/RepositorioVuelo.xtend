@@ -1,25 +1,61 @@
 package Repositorio
 
-import App.FiltrosAsiento
 import Clases.Vuelo
-import java.time.LocalDate
-import java.util.Set
-import javax.persistence.criteria.CriteriaBuilder
-import javax.persistence.criteria.CriteriaQuery
-import javax.persistence.criteria.Root
 
-class RepositorioVuelo extends Repositorio<Vuelo> {
+class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 
-	def asientosDeMiVuelo(Long id, FiltrosAsiento filtros) {
+	/*def asientosDeMiVuelo(Long id, FiltrosAsiento filtros) {
 		val vuelo = searchByID(id)
 		vuelo.avion.asientosFiltrados(filtros)
-	}
+	}*/
 
 	override getEntityType() {
 		Vuelo
 	}
+	
+	def createWhenNew(Vuelo vuelo) {
+		if (searchByExample(vuelo).isEmpty) {
+			this.create(vuelo)
+		}
+	}
+	
+	override searchByExample(Vuelo vuelo) {
+		val query = ds.createQuery(entityType)
+		if (vuelo !== null) {
+			query.field("ID")
+				.equal(vuelo.ID)
+		}
+		
+		query.asList
+	}
+	
+	override defineUpdateOperations(Vuelo vuelo) {
+		val operations = ds.createUpdateOperations(entityType)
+		if (vuelo.avion === null) {
+			operations.unset("fechaRetorno")
+		} else {
+			// No tiene sentido modificar el libro o el usuario
+			//.set("libro", prestamo.libro)
+			//.set("usuario", prestamo.usuario)
+			// solo la fecha de devolucion cuando lo devuelve
+			operations.set("avion", vuelo.avion)
+		}
+	}
 
-	override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Vuelo> query, Root<Vuelo> camposUsuario, Long id) {
+	
+	/*def searchByFilter(Vuelo vuelo) {
+		val query = ds.createQuery(entityType)
+		if (vuelo !== null) {
+			query.field("ID")
+				.equal(vuelo.ID)
+		}
+		
+		query.asList
+	}*/
+	
+
+
+	/*override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Vuelo> query, Root<Vuelo> camposUsuario, Long id) {
 		if (id !== null) {
 			query.where(criteria.equal(camposUsuario.get("ID"), id))
 		}
@@ -66,11 +102,11 @@ class RepositorioVuelo extends Repositorio<Vuelo> {
 		} finally {
 			
 		}
-	}
+	}*/
 	
-	def filtroFechas(Set<Vuelo> vuelos, String claseAsiento, Boolean ventanilla) {
+	/*def filtroFechas(Set<Vuelo> vuelos, String claseAsiento, Boolean ventanilla) {
 			
 			vuelos.filter[it|  it.avion.filtroAsientosVuelo(claseAsiento, ventanilla)]
 			
-	}
+	}*/
 }
