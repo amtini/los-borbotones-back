@@ -2,18 +2,18 @@ package RepositorioMongo
 
 import Filtros.FiltrosVuelo
 
-class RepositorioBusquedaVuelos extends RepoPersistencia<FiltrosVuelo>{
-	
-	override searchByExample(FiltrosVuelo t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
-	override defineUpdateOperations(FiltrosVuelo t) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
+class RepositorioBusquedaVuelos extends RepoPersistencia<FiltrosVuelo> {
+
 	override getEntityType() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		FiltrosVuelo
 	}
-	
+
+	override searchByExample(FiltrosVuelo t) {
+		throw new UnsupportedOperationException("TODO: Operacion no soportada")
+	}
+
+	override defineUpdateOperations(FiltrosVuelo t) {
+		throw new UnsupportedOperationException("TODO: Operacion no soportada")
+	}
+
 }

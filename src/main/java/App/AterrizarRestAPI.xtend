@@ -21,6 +21,7 @@ import RepositorioMongo.RepositorioVuelo
 import RepositorioMongo.RepositorioAsiento
 import Filtros.FiltrosVuelo
 import Filtros.FiltrosAsiento
+import RepositorioMongo.RepositorioBusquedaVuelos
 
 @Controller
 class AterrizarRestAPI {
@@ -28,6 +29,7 @@ class AterrizarRestAPI {
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
 	RepositorioAsiento repoAsiento
+	RepositorioBusquedaVuelos repoBusquedaVuelos
 	//RepositorioTicket repoTicket
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
@@ -237,8 +239,16 @@ class AterrizarRestAPI {
 	@Get("/vuelos")
 	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
 		try {
-			val filtros = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
+			var filtros = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
 			
+			println("estoy afuera del create " + filtros.origen)
+			println("estoy afuera del create " + filtros.destino)
+			println("estoy afuera del create " + filtros.desde)
+			println("estoy afuera del create " + filtros.hasta)
+			println("estoy afuera del create " + filtros.ventanilla)
+			println("estoy afuera del create " + filtros.claseAsiento)
+			
+			repoBusquedaVuelos.create(filtros)
 			
 			
 			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtros).toSet))

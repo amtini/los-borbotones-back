@@ -50,6 +50,7 @@ abstract class RepoPersistencia<T> {
 	abstract def UpdateOperations<T> defineUpdateOperations(T t)
 
 	def T create(T t) {
+		println(t)
 		ds.save(t)
 		t
 	}
