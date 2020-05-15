@@ -8,17 +8,23 @@ import Clases.Vuelo
 import java.time.LocalDate
 import Clases.VueloCompuesto
 import Clases.Usuario
-import Clases.Pasaje
 import Repositorio.RepositorioUsuario
 import Repositorio.RepositorioVuelo
 import Repositorio.RepositorioTicket
-import Repositorio.RepositorioAerolinea
+import Repositorio.RepositorioAsiento
+import Clases.Pasaje
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
 		
-		//Clases de asientos
+		//Repos
 		
+		//REPOOO
+		
+		val repoUsuario = new RepositorioUsuario
+		val repoVuelo = new RepositorioVuelo
+		val repoTicket = new RepositorioTicket
+		val repoAsiento = new RepositorioAsiento
 		
 		//Aviones
 		
@@ -558,57 +564,94 @@ class AterrizarBootstrap {
 		NicolasDichiara.agregarAmigo(BrianZerial)
 		
 		//pasajes para Martin Morena
-		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio,asiento25,15000.0,LocalDate.of(2020,03,29))
-		val pasajeBSaCHILEMMorena = new Pasaje(vueloBSaMiami,asiento26,36000.0,LocalDate.of(2020,04,16))
+		val pasajeBSaRioMMorena = new Pasaje(vueloBSaRio.ciudadDeDestino,vueloBSaRio.ciudadDeOrigen,vueloBSaRio.aerolinea.nombre,vueloBSaRio.horarioDePartida,15000.0,LocalDate.of(2020,03,29))
+		val pasajeBSaCHILEMMorena = new Pasaje(vueloBSaMiami.ciudadDeDestino,vueloBSaMiami.ciudadDeOrigen,vueloBSaMiami.aerolinea.nombre,vueloBSaMiami.horarioDePartida,36000.0,LocalDate.of(2020,04,16))
 		
 		MartinMorena.pasajesComprados.add(pasajeBSaRioMMorena)
 		MartinMorena.pasajesComprados.add(pasajeBSaCHILEMMorena)
 		
 		//pasajes para Lucas Perez
 		
-		val pasajeBSaJamaicaLPerez = new Pasaje(vueloBSaJamaica,asiento36,26000.0,LocalDate.of(2020,03,25))
-		val pasajeBSaFranciaLPerez = new Pasaje(vueloAFrancia,asiento35,45000.0,LocalDate.of(2020,04,02))
+		val pasajeBSaJamaicaLPerez = new Pasaje(vueloBSaJamaica.ciudadDeDestino,vueloAFrancia.ciudadDeOrigen,vueloAFrancia.aerolinea.nombre,vueloAFrancia.horarioDePartida,26000.0,LocalDate.of(2020,03,25))
+		val pasajeBSaFranciaLPerez = new Pasaje(vueloAFrancia.ciudadDeDestino,vueloAFrancia.ciudadDeOrigen,vueloAFrancia.aerolinea.nombre,vueloAFrancia.horarioDePartida,45000.0,LocalDate.of(2020,04,02))
 		
 		LucasPerez.pasajesComprados.add(pasajeBSaJamaicaLPerez)
 		LucasPerez.pasajesComprados.add(pasajeBSaFranciaLPerez)
 		
 		//pasajes para NicolasDichiara
-        val pasajeBSaMiamiDiachiara = new Pasaje(vueloBSaMiami,asiento27,150000.0,LocalDate.of(2020,03,23))
-        val pasajeBSaItaliaDiachiara= new Pasaje(vueloBSaItalia,asiento28,36000.0,LocalDate.of(2020,02,01))
+        val pasajeBSaMiamiDiachiara = new Pasaje(vueloBSaMiami.ciudadDeDestino,vueloBSaItalia.ciudadDeOrigen,vueloBSaItalia.aerolinea.nombre,vueloBSaItalia.horarioDePartida,150000.0,LocalDate.of(2020,03,23))
+        val pasajeBSaItaliaDiachiara= new Pasaje(vueloBSaItalia.ciudadDeDestino,vueloBSaItalia.ciudadDeOrigen,vueloBSaItalia.aerolinea.nombre,vueloBSaItalia.horarioDePartida,36000.0,LocalDate.of(2020,02,01))
 
         NicolasDichiara.pasajesComprados.add(pasajeBSaMiamiDiachiara)
         NicolasDichiara.pasajesComprados.add(pasajeBSaItaliaDiachiara)
 
          //pasajes para BrianZerial
-        val pasajeBSaItaliaBrian = new Pasaje(vueloBSaItalia,asiento29,150000.0,LocalDate.of(2020,03,23))
-        val pasajeBSaAustraliaBrian= new Pasaje(vueloBSaAustralia,asiento30,36000.0,LocalDate.of(2020,02,01))
+        val pasajeBSaItaliaBrian = new Pasaje(vueloBSaItalia.ciudadDeDestino,vueloBSaItalia.ciudadDeOrigen,vueloBSaItalia.aerolinea.nombre,vueloBSaItalia.horarioDePartida,150000.0,LocalDate.of(2020,03,23))
+        val pasajeBSaAustraliaBrian= new Pasaje(vueloBSaAustralia.ciudadDeDestino,vueloBSaAustralia.ciudadDeOrigen,vueloBSaAustralia.aerolinea.nombre,vueloBSaAustralia.horarioDePartida,36000.0,LocalDate.of(2020,02,01))
 
         BrianZerial.pasajesComprados.add(pasajeBSaItaliaBrian)
         BrianZerial.pasajesComprados.add(pasajeBSaAustraliaBrian)
 
 		//Pasajes para Agustin Mario Tini
 		
-		val vueloAFranciaAMTini = new Pasaje(vueloBSaJamaica,asiento34,55000.0,LocalDate.of(2020,03,27))
-		val vueloBSaInglaterraAMTini = new Pasaje(vueloAFrancia,asiento33,65000.0,LocalDate.of(2020,04,06))
+		val vueloAFranciaAMTini = new Pasaje(vueloBSaJamaica.ciudadDeDestino, vueloBSaJamaica.ciudadDeOrigen, vueloBSaJamaica.aerolinea.nombre, vueloBSaJamaica.horarioDePartida,55000.0,LocalDate.of(2020,03,27))
+		val vueloBSaInglaterraAMTini = new Pasaje(vueloAFrancia.ciudadDeDestino, vueloAFrancia.ciudadDeOrigen,vueloAFrancia.aerolinea.nombre,vueloAFrancia.horarioDePartida,65000.0,LocalDate.of(2020,04,06))
 		
 		AgustinMarioTini.pasajesComprados.add(vueloAFranciaAMTini)
 		AgustinMarioTini.pasajesComprados.add(vueloBSaInglaterraAMTini)
 		
-		
 		//Pasajes para Jorge Lopez
 		
-		val vueloBSaInglaterraJLopez = new Pasaje(vueloBSaInglaterra,asiento32,63000.0,LocalDate.of(2020,03,22))
-		val	vueloBSaAustraliaJLopez = new Pasaje(vueloBSaAustralia,asiento31,85000.0,LocalDate.of(2020,02,15))
+		val vueloBSaInglaterraJLopez = new Pasaje(vueloBSaInglaterra.ciudadDeDestino, vueloBSaInglaterra.ciudadDeOrigen, vueloBSaInglaterra.aerolinea.nombre, vueloBSaInglaterra.horarioDePartida,63000.0,LocalDate.of(2020,03,22))
+		val	vueloBSaAustraliaJLopez = new Pasaje(vueloBSaAustralia.ciudadDeDestino, vueloBSaAustralia.ciudadDeOrigen, vueloBSaAustralia.aerolinea.nombre, vueloBSaAustralia.horarioDePartida,85000.0,LocalDate.of(2020,02,15))
 		
 		JorgeLopez.pasajesComprados.add(vueloBSaInglaterraJLopez)
 		JorgeLopez.pasajesComprados.add(vueloBSaAustraliaJLopez)
 		
-		//REPOOO
+		//creaciones
 		
-		val repoUsuario = new RepositorioUsuario
-		val repoVuelo = new RepositorioVuelo
-		val repoTicket = new RepositorioTicket
-		val repoAerolinea = new RepositorioAerolinea
+		
+		
+		
+		repoAsiento.create(asiento1)
+		repoAsiento.create(asiento2)
+		repoAsiento.create(asiento3)
+		repoAsiento.create(asiento4)
+		repoAsiento.create(asiento5)
+		repoAsiento.create(asiento6)
+		repoAsiento.create(asiento7)
+		repoAsiento.create(asiento8)	
+		repoAsiento.create(asiento9)
+		repoAsiento.create(asiento10)
+		repoAsiento.create(asiento11)
+		repoAsiento.create(asiento12)
+		repoAsiento.create(asiento13)
+		repoAsiento.create(asiento14)
+		repoAsiento.create(asiento15)
+		repoAsiento.create(asiento16)
+		repoAsiento.create(asiento17)
+		repoAsiento.create(asiento18)
+		repoAsiento.create(asiento19)
+		repoAsiento.create(asiento20)
+		repoAsiento.create(asiento21)
+		repoAsiento.create(asiento22)
+		repoAsiento.create(asiento23)
+		repoAsiento.create(asiento24)
+		repoAsiento.create(asiento25)
+		repoAsiento.create(asiento26)
+		repoAsiento.create(asiento27)
+		repoAsiento.create(asiento28)
+		repoAsiento.create(asiento29)
+		repoAsiento.create(asiento30)
+		repoAsiento.create(asiento31)
+		repoAsiento.create(asiento32)
+		repoAsiento.create(asiento33)
+		repoAsiento.create(asiento34)
+		repoAsiento.create(asiento35)
+		repoAsiento.create(asiento36)
+		repoAsiento.create(asientoDeRapidoDelNorte)
+		
+		
 		
 		Boeing747.asientos.add(asiento1)
 		Boeing747.asientos.add(asiento2)
@@ -646,15 +689,7 @@ class AterrizarBootstrap {
 		Boeing757.asientos.add(asiento24)
 		Boeing757.asientos.add(asiento32)
 		Boeing757.asientos.add(asiento33)
-        RapidoDelNorte.asientos.add(asientoDeRapidoDelNorte)
-		
-		repoAerolinea.create(AerolineasArgentinas)
-		repoAerolinea.create(AirFrance)
-		repoAerolinea.create(Luftansa)
-		repoAerolinea.create(LanChile)
-		repoAerolinea.create(CopaAirlans)
-		repoAerolinea.create(Varig)
-		
+        RapidoDelNorte.asientos.add(asientoDeRapidoDelNorte)		
 		
 		repoVuelo.create(vueloBSaRio) 
         repoVuelo.create(vueloBSaJamaica)
@@ -665,13 +700,19 @@ class AterrizarBootstrap {
         repoVuelo.create(vueloBSaAustralia)
         repoVuelo.create(vueloBSaInglaterra)
         repoVuelo.create(vueloARGaCHILEaCUBA)
-
-        repoUsuario.create(MartinMorena)
+		
+		
+		//repos
+		
+		repoUsuario.create(MartinMorena)
         repoUsuario.create(LucasPerez)
         repoUsuario.create(BrianZerial)
         repoUsuario.create(NicolasDichiara)
         repoUsuario.create(AgustinMarioTini) //TODO
         repoUsuario.create(JorgeLopez)
+		
+		
+        
         
         
  		

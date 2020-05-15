@@ -6,15 +6,15 @@ import javax.persistence.FetchType
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.OneToMany
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.ManyToMany
-import javax.persistence.OneToOne
 import javax.persistence.CascadeType
 import java.util.Set
 import java.util.HashSet
 import java.time.LocalDate
+import javax.persistence.Transient
+import javax.persistence.OneToMany
+import javax.persistence.ManyToMany
 
 @Entity
 @Observable
@@ -43,13 +43,12 @@ class Usuario {
 	double dinero
 
 	@ManyToMany(fetch=FetchType.LAZY)
-	// @ElementCollection
 	Set<Usuario> amigos = new HashSet<Usuario>
 
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 
-	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@Transient
 	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
 
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {
@@ -60,7 +59,7 @@ class Usuario {
 		if (carritoDeCompras.costoTotalDelCarrito() < dinero) {
 			dinero -= carritoDeCompras.costoTotalDelCarrito
 			carritoDeCompras.tickets.forEach [ ticket |
-				pasajesComprados.add(new Pasaje(ticket.vuelo, ticket.asiento, ticket.costo, LocalDate.now))
+				pasajesComprados.add(new Pasaje(ticket.vuelo.ciudadDeDestino, ticket.vuelo.ciudadDeOrigen, ticket.vuelo.aerolinea.nombre, ticket.vuelo.horarioDePartida, ticket.costo, LocalDate.now))
 			]
 			carritoDeCompras.limpiarCarritoDeCompras
 		}

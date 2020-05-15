@@ -24,11 +24,11 @@ class PasajeSerializer extends StdSerializer<Pasaje>{
 	
 	override serialize(Pasaje value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeStringField("ciudadDeOrigen", value.vuelo.ciudadDeOrigen);
-		gen.writeStringField("ciudadDeDestino", value.vuelo.ciudadDeDestino);
-		gen.writeStringField("aerolinea", value.vuelo.aerolinea.nombre);
+		gen.writeStringField("ciudadDeOrigen", value.ciudadDeOrigen);
+		gen.writeStringField("ciudadDeDestino", value.ciudadDeDestino);
+		gen.writeStringField("aerolinea", value.aerolinea);
 		gen.writeNumberField("precioPasaje", value.costo)
-		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.vuelo.horarioDePartida))
+		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.horarioDePartida))
 		gen.writeStringField("comprado", getStringDateFromLocalDate(value.comprado))
 		gen.writeEndObject();
 	}

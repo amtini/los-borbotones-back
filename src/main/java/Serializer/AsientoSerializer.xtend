@@ -14,15 +14,13 @@ import Parsers.ParserStringToLong
 @Accessors
 class AsientoSerializer extends StdSerializer<Asiento>{
 	
-	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
-	
 	new(Class<Asiento> s){
 		super(s)
 	}
 	
 	override serialize(Asiento value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeStringField("id", parserStringToLong.parsearDeLongAString(value.ID));
+		gen.writeStringField("id", value.ID.toString);
 		gen.writeStringField("claseAsiento", value.claseDeAsiento);
 		gen.writeBooleanField("ventanilla", value.ventana);
 		gen.writeNumberField("precioAsiento", value.precio)

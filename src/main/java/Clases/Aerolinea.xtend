@@ -1,24 +1,18 @@
 package Clases
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.GenerationType
+import org.mongodb.morphia.annotations.Entity
+import org.mongodb.morphia.annotations.Id
+import org.bson.types.ObjectId
 
-@Entity
 @Observable
 @Accessors
+@Entity(value="Aerolinea")
 class Aerolinea {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id
+	@Id ObjectId ID
 
-	@Column(length=150)
 	String nombre
 
-	@Column(length=150)
 	Double precioAsiento
 }

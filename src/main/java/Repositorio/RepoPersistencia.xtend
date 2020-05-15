@@ -5,6 +5,9 @@ import com.mongodb.MongoClient
 import org.mongodb.morphia.Morphia
 import org.mongodb.morphia.query.UpdateOperations
 import java.util.List
+import Clases.Vuelo
+import Clases.Avion
+import Clases.Asiento
 
 abstract class RepoPersistencia<T> {
 	static protected Datastore ds
@@ -14,7 +17,7 @@ abstract class RepoPersistencia<T> {
 		if (ds === null) {
 			val mongo = new MongoClient("localhost", 27017)
 			morphia = new Morphia => [
-				//map(Usuario).map(Libro).map(Prestamo)
+				map(Vuelo).map(Avion).map(Asiento)
 				ds = createDatastore(mongo, "test")
 				ds.ensureIndexes
 			]

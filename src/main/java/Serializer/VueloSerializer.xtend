@@ -19,22 +19,20 @@ class VueloSerializer extends StdSerializer<Vuelo>{
 		super(s)
 	}
 	
-	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
-	
 	static val DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 	
 	static def getStringDateFromLocalDate(LocalDate date) { 	date.format(formatter) 	}
 	
 	override serialize(Vuelo value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 		gen.writeStartObject();
-		gen.writeStringField("id", parserStringToLong.parsearDeLongAString(value.ID));
+		gen.writeStringField("id", value.ID.toString);
 		gen.writeStringField("ciudadDeOrigen", value.ciudadDeOrigen);
 		gen.writeStringField("ciudadDeDestino", value.ciudadDeDestino);
 		gen.writeStringField("aerolinea", value.aerolinea.nombre);
-		gen.writeNumberField("duracionDeVuelo", value.duracionDeVuelo);	
+		gen.writeNumberField("duracionDeVuelo", value.duracionDeVuelo);
 		gen.writeNumberField("escalas", value.cantidadEscalas);
-		gen.writeNumberField("precioMinimoPasaje", value.precioMinimoPasaje)
-		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.horarioDePartida))
+		gen.writeNumberField("precioMinimoPasaje", value.precioMinimoPasaje);
+		gen.writeStringField("horarioDePartida", getStringDateFromLocalDate(value.horarioDePartida));
 		gen.writeEndObject();
 	}
 	

@@ -3,21 +3,17 @@ package Clases
 import App.FiltrosAsiento
 import java.util.HashSet
 import java.util.Set
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.GenerationType
 import org.mongodb.morphia.annotations.Embedded
+import org.bson.types.ObjectId
+import org.mongodb.morphia.annotations.Id
 
-@Entity
 @Observable
 @Accessors
 class Avion {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long ID
+	
+	@Id ObjectId ID
 	
 	String nombre
 	

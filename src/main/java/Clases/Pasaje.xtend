@@ -8,8 +8,6 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.OneToOne
-import javax.persistence.FetchType
 
 @Entity
 @Observable
@@ -21,21 +19,29 @@ class Pasaje {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long ID
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	Vuelo vuelo
+	@Column
+	String ciudadDeDestino
 	
-	@OneToOne(fetch=FetchType.LAZY)
-	Asiento asiento
-
+	@Column
+	String ciudadDeOrigen
+	
+	@Column
+	String aerolinea
+	
+	@Column
+	LocalDate horarioDePartida
+	
 	@Column(length=150)
 	Double costo
-
+	
 	@Column
 	LocalDate comprado
-
-	new(Vuelo vuelo_, Asiento asiento_, Double costo_, LocalDate comprado_) {
-		vuelo = vuelo_
-		asiento = asiento_
+	
+	new(String ciudadDeDestino_, String ciudadDeOrigen_, String aerolinea_, LocalDate horarioDePartida_, Double costo_, LocalDate comprado_) {
+		ciudadDeOrigen = ciudadDeOrigen_
+		ciudadDeDestino = ciudadDeDestino_
+		aerolinea = aerolinea_
+		horarioDePartida = horarioDePartida_
 		costo = costo_
 		comprado = comprado_
 	}

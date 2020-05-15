@@ -1,16 +1,8 @@
 package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import javax.persistence.FetchType
-import javax.persistence.OneToOne
-import javax.persistence.Entity
 import org.uqbar.commons.model.annotations.Observable
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.GenerationType
-import javax.persistence.CascadeType
 
-@Entity
 @Observable
 @Accessors
 class Ticket {
@@ -18,13 +10,10 @@ class Ticket {
 	new() {
 	}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	Long ID
+	String ID
 
-	@OneToOne(fetch=FetchType.LAZY)
 	Vuelo vuelo
-	@OneToOne(fetch=FetchType.LAZY)
+
 	Asiento asiento
 
 	new(Vuelo vuelo_, Asiento asiento_) {

@@ -21,20 +21,20 @@ import org.uqbar.xtrest.api.annotation.Delete
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
+import Repositorio.RepositorioAsiento
 
 @Controller
 class AterrizarRestAPI {
 	extension JSONUtils = new JSONUtils
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
-	//RepositorioAsiento repoAsiento
+	RepositorioAsiento repoAsiento
 	RepositorioTicket repoTicket
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
-	new(RepositorioUsuario repoU, RepositorioVuelo repoV, /*RepositorioAsiento repoA,*/ RepositorioTicket repoT) {
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV, RepositorioTicket repoT) {
 		repoUsuario = repoU
 		repoVuelo = repoV
-		//repoAsiento = repoA
 		repoTicket = repoT
 	}
 
@@ -138,13 +138,15 @@ class AterrizarRestAPI {
 			return badRequest()
 		}
 	}
-
+	
+	
+	/*
 	// reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
 	@Get("/usuario/reservarVuelo/:id1/:id2/:id3")
 	def reservarVuelo() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
-			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
+			val vuelo = repoVuelo.searchByExample((id2))
 
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 			repoUsuario.update(usuario)
@@ -173,7 +175,7 @@ class AterrizarRestAPI {
 		} catch (UserException exception) {
 			return badRequest()
 		}
-	}
+	}*/
 
 	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras() {

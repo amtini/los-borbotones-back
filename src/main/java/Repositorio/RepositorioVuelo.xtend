@@ -8,7 +8,7 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 		val vuelo = searchByID(id)
 		vuelo.avion.asientosFiltrados(filtros)
 	}*/
-
+	
 	override getEntityType() {
 		Vuelo
 	}
@@ -19,11 +19,11 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 		}
 	}
 	
-	override searchByExample(Vuelo vuelo) {
+	override searchByExample(Vuelo vueloId) {
 		val query = ds.createQuery(entityType)
-		if (vuelo !== null) {
+		if (vueloId !== null) {
 			query.field("ID")
-				.equal(vuelo.ID)
+				.equal(vueloId)
 		}
 		
 		query.asList
@@ -41,7 +41,7 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 			operations.set("avion", vuelo.avion)
 		}
 	}
-
+	
 	
 	/*def searchByFilter(Vuelo vuelo) {
 		val query = ds.createQuery(entityType)
@@ -52,7 +52,7 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 		
 		query.asList
 	}*/
-	
+
 
 
 	/*override generateWhereId(CriteriaBuilder criteria, CriteriaQuery<Vuelo> query, Root<Vuelo> camposUsuario, Long id) {

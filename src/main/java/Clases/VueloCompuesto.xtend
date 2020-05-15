@@ -2,14 +2,14 @@ package Clases
 
 import java.util.ArrayList
 import java.util.List
-import javax.persistence.Entity
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
 import org.mongodb.morphia.annotations.Embedded
+import org.mongodb.morphia.annotations.Entity
 
-@Entity
 @Observable
 @Accessors
+@Entity(value="Vuelos")
 class VueloCompuesto extends Vuelo {
 	
 	@Embedded

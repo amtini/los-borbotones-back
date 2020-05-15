@@ -25,7 +25,7 @@ class AmigoSerializer extends StdSerializer<Usuario>{
 		gen.writeStringField("id", parserStringToLong.parsearDeLongAString(value.ID));
 		gen.writeStringField("nombre", value.nombre);
 		gen.writeStringField("apellido", value.apellido);
-		gen.writeNumberField("edad", value.edad);	
+		gen.writeNumberField("edad", value.edad);
 
 		gen.writeEndObject();
 	}
