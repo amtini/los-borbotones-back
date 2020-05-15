@@ -1,11 +1,12 @@
-package Repositorio
+package RepositorioHibernate
 
 import Clases.Usuario
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
 import javax.persistence.criteria.Root
+import RepositorioHibernate.RepositorioHibernate
 
-class RepositorioUsuario extends Repositorio<Usuario> {
+class RepositorioUsuario extends RepositorioHibernate<Usuario> {
 
 	def verificarLogin(String usuarioLogin, String passwordLogin) {
 		allInstances.findFirst(usuario|usuario.verificarUsuario(usuarioLogin, passwordLogin))

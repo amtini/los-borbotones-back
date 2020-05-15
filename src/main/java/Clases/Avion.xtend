@@ -1,6 +1,5 @@
 package Clases
 
-import App.FiltrosAsiento
 import java.util.HashSet
 import java.util.Set
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -8,6 +7,7 @@ import org.uqbar.commons.model.annotations.Observable
 import org.mongodb.morphia.annotations.Embedded
 import org.bson.types.ObjectId
 import org.mongodb.morphia.annotations.Id
+import Filtros.FiltrosAsiento
 
 @Observable
 @Accessors

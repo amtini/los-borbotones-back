@@ -1,10 +1,6 @@
 package App
 
-import Parsers.ParserDate
 import Parsers.ParserStringToLong
-import Repositorio.RepositorioTicket
-import Repositorio.RepositorioUsuario
-import Repositorio.RepositorioVuelo
 import Serializer.AmigoSerializer
 import Serializer.AsientoSerializer
 import Serializer.PasajeSerializer
@@ -12,7 +8,6 @@ import Serializer.TicketSerializer
 import Serializer.UsuarioSerializer
 import Serializer.VueloSerializer
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-import java.time.LocalDate
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.exceptions.UserException
 import org.uqbar.xtrest.api.annotation.Body
@@ -21,7 +16,11 @@ import org.uqbar.xtrest.api.annotation.Delete
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
-import Repositorio.RepositorioAsiento
+import RepositorioHibernate.RepositorioUsuario
+import RepositorioMongo.RepositorioVuelo
+import RepositorioMongo.RepositorioAsiento
+import Filtros.FiltrosVuelo
+import Filtros.FiltrosAsiento
 
 @Controller
 class AterrizarRestAPI {
@@ -29,13 +28,13 @@ class AterrizarRestAPI {
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
 	RepositorioAsiento repoAsiento
-	RepositorioTicket repoTicket
+	//RepositorioTicket repoTicket
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
-	new(RepositorioUsuario repoU, RepositorioVuelo repoV, RepositorioTicket repoT) {
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV/* , RepositorioTicket repoT*/) {
 		repoUsuario = repoU
 		repoVuelo = repoV
-		repoTicket = repoT
+		//repoTicket = repoT
 	}
 
 	@Post("/login")
@@ -181,13 +180,13 @@ class AterrizarRestAPI {
 	def limpiarCarritoDeCompras() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-			val tickets = usuario.carritoDeCompras.tickets.clone
+			//val tickets = usuario.carritoDeCompras.tickets.clone
 
 			usuario.carritoDeCompras.cancelarReservaDeTodosLosAsientos
 			//repoAsiento.actualizarAsientos(tickets)
 			usuario.carritoDeCompras.limpiarCarritoDeCompras
 			repoUsuario.update(usuario)
-			repoTicket.eliminarTickets(tickets)
+			//repoTicket.eliminarTickets(tickets)
 
 			return ok()
 		} catch (UserException exception) {
@@ -212,11 +211,11 @@ class AterrizarRestAPI {
 	def finalizarCompra() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-			val tickets = usuario.carritoDeCompras.tickets.clone
+			//val tickets = usuario.carritoDeCompras.tickets.clone
 			usuario.comprarPasajes
 			
 			repoUsuario.update(usuario)
-			repoTicket.eliminarTickets(tickets)
+			//repoTicket.eliminarTickets(tickets)
 			
 			return ok()
 		} catch (UserException exception) {
@@ -284,32 +283,6 @@ class AterrizarRestAPI {
 			return badRequest()
 		}
 	}
-}
-
-@Accessors
-class FiltrosVuelo {
-	String origen
-	String destino
-	LocalDate desde
-	LocalDate hasta
-	boolean ventanilla
-	String claseAsiento
-	Boolean disponible = true
-
-	new(String _origen, String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento) {
-		origen = _origen
-		destino = _destino
-		desde = ParserDate.ParseStringToDate(_desde)
-		hasta = ParserDate.ParseStringToDate(_hasta)
-		ventanilla = Boolean.parseBoolean(_ventanilla)
-		claseAsiento = _claseAsiento
-	}
-}
-
-@Accessors
-class FiltrosAsiento {
-	boolean ventanilla
-	String claseAsiento
 }
 
 @Accessors

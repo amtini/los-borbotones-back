@@ -1,4 +1,4 @@
-package Repositorio
+package RepositorioMongo
 
 import Clases.Asiento
 

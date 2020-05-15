@@ -8,11 +8,10 @@ import Clases.Vuelo
 import java.time.LocalDate
 import Clases.VueloCompuesto
 import Clases.Usuario
-import Repositorio.RepositorioUsuario
-import Repositorio.RepositorioVuelo
-import Repositorio.RepositorioTicket
-import Repositorio.RepositorioAsiento
 import Clases.Pasaje
+import RepositorioHibernate.RepositorioUsuario
+import RepositorioMongo.RepositorioVuelo
+import RepositorioMongo.RepositorioAsiento
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -23,7 +22,7 @@ class AterrizarBootstrap {
 		
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
-		val repoTicket = new RepositorioTicket
+		//val repoTicket = new RepositorioTicket
 		val repoAsiento = new RepositorioAsiento
 		
 		//Aviones
@@ -717,6 +716,6 @@ class AterrizarBootstrap {
         
  		
 		
-		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoTicket))
+		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo/*, repoTicket*/))
 	}
 }

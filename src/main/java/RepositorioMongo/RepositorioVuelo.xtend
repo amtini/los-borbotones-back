@@ -1,7 +1,7 @@
-package Repositorio
+package RepositorioMongo
 
 import Clases.Vuelo
-import App.FiltrosVuelo
+import Filtros.FiltrosVuelo
 
 class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 	

@@ -1,4 +1,4 @@
-package Repositorio
+package RepositorioMongo
 
 import org.mongodb.morphia.Datastore
 import com.mongodb.MongoClient

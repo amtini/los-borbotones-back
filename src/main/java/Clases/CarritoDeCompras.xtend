@@ -4,12 +4,21 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
 import java.util.List
 import org.uqbar.commons.model.annotations.Observable
+import Repositorio.Entidad
 
 @Observable
 @Accessors
-class CarritoDeCompras {
+class CarritoDeCompras implements Entidad {
 	
 	String ID
+	
+	override getID() {
+		return ID
+	}
+	
+	override setID(String id) {
+		ID = id
+	}
 	
 	List<Ticket> tickets = new ArrayList<Ticket>
 	
@@ -43,5 +52,5 @@ class CarritoDeCompras {
 	
 	def double costoTotalDelCarrito(){
 		tickets.fold(0.0, [acum, ticket | acum + ticket.costo])
-	}
+	}	
 }
