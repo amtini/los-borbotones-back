@@ -242,7 +242,7 @@ class AterrizarRestAPI {
 			
 			
 			
-			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtros.origen, filtros.destino, filtros.ventanilla, filtros.claseAsiento, filtros.disponible, filtros.desde, filtros.hasta).toSet))
+			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtros).toSet))
 		} catch (UserException exception) {
 			return badRequest()
 		}

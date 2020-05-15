@@ -1,13 +1,9 @@
 package Repositorio
 
 import Clases.Vuelo
+import App.FiltrosVuelo
 
 class RepositorioVuelo extends RepoPersistencia<Vuelo> {
-
-	/*def asientosDeMiVuelo(Long id, FiltrosAsiento filtros) {
-		val vuelo = searchByID(id)
-		vuelo.avion.asientosFiltrados(filtros)
-	}*/
 	
 	override getEntityType() {
 		Vuelo
@@ -19,14 +15,76 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 		}
 	}
 	
-	override searchByExample(Vuelo vueloId) {
+	override searchByExample(Vuelo vuelo) {
 		val query = ds.createQuery(entityType)
-		if (vueloId !== null) {
-			query.field("ID")
-				.equal(vueloId)
+		if (vuelo !== null) {
+			query.field("asereje a deje")
+				.equal(vuelo)
 		}
 		
 		query.asList
+	}
+	
+	def searchByID(String vueloID){
+		val query = ds.createQuery(entityType)
+		if (vueloID !== null) {
+			query.field("ID")
+				.equal(vueloID)
+		}
+		
+		query.asList
+	}
+	
+	def searchFiltros(FiltrosVuelo filtroVuelo){
+		val query = ds.createQuery(entityType)
+		if (filtroVuelo !== null) {
+			
+			if (!filtroVuelo.origen.isNullOrEmpty) {
+			query.field("ciudadDeOrigen")
+				.equal(filtroVuelo.origen)
+			}
+			
+			if (!filtroVuelo.destino.isNullOrEmpty) {
+			query.field("ciudadDeDestino")
+				.equal(filtroVuelo.destino)
+			}
+			
+			if (filtroVuelo.desde !== null) {
+			query.field("horarioDePartida")
+				.greaterThan(filtroVuelo.desde)
+			}
+			
+			if (filtroVuelo.hasta !== null) {
+			query.field("horarioDePartida")
+				.lessThan(filtroVuelo.hasta)
+			}
+			
+			//chequear comportamiento de mongo al utilizar query con listas
+			/*
+			query.field("avion.asientos.ventana")
+				.equal(filtroVuelo.ventanilla)
+			
+			
+			if (filtroVuelo.claseAsiento !== null) {
+			query.field("avion.asientos.claseAsiento")
+				.equal(filtroVuelo.claseAsiento)
+			}
+			
+			
+			query.field("habilitado")
+				.equal(filtroVuelo.disponible)*/
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+		
+		query.asList.toSet
 	}
 	
 	override defineUpdateOperations(Vuelo vuelo) {
