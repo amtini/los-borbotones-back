@@ -7,9 +7,6 @@ import org.mongodb.morphia.annotations.Entity
 import org.bson.types.ObjectId
 import org.mongodb.morphia.annotations.Id
 import org.mongodb.morphia.annotations.Embedded
-import javax.persistence.OneToOne
-import javax.persistence.FetchType
-import javax.persistence.CascadeType
 
 @Observable
 @Accessors

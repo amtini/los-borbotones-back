@@ -12,6 +12,8 @@ import Clases.Pasaje
 import RepositorioHibernate.RepositorioUsuario
 import RepositorioMongo.RepositorioVuelo
 import RepositorioMongo.RepositorioAsiento
+import Filtros.FiltrosVuelo
+import RepositorioMongo.RepositorioBusquedaVuelos
 
 class AterrizarBootstrap {
 	def static void main(String[] args) {
@@ -22,7 +24,6 @@ class AterrizarBootstrap {
 		
 		val repoUsuario = new RepositorioUsuario
 		val repoVuelo = new RepositorioVuelo
-		//val repoTicket = new RepositorioTicket
 		val repoAsiento = new RepositorioAsiento
 		
 		//Aviones
@@ -609,9 +610,6 @@ class AterrizarBootstrap {
 		
 		//creaciones
 		
-		
-		
-		
 		repoAsiento.create(asiento1)
 		repoAsiento.create(asiento2)
 		repoAsiento.create(asiento3)
@@ -716,6 +714,6 @@ class AterrizarBootstrap {
         
  		
 		
-		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo/*, repoTicket*/))
+		XTRest.startInstance(16000, new AterrizarRestAPI(repoUsuario, repoVuelo, repoAsiento))
 	}
 }

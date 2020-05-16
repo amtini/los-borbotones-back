@@ -29,14 +29,14 @@ class AterrizarRestAPI {
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
 	RepositorioAsiento repoAsiento
-	RepositorioBusquedaVuelos repoBusquedaVuelos
-	//RepositorioTicket repoTicket
+	val repoFiltro =  new RepositorioBusquedaVuelos
+	
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
-	new(RepositorioUsuario repoU, RepositorioVuelo repoV/* , RepositorioTicket repoT*/) {
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV , RepositorioAsiento repoA) {
 		repoUsuario = repoU
 		repoVuelo = repoV
-		//repoTicket = repoT
+		repoAsiento = repoA
 	}
 
 	@Post("/login")
@@ -239,19 +239,13 @@ class AterrizarRestAPI {
 	@Get("/vuelos")
 	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
 		try {
-			var filtros = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
+			val filtro3 = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
 			
-			println("estoy afuera del create " + filtros.origen)
-			println("estoy afuera del create " + filtros.destino)
-			println("estoy afuera del create " + filtros.desde)
-			println("estoy afuera del create " + filtros.hasta)
-			println("estoy afuera del create " + filtros.ventanilla)
-			println("estoy afuera del create " + filtros.claseAsiento)
-			
-			repoBusquedaVuelos.create(filtros)
+			println(filtro3.toJson)
+			repoFiltro.create(filtro3)
 			
 			
-			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtros).toSet))
+			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtro3).toSet))
 		} catch (UserException exception) {
 			return badRequest()
 		}

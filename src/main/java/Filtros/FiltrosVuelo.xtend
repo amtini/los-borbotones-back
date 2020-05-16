@@ -6,13 +6,16 @@ import Parsers.ParserDate
 import org.mongodb.morphia.annotations.Entity
 import org.mongodb.morphia.annotations.Id
 import org.bson.types.ObjectId
-import org.mongodb.morphia.annotations.Transient
 import org.uqbar.commons.model.annotations.Observable
 
-@Entity(value="BusquedaVuelo")
-@Accessors
 @Observable
+@Accessors
+@Entity(value="FiltrosVuelo")
 class FiltrosVuelo {
+	
+	new(){
+		
+	}
 	
 	@Id ObjectId ID
 	
@@ -32,4 +35,9 @@ class FiltrosVuelo {
 		ventanilla = Boolean.parseBoolean(_ventanilla)
 		claseAsiento = _claseAsiento
 	}
+	
+	
+	
+	
+	
 }

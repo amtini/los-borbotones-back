@@ -9,11 +9,8 @@ class RepositorioBusquedaVuelos extends RepoPersistencia<FiltrosVuelo> {
 	}
 
 	override searchByExample(FiltrosVuelo t) {
-		throw new UnsupportedOperationException("TODO: Operacion no soportada")
 	}
 
 	override defineUpdateOperations(FiltrosVuelo t) {
-		throw new UnsupportedOperationException("TODO: Operacion no soportada")
 	}
-
 }
