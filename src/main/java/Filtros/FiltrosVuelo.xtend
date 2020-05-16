@@ -28,9 +28,6 @@ class FiltrosVuelo {
 	LocalDate hasta
 	boolean ventanilla
 	String claseAsiento
-	
-	@Transient
-	Boolean disponible = true
 
 	new(String _origen, String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento, String _idUsuario) {
 		origen = _origen
