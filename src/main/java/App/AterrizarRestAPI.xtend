@@ -153,9 +153,10 @@ class AterrizarRestAPI {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID((id2))
-			val carrito = repoCarritoDeCompras.searchByID(id1)
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
+			
 
-			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
+			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(id3))
 			repoUsuario.update(usuario)
 			repoVuelo.update(vuelo)
 
@@ -207,7 +208,8 @@ class AterrizarRestAPI {
 	def dameCarritoDeCompras() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
+			
 			return ok(TicketSerializer.toJson(usuario.carritoDeCompras.tickets))
 		} catch (UserException exception) {
 			return badRequest()
@@ -235,6 +237,8 @@ class AterrizarRestAPI {
 	def costoTotalCarrito() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
+			
 			return ok(usuario.carritoDeCompras.costoTotalDelCarrito.toJson)
 		} catch (UserException exception) {
 			return badRequest()

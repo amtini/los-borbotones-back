@@ -49,7 +49,7 @@ class Usuario {
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 
 	@Transient
-	CarritoDeCompras carritoDeCompras//TODO:PASAR EL COMPORTAMIENTO AL CARRITO
+	CarritoDeCompras carritoDeCompras
 
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {
 		return (usuario == usuarioLogin && password == passwordLogin)

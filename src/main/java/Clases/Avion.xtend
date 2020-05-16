@@ -20,8 +20,8 @@ class Avion {
 	@Embedded
 	Set<Asiento> asientos = new HashSet<Asiento>
 	
-	def seleccionarAsiento(Long id){
-		asientos.findFirst(it|it.ID == id)
+	def seleccionarAsiento(String id){
+		asientos.findFirst(it|it.ID == new ObjectId(id))
 	}
 	
 	def recargoUltimosPasajes(){

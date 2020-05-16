@@ -31,13 +31,13 @@ class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 		elementos.add(unCarrito)
 	}
 	
-	override searchByID(String id) {
-		if(super.searchByID(id)===null){
+	def searchCarritoDelUsuario(String id) {
+		if(searchByID(id)===null){
 			val carritoNuevo = new CarritoDeCompras(id)
 			create(carritoNuevo)
 			return carritoNuevo
 		}else{
-			super.searchByID(id)
+			searchByID(id)
 		}
 	}
 
