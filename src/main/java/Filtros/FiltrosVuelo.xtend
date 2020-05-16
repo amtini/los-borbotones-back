@@ -7,6 +7,7 @@ import org.mongodb.morphia.annotations.Entity
 import org.mongodb.morphia.annotations.Id
 import org.bson.types.ObjectId
 import org.uqbar.commons.model.annotations.Observable
+import org.mongodb.morphia.annotations.Transient
 
 @Observable
 @Accessors
@@ -25,6 +26,8 @@ class FiltrosVuelo {
 	LocalDate hasta
 	boolean ventanilla
 	String claseAsiento
+	
+	@Transient
 	Boolean disponible = true
 
 	new(String _origen, String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento) {

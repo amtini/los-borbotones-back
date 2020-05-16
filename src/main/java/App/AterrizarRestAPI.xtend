@@ -22,6 +22,7 @@ import RepositorioMongo.RepositorioAsiento
 import Filtros.FiltrosVuelo
 import Filtros.FiltrosAsiento
 import RepositorioMongo.RepositorioBusquedaVuelos
+import org.bson.types.ObjectId
 
 @Controller
 class AterrizarRestAPI {
@@ -255,7 +256,7 @@ class AterrizarRestAPI {
 	def dameAsientos(@Body String body) {
 		try {
 			val filtros = body.fromJson(FiltrosAsiento)
-			val asientos = repoVuelo.asientosDeMiVuelo(parserStringToLong.parsearDeStringALong(id), filtros)
+			val asientos = repoVuelo.asientosDeMiVuelo(id , filtros)
 
 			return ok(AsientoSerializer.toJson(asientos))
 		} catch (UserException exception) {

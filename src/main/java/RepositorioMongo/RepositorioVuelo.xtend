@@ -2,6 +2,8 @@ package RepositorioMongo
 
 import Clases.Vuelo
 import Filtros.FiltrosVuelo
+import Filtros.FiltrosAsiento
+import org.bson.types.ObjectId
 
 class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 	
@@ -27,12 +29,14 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 	
 	def searchByID(String vueloID){
 		val query = ds.createQuery(entityType)
+		println("lo que me llega del front " + vueloID)
+		println("lo que le mando a mongo " + new ObjectId(vueloID))
 		if (vueloID !== null) {
 			query.field("ID")
-				.equal(vueloID)
+				.equal(new ObjectId(vueloID))
 		}
 		
-		query.asList
+		query.get
 	}
 	
 	def searchFiltros(FiltrosVuelo filtroVuelo){
@@ -98,6 +102,13 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 			// solo la fecha de devolucion cuando lo devuelve
 			operations.set("avion", vuelo.avion)
 		}
+	}
+	
+	def asientosDeMiVuelo(String id, FiltrosAsiento filtros) {
+		val vuelo = searchByID(id)
+		println(vuelo.ciudadDeDestino)
+		println("asientos " + vuelo.avion.asientosFiltrados(filtros))
+		vuelo.avion.asientosFiltrados(filtros)
 	}
 	
 	
