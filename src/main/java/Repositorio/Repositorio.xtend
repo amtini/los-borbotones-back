@@ -28,6 +28,12 @@ abstract class Repositorio<T extends Entidad> {
 			elementos.add(element)
 		}
 	}
+	
+	def createIfNotExists(T element) {
+		if (searchByID(element.ID) === null){
+			create(element)
+		}
+	}
 
 	def String newID() {
 		getTipo + id.toString()

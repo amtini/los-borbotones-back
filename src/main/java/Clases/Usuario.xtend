@@ -49,13 +49,13 @@ class Usuario {
 	Set<Pasaje> pasajesComprados = new HashSet<Pasaje>
 
 	@Transient
-	CarritoDeCompras carritoDeCompras = new CarritoDeCompras
+	CarritoDeCompras carritoDeCompras//TODO:PASAR EL COMPORTAMIENTO AL CARRITO
 
 	def verificarUsuario(String usuarioLogin, String passwordLogin) {
 		return (usuario == usuarioLogin && password == passwordLogin)
 	}
 
-	def comprarPasajes() {
+	def comprarPasajes() {//TODO:PASAR LISTA DE TICKETS Y COSTO DEL CARRITO
 		if (carritoDeCompras.costoTotalDelCarrito() < dinero) {
 			dinero -= carritoDeCompras.costoTotalDelCarrito
 			carritoDeCompras.tickets.forEach [ ticket |
