@@ -29,8 +29,6 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 
 	def searchByID(String vueloID) {
 		val query = ds.createQuery(entityType)
-		println("lo que me llega del front " + vueloID)
-		println("lo que le mando a mongo " + new ObjectId(vueloID))
 		if (vueloID !== null) {
 			query.field("ID").equal(new ObjectId(vueloID))
 		}
@@ -59,24 +57,24 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 			}
 
 		// chequear comportamiento de mongo al utilizar query con listas
-		/*
-		 * query.field("avion.asientos.ventana")
-		 * 	.equal(filtroVuelo.ventanilla)
-		 * 
-		 * 
-		 * if (filtroVuelo.claseAsiento !== null) {
-		 * query.field("avion.asientos.claseAsiento")
-		 * 	.equal(filtroVuelo.claseAsiento)
-		 * }
-		 * 
-		 * 
-		 * query.field("habilitado")
-		 .equal(filtroVuelo.disponible)*/
+		
+			query.field("avion.asientos.habilitado")
+		 		.equal(true)
+			
+		  	query.field("avion.asientos.ventana")
+		  		.equal(filtroVuelo.ventanilla)
+		  
+		  
+		  	if (!filtroVuelo.claseAsiento.isNullOrEmpty) {
+		  		query.field("avion.asientos.claseDeAsiento")
+		  			.equal(filtroVuelo.claseAsiento)
+		  	}
+		  
+		  
+		  	
 		}
-
-		val result = query.asList.toSet //TODO: fijarse de filtrarlo en la query
-
-		return filtroFechas(result, filtroVuelo.claseAsiento, filtroVuelo.ventanilla)
+		return query.asList.toSet 
+		
 	}
 
 	override defineUpdateOperations(Vuelo vuelo) {
@@ -94,14 +92,6 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 
 	def asientosDeMiVuelo(String id, FiltrosAsiento filtros) {
 		val vuelo = searchByID(id)
-		println(vuelo.ciudadDeDestino)
-		println("asientos " + vuelo.avion.asientosFiltrados(filtros))
 		vuelo.avion.asientosFiltrados(filtros)
-	}
-
-	def filtroFechas(Set<Vuelo> vuelos, String claseAsiento, Boolean ventanilla) {
-
-		vuelos.filter[it|it.avion.filtroAsientosVuelo(claseAsiento, ventanilla)]
-
 	}
 }

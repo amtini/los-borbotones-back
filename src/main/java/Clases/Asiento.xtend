@@ -15,7 +15,7 @@ class Asiento {
 	
 	String nombre
 	
-	public boolean ventana
+	boolean ventana
 	
 	boolean habilitado
 	
