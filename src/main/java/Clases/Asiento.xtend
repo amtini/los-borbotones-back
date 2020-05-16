@@ -13,6 +13,8 @@ class Asiento {
 	
 	@Id ObjectId ID
 	
+	String nombre
+	
 	public boolean ventana
 	
 	boolean habilitado
