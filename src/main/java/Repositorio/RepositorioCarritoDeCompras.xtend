@@ -26,5 +26,19 @@ class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 	override condicionDeBusqueda(CarritoDeCompras cc, String value) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
+	
+	override create(CarritoDeCompras unCarrito){
+		elementos.add(unCarrito)
+	}
+	
+	override searchByID(String id) {
+		if(super.searchByID(id)===null){
+			val carritoNuevo = new CarritoDeCompras(id)
+			create(carritoNuevo)
+			return carritoNuevo
+		}else{
+			super.searchByID(id)
+		}
+	}
 
 }

@@ -24,6 +24,8 @@ import Filtros.FiltrosAsiento
 import RepositorioMongo.RepositorioBusquedaVuelos
 import org.bson.types.ObjectId
 import Serializer.FiltrosSerializer
+import Clases.CarritoDeCompras
+import Repositorio.RepositorioCarritoDeCompras
 
 @Controller
 class AterrizarRestAPI {
@@ -32,6 +34,7 @@ class AterrizarRestAPI {
 	RepositorioVuelo repoVuelo
 	RepositorioAsiento repoAsiento
 	val repoFiltro =  new RepositorioBusquedaVuelos
+	RepositorioCarritoDeCompras repoCarritoDeCompras = RepositorioCarritoDeCompras.instance
 	
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
@@ -143,13 +146,14 @@ class AterrizarRestAPI {
 	}
 	
 	
-	/*
+	
 	// reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
 	@Get("/usuario/reservarVuelo/:id1/:id2/:id3")
 	def reservarVuelo() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
-			val vuelo = repoVuelo.searchByExample((id2))
+			val vuelo = repoVuelo.searchByID((id2))
+			val carrito = repoCarritoDeCompras.searchByID(id1)
 
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 			repoUsuario.update(usuario)
@@ -165,7 +169,7 @@ class AterrizarRestAPI {
 	def cancelarReserva() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
-			val vuelo = repoVuelo.searchByID(parserStringToLong.parsearDeStringALong(id2))
+			val vuelo = repoVuelo.searchByID(id2)
 			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
 
 			ticket.cancelarReserva()
@@ -178,7 +182,7 @@ class AterrizarRestAPI {
 		} catch (UserException exception) {
 			return badRequest()
 		}
-	}*/
+	}
 
 	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras() {
