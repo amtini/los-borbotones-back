@@ -20,6 +20,8 @@ class FiltrosVuelo {
 	
 	@Id ObjectId ID
 	
+	String idUsuario
+	
 	String origen
 	String destino
 	LocalDate desde
@@ -30,13 +32,14 @@ class FiltrosVuelo {
 	@Transient
 	Boolean disponible = true
 
-	new(String _origen, String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento) {
+	new(String _origen, String _destino, String _desde, String _hasta, String _ventanilla, String _claseAsiento, String _idUsuario) {
 		origen = _origen
 		destino = _destino
 		desde = ParserDate.ParseStringToDate(_desde)
 		hasta = ParserDate.ParseStringToDate(_hasta)
 		ventanilla = Boolean.parseBoolean(_ventanilla)
 		claseAsiento = _claseAsiento
+		idUsuario = _idUsuario
 	}
 	
 	

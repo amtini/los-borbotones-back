@@ -8,9 +8,20 @@ class RepositorioBusquedaVuelos extends RepoPersistencia<FiltrosVuelo> {
 		FiltrosVuelo
 	}
 
-	override searchByExample(FiltrosVuelo t) {
+	def searchByExample(String idUsuario) {
+		val query = ds.createQuery(entityType)
+		if (idUsuario.isNullOrEmpty) {
+			query.field("idUsuario").equal(idUsuario)
+		}
+
+		query.asList.toSet
 	}
 
 	override defineUpdateOperations(FiltrosVuelo t) {
 	}
+	
+	override searchByExample(FiltrosVuelo t) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }

@@ -23,6 +23,7 @@ import Filtros.FiltrosVuelo
 import Filtros.FiltrosAsiento
 import RepositorioMongo.RepositorioBusquedaVuelos
 import org.bson.types.ObjectId
+import Serializer.FiltrosSerializer
 
 @Controller
 class AterrizarRestAPI {
@@ -238,15 +239,13 @@ class AterrizarRestAPI {
 
 	// dame vuelos y dame asientos
 	@Get("/vuelos")
-	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento) {
+	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento, String idUsuario) {
 		try {
-			val filtro3 = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento)
+			val filtro = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento, idUsuario)
 			
-			println(filtro3.toJson)
-			repoFiltro.create(filtro3)
+			repoFiltro.create(filtro)
 			
-			
-			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtro3).toSet))
+			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtro).toSet))
 		} catch (UserException exception) {
 			return badRequest()
 		}
@@ -284,6 +283,17 @@ class AterrizarRestAPI {
 
 			return ok(PasajeSerializer.toJson(pasajes))
 		// usuario.toJson
+		} catch (UserException exception) {
+			return badRequest()
+		}
+	}
+	
+	@Get("/usuario/historialDeBusqueda/:id")
+	def historialDeBusqueda(){
+		try {
+			
+			return ok(FiltrosSerializer.toJson(repoFiltro.searchByExample(id)))
+		
 		} catch (UserException exception) {
 			return badRequest()
 		}
