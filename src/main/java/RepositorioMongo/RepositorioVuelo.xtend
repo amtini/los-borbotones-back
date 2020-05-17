@@ -1,10 +1,9 @@
 package RepositorioMongo
 
 import Clases.Vuelo
-import Filtros.FiltrosVuelo
 import Filtros.FiltrosAsiento
+import Filtros.FiltrosVuelo
 import org.bson.types.ObjectId
-import java.util.Set
 
 class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 
@@ -92,6 +91,8 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 
 	def asientosDeMiVuelo(String id, FiltrosAsiento filtros) {
 		val vuelo = searchByID(id)
+		println("el vuelo es " + vuelo)
+		println("los asientos son " + vuelo.avion.asientosFiltrados(filtros))
 		vuelo.avion.asientosFiltrados(filtros)
 	}
 }

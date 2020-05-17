@@ -11,9 +11,7 @@ import org.bson.types.ObjectId
 @Accessors
 class Asiento {
 	
-	@Id ObjectId ID
-	
-	String nombre
+	@Id String ID
 	
 	boolean ventana
 	

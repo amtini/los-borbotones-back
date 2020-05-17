@@ -1,8 +1,15 @@
 package App
 
+import Filtros.FiltrosAsiento
+import Filtros.FiltrosVuelo
 import Parsers.ParserStringToLong
+import Repositorio.RepositorioCarritoDeCompras
+import RepositorioHibernate.RepositorioUsuario
+import RepositorioMongo.RepositorioBusquedaVuelos
+import RepositorioMongo.RepositorioVuelo
 import Serializer.AmigoSerializer
 import Serializer.AsientoSerializer
+import Serializer.FiltrosSerializer
 import Serializer.PasajeSerializer
 import Serializer.TicketSerializer
 import Serializer.UsuarioSerializer
@@ -16,32 +23,22 @@ import org.uqbar.xtrest.api.annotation.Delete
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
-import RepositorioHibernate.RepositorioUsuario
-import RepositorioMongo.RepositorioVuelo
-import RepositorioMongo.RepositorioAsiento
-import Filtros.FiltrosVuelo
-import Filtros.FiltrosAsiento
-import RepositorioMongo.RepositorioBusquedaVuelos
-import org.bson.types.ObjectId
-import Serializer.FiltrosSerializer
-import Clases.CarritoDeCompras
-import Repositorio.RepositorioCarritoDeCompras
 
 @Controller
 class AterrizarRestAPI {
 	extension JSONUtils = new JSONUtils
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
-	RepositorioAsiento repoAsiento
+	//RepositorioAsiento repoAsiento
 	val repoFiltro =  new RepositorioBusquedaVuelos
 	RepositorioCarritoDeCompras repoCarritoDeCompras = RepositorioCarritoDeCompras.instance
 	
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
-	new(RepositorioUsuario repoU, RepositorioVuelo repoV , RepositorioAsiento repoA) {
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV/*, RepositorioAsiento repoA*/) {
 		repoUsuario = repoU
 		repoVuelo = repoV
-		repoAsiento = repoA
+//		repoAsiento = repoA
 	}
 
 	@Post("/login")
@@ -169,12 +166,11 @@ class AterrizarRestAPI {
 	@Delete("/usuario/cancelarReserva/:id1/:id2/:id3")
 	def cancelarReserva() {
 		try {
-			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID(id2)
-			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
-			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
+			val carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
+			val ticket = carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
 
-			usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
+			carritoDeCompras.removerTicketDelCarrito(ticket)
 			repoVuelo.update(vuelo)
 
 			return ok()
@@ -263,7 +259,6 @@ class AterrizarRestAPI {
 		try {
 			val filtros = body.fromJson(FiltrosAsiento)
 			val asientos = repoVuelo.asientosDeMiVuelo(id , filtros)
-
 			return ok(AsientoSerializer.toJson(asientos))
 		} catch (UserException exception) {
 			return badRequest()

@@ -21,7 +21,7 @@ class Avion {
 	Set<Asiento> asientos = new HashSet<Asiento>
 	
 	def seleccionarAsiento(String id){
-		asientos.findFirst(it|it.ID == new ObjectId(id))
+		asientos.findFirst(it|it.ID == id)
 	}
 	
 	def recargoUltimosPasajes(){
