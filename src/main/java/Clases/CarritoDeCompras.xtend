@@ -37,7 +37,6 @@ class CarritoDeCompras implements Entidad {
 	def removerTicketDelCarrito(Ticket ticket) {
 		tickets.remove(ticket)
 		ticket.cancelarReserva()
-		println(ticket.asiento.habilitado)
 	}
 
 	def buscarTicket(Vuelo vuelo, Asiento asiento) {

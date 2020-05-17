@@ -174,7 +174,6 @@ class AterrizarRestAPI {
 			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
 			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
 
-			ticket.cancelarReserva()
 			usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
 			repoVuelo.update(vuelo)
 
