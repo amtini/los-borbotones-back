@@ -171,13 +171,12 @@ class AterrizarRestAPI {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID(id2)
-			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(parserStringToLong.parsearDeStringALong(id3)))
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
+			val ticket = usuario.carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
 
 			ticket.cancelarReserva()
-			repoVuelo.update(vuelo)
 			usuario.carritoDeCompras.removerTicketDelCarrito(ticket)
-			repoUsuario.update(usuario)
-			repoTicket.delete(ticket)
+			repoVuelo.update(vuelo)
 
 			return ok()
 		} catch (UserException exception) {
