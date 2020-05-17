@@ -26,7 +26,9 @@ class Ticket {
 	}
 
 	def cancelarReserva() {
+		println("El asiento que voy a cambiar es " + asiento.ID + asiento.habilitado)
 		asiento.habilitado = true
+		println("Lo cambie " + asiento.ID + asiento.habilitado)
 	}
 
 	def costo() {

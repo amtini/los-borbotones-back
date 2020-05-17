@@ -171,7 +171,8 @@ class AterrizarRestAPI {
 			val ticket = carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
 
 			carritoDeCompras.removerTicketDelCarrito(ticket)
-			repoVuelo.update(vuelo)
+			
+			repoVuelo.update(ticket.vuelo)
 
 			return ok()
 		} catch (UserException exception) {
@@ -182,14 +183,11 @@ class AterrizarRestAPI {
 	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras() {
 		try {
-			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-			//val tickets = usuario.carritoDeCompras.tickets.clone
-
-			usuario.carritoDeCompras.cancelarReservaDeTodosLosAsientos
-			//repoAsiento.actualizarAsientos(tickets)
-			usuario.carritoDeCompras.limpiarCarritoDeCompras
-			repoUsuario.update(usuario)
-			//repoTicket.eliminarTickets(tickets)
+			val carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
+			val tickets = carritoDeCompras.tickets
+			carritoDeCompras.cancelarReservaDeTodosLosAsientos
+			tickets.forEach(ticket|repoVuelo.update(ticket.vuelo))
+			carritoDeCompras.limpiarCarritoDeCompras
 
 			return ok()
 		} catch (UserException exception) {
