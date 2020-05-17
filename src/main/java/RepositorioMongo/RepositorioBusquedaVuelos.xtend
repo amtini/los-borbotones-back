@@ -10,7 +10,7 @@ class RepositorioBusquedaVuelos extends RepoPersistencia<FiltrosVuelo> {
 
 	def searchByExample(String idUsuario) {
 		val query = ds.createQuery(entityType)
-		if (idUsuario.isNullOrEmpty) {
+		if (!idUsuario.isNullOrEmpty) {
 			query.field("idUsuario").equal(idUsuario)
 		}
 

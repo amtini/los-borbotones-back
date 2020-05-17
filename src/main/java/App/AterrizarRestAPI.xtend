@@ -222,6 +222,7 @@ class AterrizarRestAPI {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
 			//val tickets = usuario.carritoDeCompras.tickets.clone
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
 			usuario.comprarPasajes
 			
 			repoUsuario.update(usuario)
