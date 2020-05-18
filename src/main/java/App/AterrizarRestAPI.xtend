@@ -29,7 +29,6 @@ class AterrizarRestAPI {
 	extension JSONUtils = new JSONUtils
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
-	//RepositorioAsiento repoAsiento
 	val repoFiltro =  new RepositorioBusquedaVuelos
 	RepositorioCarritoDeCompras repoCarritoDeCompras = RepositorioCarritoDeCompras.instance
 	
@@ -172,7 +171,7 @@ class AterrizarRestAPI {
 
 			carritoDeCompras.removerTicketDelCarrito(ticket)
 			
-			repoVuelo.update(ticket.vuelo)
+			//repoVuelo.update(ticket.vuelo)
 
 			return ok()
 		} catch (UserException exception) {
@@ -183,10 +182,9 @@ class AterrizarRestAPI {
 	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras() {
 		try {
+			
 			val carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
-			val tickets = carritoDeCompras.tickets
-			carritoDeCompras.cancelarReservaDeTodosLosAsientos
-			tickets.forEach(ticket|repoVuelo.update(ticket.vuelo))
+			
 			carritoDeCompras.limpiarCarritoDeCompras
 
 			return ok()

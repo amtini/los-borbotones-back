@@ -2,6 +2,7 @@ package Clases
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.uqbar.commons.model.annotations.Observable
+import RepositorioMongo.RepositorioVuelo
 
 @Observable
 @Accessors
@@ -16,6 +17,8 @@ class Ticket {
 
 	Asiento asiento
 
+	RepositorioVuelo repoVuelo = new RepositorioVuelo
+
 	new(Vuelo vuelo_, Asiento asiento_) {
 		vuelo = vuelo_
 		asiento = asiento_
@@ -26,9 +29,9 @@ class Ticket {
 	}
 
 	def cancelarReserva() {
-		println("El asiento que voy a cambiar es " + asiento.ID + asiento.habilitado)
-		asiento.habilitado = true
-		println("Lo cambie " + asiento.ID + asiento.habilitado)
+		val vueloSeleccionado = repoVuelo.searchByID(vuelo.ID.toString)
+		vueloSeleccionado.avion.seleccionarAsiento(asiento.ID).habilitado = true
+		repoVuelo.update(vueloSeleccionado)
 	}
 
 	def costo() {

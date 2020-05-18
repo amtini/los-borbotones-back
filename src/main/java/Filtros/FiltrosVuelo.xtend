@@ -15,7 +15,6 @@ import org.mongodb.morphia.annotations.Transient
 class FiltrosVuelo {
 	
 	new(){
-		
 	}
 	
 	@Id ObjectId ID

@@ -48,6 +48,7 @@ class CarritoDeCompras implements Entidad {
 	}
 
 	def limpiarCarritoDeCompras() {
+		cancelarReservaDeTodosLosAsientos
 		tickets.clear
 	}
 
