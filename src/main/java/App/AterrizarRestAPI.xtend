@@ -141,8 +141,6 @@ class AterrizarRestAPI {
 		}
 	}
 	
-	
-	
 	// reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
 	@Get("/usuario/reservarVuelo/:id1/:id2/:id3")
 	def reservarVuelo() {
@@ -170,8 +168,6 @@ class AterrizarRestAPI {
 			val ticket = carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
 
 			carritoDeCompras.removerTicketDelCarrito(ticket)
-			
-			//repoVuelo.update(ticket.vuelo)
 
 			return ok()
 		} catch (UserException exception) {
