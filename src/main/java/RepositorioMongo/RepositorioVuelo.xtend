@@ -20,7 +20,9 @@ class RepositorioVuelo extends RepoPersistencia<Vuelo> {
 	override searchByExample(Vuelo vuelo) {
 		val query = ds.createQuery(entityType)
 		if (vuelo !== null) {
-			query.field("asereje a deje").equal(vuelo)
+			query.field("ciudadDeOrigen").equal(vuelo.ciudadDeOrigen)
+			query.field("ciudadDeDestino").equal(vuelo.ciudadDeDestino)
+			query.field("avion").equal(vuelo.avion)
 		}
 
 		query.asList
