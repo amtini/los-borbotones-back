@@ -1,0 +1,108 @@
+GUia para levantar Cluster de Sharding y replicacion
+
+1- Crear los Directorios
+
+ejecutar con git bash en windows los siguientes comandos
+
+cd ~/data/mongodb/sharding
+mkdir cfg1 cfg2 shard1 shard2 repl1 repl2
+chmod 775 shard* cfg* (con sudo si es linux)
+chown -R `id -un` shard* cfg* (con sudo si es linux)
+
+2-Levantar los Config Server
+
+Si estas en git bash sacar el --fork
+
+mongod --replSet rsConf --configsvr --port 26050 --logpath ~/data/mongodb/sharding/log.cfg1 --logappend --dbpath ~/data/mongodb/sharding/cfg1 --fork
+mongod --replSet rsConf --configsvr --port 26051 --logpath ~/data/mongodb/sharding/log.cfg2 --logappend --dbpath ~/data/mongodb/sharding/cfg2 --fork
+
+3-Levantar los Shards
+
+Si estas en git bash sacar el --fork
+
+mongod --shardsvr --replSet shard1 --dbpath ~/data/mongodb/sharding/shard1 --logpath ~/data/mongodb/sharding/log.shard1 --port 27000 --fork --logappend --oplogSize 50
+mongod --shardsvr --replSet shard1 --dbpath ~/data/mongodb/sharding/repl1 --logpath ~/data/mongodb/sharding/log.repl1 --port 27001 --fork --logappend --oplogSize 50
+mongod --shardsvr --replSet shard2 --dbpath ~/data/mongodb/sharding/shard2 --logpath ~/data/mongodb/sharding/log.shard2 --port 27100 --fork --logappend --oplogSize 50
+mongod --shardsvr --replSet shard2 --dbpath ~/data/mongodb/sharding/repl2 --logpath ~/data/mongodb/sharding/log.repl2 --port 27101 --fork --logappend --oplogSize 50
+
+Si salio todo bien cuando corres esto
+
+ps -fe | grep mongo
+
+Tienen que aparecer los 6 Servers (2 shards, 2 replicas y 2 configserver)
+
+4-Levantar el Router
+
+Ingresamos a un cliente mongo que se conecte a un config server desde un git bash
+
+mongo --port 26050
+
+Ahora configuraremos el servicio de routing (los mongos):
+
+cfg={_id:"rsConf",members:[{_id:0 ,host: "127.0.0.1:26050"}, {_id: 1, host: "127.0.0.1:26051" }]}
+rs.initiate(cfg)
+exit
+
+5-Configurar Sharding
+
+Ahora ingresaremos a cada uno de los shards y configuraremos el servicio de sharding contra los config servers:
+
+mongo --port 27000
+
+Configuraremos master y slave para shard1:
+
+cfg={_id:"shard1", members:[{_id:0 ,host: "127.0.0.1:27000"}, {_id:1 ,host: "127.0.0.1:27001" }]}
+rs.initiate(cfg)
+rs.status()
+exit
+
+Hacemos lo mismo con el shard 2:
+
+mongo --port 27100
+cfg={_id:"shard2", members:[{_id:0 ,host: "127.0.0.1:27100"}, {_id:1 ,host: "127.0.0.1:27101" }]}
+rs.initiate(cfg)
+rs.status()
+exit
+
+6-Iniciar sharding
+
+Levantaremos ahora los servicios de ruteo:
+
+mongos --configdb rsConf/127.0.0.1:26050,127.0.0.1:26051 --fork --logappend --logpath ~/data/mongodb/shardlog --port 28001 --bind_ip 127.0.0.1
+
+Tiene que aparecer un mensaje asi:
+
+2019-05-07T19:28:58.716-0300 W SHARDING [main] Running a sharded cluster with fewer than 3 config servers should only be done for testing purposes and is not recommended for production.
+about to fork child process, waiting until server is ready for connections.
+forked process: 17925
+child process started successfully, parent exiting
+
+7-Nos conectamos al router
+
+Abrir un mongo al router
+
+mongo --port 28001
+
+Dentro del shell del router, le definiremos los dos shards:
+
+sh.addShard("shard1/127.0.0.1:27000")
+sh.addShard("shard2/127.0.0.1:27100")
+
+Si todo anduvo ok, vas a ver los tres shards y sus réplicas con este comando:
+
+db.adminCommand( { listShards: 1 } )
+
+8-Definimos la shard key -> hashed
+
+En el shell del router escribimos:
+
+use test
+db.Vuelos.ensureIndex({"_id": "hashed"})
+sh.enableSharding("test")
+sh.shardCollection("test.Vuelos", {"_id": "hashed" }, false)
+
+Y listo, ya podes insertar en la base
+
+con esto ves como se distribuyeron
+
+db.finanzas.getShardDistribution()
