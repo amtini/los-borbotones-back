@@ -1,0 +1,5 @@
+package Repositorio
+
+class RepoAbstract {
+	
+}
