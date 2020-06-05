@@ -5,6 +5,7 @@ GUia para levantar Cluster de Sharding y replicacion
 ejecutar con git bash en windows los siguientes comandos
 
 mkdir ~/data/
+mkdir ~/data/mongodb
 mkdir ~/data/mongodb/sharding
 cd ~/data/mongodb/sharding
 mkdir cfg1 cfg2 shard1 shard2 repl1 repl2
@@ -107,4 +108,4 @@ Y listo, ya podes insertar en la base
 
 con esto ves como se distribuyeron
 
-db.finanzas.getShardDistribution()
+db.Vuelos.getShardDistribution()
