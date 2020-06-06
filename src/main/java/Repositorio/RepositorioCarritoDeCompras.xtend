@@ -8,6 +8,8 @@ import redis.clients.jedis.Jedis
 import org.uqbar.commons.model.exceptions.UserException
 import redis.clients.jedis.exceptions.JedisConnectionException
 import org.uqbar.xtrest.json.JSONUtils
+import java.util.ArrayList
+import Clases.Ticket
 
 class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 	
@@ -38,18 +40,30 @@ class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 	
-	override create(CarritoDeCompras unCarrito){
-		jedis.set(unCarrito.ID,unCarrito.toJson)
+	def create(String id){
+		val carritoNuevo = new CarritoDeCompras(id)
+		return carritoNuevo
+	}
+	
+	override update(CarritoDeCompras unCarrito){
+		if(unCarrito.tickets !== null){
+			jedis.set(unCarrito.ID,unCarrito.tickets.toJson)
+		 }else{
+			val tickets = new ArrayList<Ticket>
+			jedis.set(unCarrito.ID,tickets.toJson)
+		}
+	}
+	
+	def test(String id){
+		println(jedis.get(id))
 	}
 	
 	def searchCarritoDelUsuario(String id) {
-		if(searchByID(id)===null){
-			val carritoNuevo = new CarritoDeCompras(id)
-			create(carritoNuevo)
-			return carritoNuevo
-		}else{
+		//if(searchByID(id) === null){
+			return create(id)
+		/*  }else{
 			searchByID(id)
-		}
+		}*/
 	}
 	
 	private def traerValor(String key) {
@@ -64,9 +78,9 @@ class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 			if (value === null) {
 				throw new UserException("No hay datos de las monedas solicitadas")
 			}
-			val returnValue = value
+			val returnValue = value.fromJson(CarritoDeCompras)
 			jedis.close()
-			returnValue.fromJson(CarritoDeCompras)
+			returnValue //.fromJson(CarritoDeCompras)
 		} catch (JedisConnectionException e) {
 			throw new UserException("Error de conexión a Redis")
 		} finally {
@@ -76,11 +90,11 @@ class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 	}
 	
 	override searchByID(String id){
-		applyOnJedis(traerValor(id))
+		//applyOnJedis(traerValor(id))
+		val tickets = jedis.get(id)
+		val nuevoCarrito = new CarritoDeCompras(id)
+		
+		nuevoCarrito.tickets = tickets.fromJson()
+		return nuevoCarrito
 	}
-	
-//	override delete(CarritoDeCompras unCarrito) {
-//		jedis.del(unCarrito.ID)
-//	}//TODO: redefinir el delete
-
 }
