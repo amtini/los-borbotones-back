@@ -29,12 +29,12 @@ class AterrizarRestAPI {
 	extension JSONUtils = new JSONUtils
 	RepositorioUsuario repoUsuario
 	RepositorioVuelo repoVuelo
-	val repoFiltro =  new RepositorioBusquedaVuelos
+	val repoFiltro = new RepositorioBusquedaVuelos
 	RepositorioCarritoDeCompras repoCarritoDeCompras = RepositorioCarritoDeCompras.instance
-	
+
 	static ParserStringToLong parserStringToLong = ParserStringToLong.instance
 
-	new(RepositorioUsuario repoU, RepositorioVuelo repoV/*, RepositorioAsiento repoA*/) {
+	new(RepositorioUsuario repoU, RepositorioVuelo repoV /*, RepositorioAsiento repoA*/ ) {
 		repoUsuario = repoU
 		repoVuelo = repoV
 //		repoAsiento = repoA
@@ -140,20 +140,19 @@ class AterrizarRestAPI {
 			return badRequest()
 		}
 	}
-	
+
 	// reservar o cancelar reserva de vuelo en Carrito de compras de usuario logeado
 	@Get("/usuario/reservarVuelo/:id1/:id2/:id3")
-	def reservarVuelo() {
+	def reservarVuelo() { // TODO:ARREGLAR ESTA MIERDA
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id1))
 			val vuelo = repoVuelo.searchByID((id2))
-			
-			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
-			
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchByID(id1)
+
 			usuario.carritoDeCompras.agregarTicketAlCarrito(vuelo, vuelo.avion.seleccionarAsiento(id3))
 			repoUsuario.update(usuario)
 			repoVuelo.update(vuelo)
-			
+
 			repoCarritoDeCompras.update(usuario.carritoDeCompras)
 			return ok()
 		} catch (UserException exception) {
@@ -165,10 +164,11 @@ class AterrizarRestAPI {
 	def cancelarReserva() {
 		try {
 			val vuelo = repoVuelo.searchByID(id2)
-			val carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id1)
+			val carritoDeCompras = repoCarritoDeCompras.searchByID(id1)
 			val ticket = carritoDeCompras.buscarTicket(vuelo, vuelo.avion.seleccionarAsiento(id3))
 
 			carritoDeCompras.removerTicketDelCarrito(ticket)
+			repoCarritoDeCompras.update(carritoDeCompras)
 
 			return ok()
 		} catch (UserException exception) {
@@ -179,10 +179,12 @@ class AterrizarRestAPI {
 	@Get("/usuario/limpiarCarritoDeCompras/:id")
 	def limpiarCarritoDeCompras() {
 		try {
-			
-			val carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
-			
+
+			val carritoDeCompras = repoCarritoDeCompras.searchByID(id)
+
 			carritoDeCompras.limpiarCarritoDeCompras
+			
+			repoCarritoDeCompras.update(carritoDeCompras)
 
 			return ok()
 		} catch (UserException exception) {
@@ -195,8 +197,9 @@ class AterrizarRestAPI {
 	def dameCarritoDeCompras() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
-			
+			// usuario.carritoDeCompras = repoCarritoDeCompras.create(id)
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchByID(id)
+
 			return ok(TicketSerializer.toJson(usuario.carritoDeCompras.tickets))
 		} catch (UserException exception) {
 			return badRequest()
@@ -208,13 +211,13 @@ class AterrizarRestAPI {
 	def finalizarCompra() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-			//val tickets = usuario.carritoDeCompras.tickets.clone
-			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
+			// val tickets = usuario.carritoDeCompras.tickets.clone
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchByID(id)
 			usuario.comprarPasajes
-			
+
 			repoUsuario.update(usuario)
-			//repoTicket.eliminarTickets(tickets)
-			
+			repoCarritoDeCompras.update(usuario.carritoDeCompras)
+			// repoTicket.eliminarTickets(tickets)
 			return ok()
 		} catch (UserException exception) {
 			return badRequest()
@@ -225,8 +228,8 @@ class AterrizarRestAPI {
 	def costoTotalCarrito() {
 		try {
 			val usuario = repoUsuario.searchByID(parserStringToLong.parsearDeStringALong(id))
-			usuario.carritoDeCompras = repoCarritoDeCompras.searchCarritoDelUsuario(id)
-			
+			usuario.carritoDeCompras = repoCarritoDeCompras.searchByID(id)
+
 			return ok(usuario.carritoDeCompras.costoTotalDelCarrito.toJson)
 		} catch (UserException exception) {
 			return badRequest()
@@ -235,12 +238,13 @@ class AterrizarRestAPI {
 
 	// dame vuelos y dame asientos
 	@Get("/vuelos")
-	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento, String idUsuario) {
+	def dameVuelos(String origen, String destino, String desde, String hasta, String ventanilla, String claseAsiento,
+		String idUsuario) {
 		try {
 			val filtro = new FiltrosVuelo(origen, destino, desde, hasta, ventanilla, claseAsiento, idUsuario)
-			
+
 			repoFiltro.create(filtro)
-			
+
 			return ok(VueloSerializer.toJson(repoVuelo.searchFiltros(filtro).toSet))
 		} catch (UserException exception) {
 			return badRequest()
@@ -251,7 +255,7 @@ class AterrizarRestAPI {
 	def dameAsientos(@Body String body) {
 		try {
 			val filtros = body.fromJson(FiltrosAsiento)
-			val asientos = repoVuelo.asientosDeMiVuelo(id , filtros)
+			val asientos = repoVuelo.asientosDeMiVuelo(id, filtros)
 			return ok(AsientoSerializer.toJson(asientos))
 		} catch (UserException exception) {
 			return badRequest()
@@ -282,13 +286,13 @@ class AterrizarRestAPI {
 			return badRequest()
 		}
 	}
-	
+
 	@Get("/usuario/historialDeBusqueda/:id")
-	def historialDeBusqueda(){
+	def historialDeBusqueda() {
 		try {
-			
+
 			return ok(FiltrosSerializer.toJson(repoFiltro.searchByExample(id)))
-		
+
 		} catch (UserException exception) {
 			return badRequest()
 		}

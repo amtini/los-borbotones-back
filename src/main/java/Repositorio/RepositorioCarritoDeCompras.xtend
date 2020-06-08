@@ -1,28 +1,28 @@
 package Repositorio
 
 import Clases.CarritoDeCompras
+import Clases.Ticket
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
+import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors
+import redis.clients.jedis.Jedis
 import redis.clients.jedis.JedisPool
 import redis.clients.jedis.JedisPoolConfig
-import redis.clients.jedis.Jedis
-import org.uqbar.commons.model.exceptions.UserException
-import redis.clients.jedis.exceptions.JedisConnectionException
-import org.uqbar.xtrest.json.JSONUtils
-import java.util.ArrayList
-import Clases.Ticket
 
 class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
-	
+
 	@Accessors String tipo = "C"
 	var JedisPool jedisPool
-	Jedis jedis = new Jedis("localhost")
-	extension JSONUtils = new JSONUtils
-	
-	//en el constructor creo el pool de conexiones
+	Jedis jedis
+
+	// en el constructor creo el pool de conexiones
 	private new() {
 		jedisPool = new JedisPool(new JedisPoolConfig, "localhost")
+		jedis = jedisPool.resource
 	}
-	
+
 	static RepositorioCarritoDeCompras instance
 
 	static def getInstance() {
@@ -31,70 +31,42 @@ class RepositorioCarritoDeCompras extends Repositorio<CarritoDeCompras> {
 		}
 		instance
 	}
-	
+
 	override getTipo() {
 		return tipo
 	}
-	
+
 	override condicionDeBusqueda(CarritoDeCompras cc, String value) {
 		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
-	
-	def create(String id){
+
+	def create(String id) {
 		val carritoNuevo = new CarritoDeCompras(id)
 		return carritoNuevo
 	}
-	
-	override update(CarritoDeCompras unCarrito){
-		if(unCarrito.tickets !== null){
-			jedis.set(unCarrito.ID,unCarrito.tickets.toJson)
-		 }else{
+
+	override update(CarritoDeCompras unCarrito) {
+		val gson = new Gson()
+		println("los tickets que se guardan en redis " + unCarrito.tickets)
+		if (unCarrito.tickets !== null) {
+			jedis.set(unCarrito.ID, gson.toJson(unCarrito.tickets))
+		} else {
 			val tickets = new ArrayList<Ticket>
-			jedis.set(unCarrito.ID,tickets.toJson)
+			jedis.set(unCarrito.ID, gson.toJson(tickets))
 		}
 	}
-	
-	def test(String id){
-		println(jedis.get(id))
-	}
-	
-	def searchCarritoDelUsuario(String id) {
-		//if(searchByID(id) === null){
-			return create(id)
-		/*  }else{
-			searchByID(id)
-		}*/
-	}
-	
-	private def traerValor(String key) {
-		return [Jedis jedis|jedis.get(key)]
-	}
-	
-	private def applyOnJedis((Jedis)=>String aBlock) {
-		var Jedis jedis
-		try {
-			jedis = jedisPool.resource
-			val value = aBlock.apply(jedis)
-			if (value === null) {
-				throw new UserException("No hay datos de las monedas solicitadas")
-			}
-			val returnValue = value.fromJson(CarritoDeCompras)
-			jedis.close()
-			returnValue //.fromJson(CarritoDeCompras)
-		} catch (JedisConnectionException e) {
-			throw new UserException("Error de conexión a Redis")
-		} finally {
-			if (jedis !== null)
-				jedis.close()
+
+	override searchByID(String id) {
+		val jsonTickets = jedis.get(id) //Me traigo los tickets de redis como json(String que adentro tiene una lista en json)
+		val carrito = new CarritoDeCompras(id) //Creo un carrito para agregarle los tickets que recupero de redis
+		//println("que trae de redis " + jsonTickets)
+		if(jsonTickets.isNullOrEmpty){ //Si lo que trajo de redis es null o vacio, a la lista de tickets le meto una lista vacia
+			carrito.tickets = new ArrayList<Ticket>
+		} else {//si no hago el else
+			val Type listType = new TypeToken<ArrayList<Ticket>>(){}.getType()//listType se trae el tipo ArrayList<Ticket> esto no seria necesario si en el fromJson te dejara poner ArrayList<Ticket> como tipo de lista
+			carrito.tickets = new Gson().fromJson(jsonTickets, listType)// Le asigno la lista de tickets que me traje de redis a 
 		}
+		return carrito
 	}
-	
-	override searchByID(String id){
-		//applyOnJedis(traerValor(id))
-		val tickets = jedis.get(id)
-		val nuevoCarrito = new CarritoDeCompras(id)
-		
-		nuevoCarrito.tickets = tickets.fromJson()
-		return nuevoCarrito
-	}
+
 }

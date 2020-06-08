@@ -7,6 +7,10 @@ import org.mongodb.morphia.annotations.Entity
 import org.bson.types.ObjectId
 import org.mongodb.morphia.annotations.Id
 import org.mongodb.morphia.annotations.Embedded
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
 
 @Observable
 @Accessors
@@ -18,7 +22,7 @@ class Vuelo{
 	String ciudadDeOrigen
 
 	String ciudadDeDestino
-
+	
 	LocalDate horarioDePartida
 
 	Aerolinea aerolinea
