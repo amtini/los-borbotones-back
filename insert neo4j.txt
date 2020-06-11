@@ -109,6 +109,10 @@ CREATE(ndichiara)-[:AMIGO]->(bzerial)
 MATCH(bzerial {usuario:'bzerial'})
 MATCH(mmorena {usuario:'mmorena'})
 CREATE(bzerial)-[:AMIGO]->(mmorena)
+5)
+MATCH(ndichiara {usuario:'ndichiara'})
+MATCH(bzerial {usuario:'bzerial'})
+CREATE(bzerial)-[:AMIGO]->(ndichiara)
 
 
 --RELACIONES USUARIO - PASAJE
@@ -171,3 +175,20 @@ CREATE(jlopez)-[:PASAJE]->(Pasaje11)
 MATCH(jlopez {usuario:'jlopez'})
 MATCH(Pasaje12 {ID:18})
 CREATE(jlopez)-[:PASAJE]->(Pasaje12)
+
+QUERYS:
+
+INTEGRANTE 2
+
+1-Saber qué vuelos no tengo pasaje y mis amigos sí con destino a una ciudad de clima frío.
+MATCH (usuario:Usuario {usuario:'ndichiara'})-[:AMIGO]->(amigos:Usuario) 
+MATCH (pasajes:Pasaje)-[:DESTINO]->(ciudades:Ciudad {clima:'frio'})
+WHERE exists ((amigos)-[:PASAJE]->(pasajes))
+	and not exists ((usuario)-[:PASAJE]->(pasajes))
+return amigos
+
+2-Saber que usuario tiene un pasaje de más de $100.000.
+
+MATCH (usuario:Usuario)-[:PASAJE]->(pasajes:Pasaje)
+WHERE (pasajes.costo>100000)
+return usuario
