@@ -33,6 +33,65 @@ CREATE(kingston:Ciudad {ID:25, nombre:'Kingston', clima:'calido'})
 CREATE(sidney:Ciudad {ID:26, nombre:'Sidney', clima:'frio'})
 CREATE(londres:Ciudad {ID:27, nombre:'Londres', clima:'frio'})
 
+--RELACIONES PASAJES - CIUDADES
+
+MATCH(pasaje:Pasaje {ID:2})
+MATCH(ciudad:Ciudad {ID:21})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:3})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:5})
+MATCH(ciudad:Ciudad {ID:24})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:6})
+MATCH(ciudad:Ciudad {ID:25})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:8})
+MATCH(ciudad:Ciudad {ID:26})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:9})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:11})
+MATCH(ciudad:Ciudad {ID:21})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:12})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:14})
+MATCH(ciudad:Ciudad {ID:25})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:15})
+MATCH(ciudad:Ciudad {ID:24})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:17})
+MATCH(ciudad:Ciudad {ID:27})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:18})
+MATCH(ciudad:Ciudad {ID:26})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:19})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:20})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+
 --RELACIONES USUARIOS - AMIGO
 1)
 MATCH(atini {usuario:'atini'})
