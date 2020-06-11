@@ -23,6 +23,16 @@ CREATE(Pasaje12:Pasaje {ID:18, aerolinea:'Luftansa', ciudadDeDestino:'Sidney', c
 CREATE(Pasaje13:Pasaje {ID:19, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-06-07', costo:29223, horarioDePartida:'2020-09-01'})
 CREATE(Pasaje14:Pasaje {ID:20, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-06-07', costo:24223, horarioDePartida:'2020-09-01'})
 
+--CIUDADES
+
+CREATE(miami:Ciudad {ID:21, nombre:'Miami', clima:'calido'})
+CREATE(bsAs:Ciudad {ID:22, nombre:'Buenos Aires', clima:'humedo'})
+CREATE(rio:Ciudad {ID:23, nombre:'Rio de Janeiro', clima:'calido'})
+CREATE(paris:Ciudad {ID:24, nombre:'Paris', clima:'frio'})
+CREATE(kingston:Ciudad {ID:25, nombre:'Kingston', clima:'calido'})
+CREATE(sidney:Ciudad {ID:26, nombre:'Sidney', clima:'frio'})
+CREATE(londres:Ciudad {ID:27, nombre:'Londres', clima:'frio'})
+
 --RELACIONES USUARIOS - AMIGO
 1)
 MATCH(atini {usuario:'atini'})
