@@ -22,8 +22,8 @@ CREATE(Pasaje11:Pasaje {ID:17, aerolinea:'Varig', ciudadDeDestino:'Londres', ciu
 CREATE(Pasaje12:Pasaje {ID:18, aerolinea:'Luftansa', ciudadDeDestino:'Sidney', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-15', costo:85000, horarioDePartida:'2021-03-01', vuelo:12})
 CREATE(Pasaje13:Pasaje {ID:19, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:29223, horarioDePartida:'2020-01-01', vuelo:14})
 CREATE(Pasaje14:Pasaje {ID:20, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:24223, horarioDePartida:'2020-01-01', vuelo:14})
-CREATE(Pasaje15:Pasaje {ID:21, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:29223, horarioDePartida:'2020-01-01', vuelo:14})
-CREATE(Pasaje16:Pasaje {ID:22, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:24223, horarioDePartida:'2020-01-01', vuelo:14})
+CREATE(Pasaje15:Pasaje {ID:28, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:29223, horarioDePartida:'2020-01-01', vuelo:14})
+CREATE(Pasaje16:Pasaje {ID:29, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:24223, horarioDePartida:'2020-01-01', vuelo:14})
 
 --CIUDADES
 
@@ -39,11 +39,11 @@ CREATE(londres:Ciudad {ID:27, nombre:'Londres', clima:'frio'})
 
 MATCH(pasaje:Pasaje {ID:2})
 MATCH(ciudad:Ciudad {ID:21})
-CREATE(pasaje)-[:DESTINO]->(ciudad)
+CREATE(pasaje)-[:DESTINO]->(ciudad) --bien
 
 MATCH(pasaje:Pasaje {ID:3})
 MATCH(ciudad:Ciudad {ID:23})
-CREATE(pasaje)-[:DESTINO]->(ciudad)
+CREATE(pasaje)-[:DESTINO]->(ciudad) --bien
 
 MATCH(pasaje:Pasaje {ID:5})
 MATCH(ciudad:Ciudad {ID:24})
@@ -90,6 +90,14 @@ MATCH(ciudad:Ciudad {ID:23})
 CREATE(pasaje)-[:DESTINO]->(ciudad)
 
 MATCH(pasaje:Pasaje {ID:20})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:28})
+MATCH(ciudad:Ciudad {ID:23})
+CREATE(pasaje)-[:DESTINO]->(ciudad)
+
+MATCH(pasaje:Pasaje {ID:29})
 MATCH(ciudad:Ciudad {ID:23})
 CREATE(pasaje)-[:DESTINO]->(ciudad)
 
@@ -184,29 +192,36 @@ CREATE(jlopez)-[:PASAJE]->(Pasaje12)
 
 +13
 MATCH(ndichiara {usuario:'ndichiara'})
-MATCH(Pasaje15 {ID:21})
+MATCH(Pasaje15 {ID:28})
 CREATE(ndichiara)-[:PASAJE]->(Pasaje15)
 
 +14
 MATCH(jlopez {usuario:'jlopez'})
-MATCH(Pasaje16 {ID:22})
+MATCH(Pasaje16 {ID:29})
 CREATE(jlopez)-[:PASAJE]->(Pasaje16)
 
 --CONSULTAS:
 Integrante1
 a) Saber qué amigos tienen mis amigos que no son propios y que tengan más de 18 años.
-match(usuario:Usuario {usuario:'ndichiara'})-[:AMIGO]->(misAmigos:Usuario)
+match(usuario:Usuario {usuario:'atini'})-[:AMIGO]->(misAmigos:Usuario)
 match(misAmigos)-[:AMIGO]->(amigosDeMisAmigos:Usuario) 
-where amigosDeMisAmigos.edad > 18
+where misAmigos <> amigosDeMisAmigos and amigosDeMisAmigos.edad > 18
+return amigosDeMisAmigos
+
+//alternativa de punto a
+match(tini:Usuario {usuario:'atini'})-[:AMIGO]->(misAmigos:Usuario)
+match(misAmigos)-[:AMIGO]->(amigosDeMisAmigos:Usuario) 
+where not exists ((amigosDeMisAmigos)-[:AMIGO]->(tini)) and amigosDeMisAmigos.edad > 18 
+and amigosDeMisAmigos.usuario <> tini.usuario 
 return amigosDeMisAmigos
 
 b) Saber qué vuelos aún no tomé (que la fecha actual es menor a la de salida del vuelo)
 match (usuario:Usuario {usuario:'bzerial'})-[:PASAJE]->(pasaje:Pasaje) 
 where pasaje.horarioDePartida > datetime()
-return usuario,pasaje
+return pasaje
 
-INTEGRANTE 2
 
+Integrante2
 1-Saber qué vuelos no tengo pasaje y mis amigos sí con destino a una ciudad de clima frío.
 MATCH (usuario:Usuario {usuario:'ndichiara'})-[:AMIGO]->(amigos:Usuario) 
 MATCH (pasajes:Pasaje)-[:DESTINO]->(ciudades:Ciudad {clima:'frio'})
@@ -221,13 +236,14 @@ WHERE (pasajes.costo>100000)
 return usuario
 
 Integrante3
-a)
+a)Saber quienes fueron mis compañeros en los viajes.
 match (usuario:Usuario {usuario:'ndichiara'})-[:PASAJE]->(pasaje:Pasaje) 
 match (comPaniero:Usuario)-[:PASAJE]->(otroPasaje:Pasaje) 
-where pasaje.vuelo = otroPasaje.vuelo and otroPasaje.horarioDePartida < datetime()
+where pasaje.vuelo = otroPasaje.vuelo and otroPasaje.horarioDePartida < datetime() and comPaniero.usuario <> usuario.usuario
 return comPaniero
 
 b)Saber a qué ciudades viajó un usuario.
 match (usuario:Usuario {usuario:'ndichiara'})-[:PASAJE]->(pasaje:Pasaje) 
+match(pasaje:Pasaje) -[:DESTINO]->(ciudad:Ciudad)
 where pasaje.horarioDePartida < datetime()
-return usuario,pasaje
+return ciudad
