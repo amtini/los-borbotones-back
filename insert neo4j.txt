@@ -1,27 +1,29 @@
 --USUARIOS
 CREATE(mmorena:Usuario {ID:1, apellido:'Morena', dinero:2500, edad:28, nombre:'Martin', password:'mmorena', usuario:'mmorena'})
-CREATE(lperez:Usuario {ID:4, apellido:'Perez', dinero:155000, edad:24, nombre:'Lucas', password:'lperez', usuario:'lperez'})
+CREATE(lperez:Usuario {ID:4, apellido:'Perez', dinero:155000, edad:16, nombre:'Lucas', password:'lperez', usuario:'lperez'})
 CREATE(bzerial:Usuario {ID:7, apellido:'Zerial', dinero:1074358, edad:30, nombre:'Brian', password:'bzerial', usuario:'bzerial'})
 CREATE(ndichiara:Usuario {ID:10, apellido:'Dichiara', dinero:74856, edad:25, nombre:'Nicolas', password:'ndichiara', usuario:'ndichiara'})
-CREATE(atini:Usuario {ID:13, apellido:'Tini', dinero:148654, edad:24, nombre:'Agustin Mario', password:'atini', usuario:'atini'})
+CREATE(atini:Usuario {ID:13, apellido:'Tini', dinero:148654, edad:24, nombre:'AgustinU Mario', password:'atini', usuario:'atini'})
 CREATE(jlopez:Usuario {ID:16, apellido:'Lopez', dinero:23984, edad:56, nombre:'Jorge', password:'jlopez', usuario:'jlopez'})
 
 --PASAJES
 
-CREATE(Pasaje1:Pasaje {ID:2, aerolinea:'Copa Airlans', ciudadDeDestino:'Miami', ciudadDeOrigen:'Buenos Aires', comprado:'2020-04-16', costo:36000, horarioDePartida:'2020-08-01'})
-CREATE(Pasaje2:Pasaje {ID:3, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-29', costo:15000, horarioDePartida:'2020-09-01'})
-CREATE(Pasaje3:Pasaje {ID:5, aerolinea:'Air France', ciudadDeDestino:'Paris', ciudadDeOrigen:'Buenos Aires', comprado:'2020-04-02', costo:45000, horarioDePartida:'2020-07-01'})
-CREATE(Pasaje4:Pasaje {ID:6, aerolinea:'Air France', ciudadDeDestino:'Kingston', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-25', costo:26000, horarioDePartida:'2020-07-01'})
-CREATE(Pasaje5:Pasaje {ID:8, aerolinea:'Luftansa', ciudadDeDestino:'Sidney', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-01', costo:36000, horarioDePartida:'2021-03-01'})
-CREATE(Pasaje6:Pasaje {ID:9, aerolinea:'Air France', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-23', costo:150000, horarioDePartida:'2021-06-01'})
-CREATE(Pasaje7:Pasaje {ID:11, aerolinea:'Air France', ciudadDeDestino:'Miami', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-23', costo:150000, horarioDePartida:'2021-06-01'})
-CREATE(Pasaje8:Pasaje {ID:12, aerolinea:'Air France', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-01', costo:36000, horarioDePartida:'2021-06-01'})
-CREATE(Pasaje9:Pasaje {ID:14, aerolinea:'Luftansa', ciudadDeDestino:'Kingston', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-27', costo:55000, horarioDePartida:'2020-07-09'})
-CREATE(Pasaje10:Pasaje {ID:15, aerolinea:'Air France', ciudadDeDestino:'Paris', ciudadDeOrigen:'Buenos Aires', comprado:'2020-04-06', costo:65000, horarioDePartida:'2020-07-01'})
-CREATE(Pasaje11:Pasaje {ID:17, aerolinea:'Varig', ciudadDeDestino:'Londres', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-22', costo:63000, horarioDePartida:'2021-01-05'})
-CREATE(Pasaje12:Pasaje {ID:18, aerolinea:'Luftansa', ciudadDeDestino:'Sidney', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-15', costo:85000, horarioDePartida:'2021-03-01'})
-CREATE(Pasaje13:Pasaje {ID:19, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-06-07', costo:29223, horarioDePartida:'2020-09-01'})
-CREATE(Pasaje14:Pasaje {ID:20, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-06-07', costo:24223, horarioDePartida:'2020-09-01'})
+CREATE(Pasaje1:Pasaje {ID:2, aerolinea:'Copa Airlans', ciudadDeDestino:'Miami', ciudadDeOrigen:'Buenos Aires', comprado:'2020-04-16', costo:36000, horarioDePartida:'2020-08-01', vuelo:1})
+CREATE(Pasaje2:Pasaje {ID:3, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-29', costo:15000, horarioDePartida:'2020-09-01', vuelo:2})
+CREATE(Pasaje3:Pasaje {ID:5, aerolinea:'Air France', ciudadDeDestino:'Paris', ciudadDeOrigen:'Buenos Aires', comprado:'2020-04-02', costo:45000, horarioDePartida:'2020-07-01', vuelo:3})
+CREATE(Pasaje4:Pasaje {ID:6, aerolinea:'Air France', ciudadDeDestino:'Kingston', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-25', costo:26000, horarioDePartida:'2020-07-01', vuelo:4})
+CREATE(Pasaje5:Pasaje {ID:8, aerolinea:'Luftansa', ciudadDeDestino:'Sidney', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-01', costo:36000, horarioDePartida:'2021-03-01', vuelo:5})
+CREATE(Pasaje6:Pasaje {ID:9, aerolinea:'Air France', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-23', costo:150000, horarioDePartida:'2021-06-01', vuelo:6})
+CREATE(Pasaje7:Pasaje {ID:11, aerolinea:'Air France', ciudadDeDestino:'Miami', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-23', costo:150000, horarioDePartida:'2021-06-01', vuelo:7})
+CREATE(Pasaje8:Pasaje {ID:12, aerolinea:'Air France', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-01', costo:36000, horarioDePartida:'2021-06-01', vuelo:8})
+CREATE(Pasaje9:Pasaje {ID:14, aerolinea:'Luftansa', ciudadDeDestino:'Kingston', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-27', costo:55000, horarioDePartida:'2020-07-09', vuelo:9})
+CREATE(Pasaje10:Pasaje {ID:15, aerolinea:'Air France', ciudadDeDestino:'Paris', ciudadDeOrigen:'Buenos Aires', comprado:'2020-04-06', costo:65000, horarioDePartida:'2020-07-01', vuelo:10})
+CREATE(Pasaje11:Pasaje {ID:17, aerolinea:'Varig', ciudadDeDestino:'Londres', ciudadDeOrigen:'Buenos Aires', comprado:'2020-03-22', costo:63000, horarioDePartida:'2021-01-05', vuelo:11})
+CREATE(Pasaje12:Pasaje {ID:18, aerolinea:'Luftansa', ciudadDeDestino:'Sidney', ciudadDeOrigen:'Buenos Aires', comprado:'2020-02-15', costo:85000, horarioDePartida:'2021-03-01', vuelo:12})
+CREATE(Pasaje13:Pasaje {ID:19, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:29223, horarioDePartida:'2020-01-01', vuelo:14})
+CREATE(Pasaje14:Pasaje {ID:20, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:24223, horarioDePartida:'2020-01-01', vuelo:14})
+CREATE(Pasaje15:Pasaje {ID:21, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:29223, horarioDePartida:'2020-01-01', vuelo:14})
+CREATE(Pasaje16:Pasaje {ID:22, aerolinea:'Aerolineas Argentinas', ciudadDeDestino:'Rio de Janeiro', ciudadDeOrigen:'Buenos Aires', comprado:'2019-06-07', costo:24223, horarioDePartida:'2020-01-01', vuelo:14})
 
 --CIUDADES
 
@@ -110,9 +112,13 @@ MATCH(bzerial {usuario:'bzerial'})
 MATCH(mmorena {usuario:'mmorena'})
 CREATE(bzerial)-[:AMIGO]->(mmorena)
 5)
-MATCH(ndichiara {usuario:'ndichiara'})
+MATCH(atini {usuario:'atini'})
+MATCH(jlopez {usuario:'jlopez'})
+CREATE(atini)-[:AMIGO]->(jlopez)
+6)
 MATCH(bzerial {usuario:'bzerial'})
-CREATE(bzerial)-[:AMIGO]->(ndichiara)
+MATCH(lperez {usuario:'lperez'})
+CREATE(bzerial)-[:AMIGO]->(lperez)
 
 
 --RELACIONES USUARIO - PASAJE
@@ -176,7 +182,28 @@ MATCH(jlopez {usuario:'jlopez'})
 MATCH(Pasaje12 {ID:18})
 CREATE(jlopez)-[:PASAJE]->(Pasaje12)
 
-QUERYS:
++13
+MATCH(ndichiara {usuario:'ndichiara'})
+MATCH(Pasaje15 {ID:21})
+CREATE(ndichiara)-[:PASAJE]->(Pasaje15)
+
++14
+MATCH(jlopez {usuario:'jlopez'})
+MATCH(Pasaje16 {ID:22})
+CREATE(jlopez)-[:PASAJE]->(Pasaje16)
+
+--CONSULTAS:
+Integrante1
+a) Saber qué amigos tienen mis amigos que no son propios y que tengan más de 18 años.
+match(usuario:Usuario {usuario:'ndichiara'})-[:AMIGO]->(misAmigos:Usuario)
+match(misAmigos)-[:AMIGO]->(amigosDeMisAmigos:Usuario) 
+where amigosDeMisAmigos.edad > 18
+return amigosDeMisAmigos
+
+b) Saber qué vuelos aún no tomé (que la fecha actual es menor a la de salida del vuelo)
+match (usuario:Usuario {usuario:'bzerial'})-[:PASAJE]->(pasaje:Pasaje) 
+where pasaje.horarioDePartida > datetime()
+return usuario,pasaje
 
 INTEGRANTE 2
 
@@ -192,3 +219,15 @@ return amigos
 MATCH (usuario:Usuario)-[:PASAJE]->(pasajes:Pasaje)
 WHERE (pasajes.costo>100000)
 return usuario
+
+Integrante3
+a)
+match (usuario:Usuario {usuario:'ndichiara'})-[:PASAJE]->(pasaje:Pasaje) 
+match (comPaniero:Usuario)-[:PASAJE]->(otroPasaje:Pasaje) 
+where pasaje.vuelo = otroPasaje.vuelo and otroPasaje.horarioDePartida < datetime()
+return comPaniero
+
+b)Saber a qué ciudades viajó un usuario.
+match (usuario:Usuario {usuario:'ndichiara'})-[:PASAJE]->(pasaje:Pasaje) 
+where pasaje.horarioDePartida < datetime()
+return usuario,pasaje
