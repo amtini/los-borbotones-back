@@ -1,3 +1,5 @@
+PARA SETEAR EL TIPO DE DATO: MATCH (Pasaje1:Pasaje)  SET Pasaje1.horarioDePartida = datetime (Pasaje1.horarioDePartida)
+
 --USUARIOS
 CREATE(mmorena:Usuario {ID:1, apellido:'Morena', dinero:2500, edad:28, nombre:'Martin', password:'mmorena', usuario:'mmorena'})
 CREATE(lperez:Usuario {ID:4, apellido:'Perez', dinero:155000, edad:16, nombre:'Lucas', password:'lperez', usuario:'lperez'})
@@ -222,15 +224,14 @@ return pasaje
 
 
 Integrante2
-1-Saber qué vuelos no tengo pasaje y mis amigos sí con destino a una ciudad de clima frío.
+a)Saber qué vuelos no tengo pasaje y mis amigos sí con destino a una ciudad de clima frío.
 MATCH (usuario:Usuario {usuario:'ndichiara'})-[:AMIGO]->(amigos:Usuario) 
 MATCH (pasajes:Pasaje)-[:DESTINO]->(ciudades:Ciudad {clima:'frio'})
 WHERE exists ((amigos)-[:PASAJE]->(pasajes))
 	and not exists ((usuario)-[:PASAJE]->(pasajes))
 return amigos
 
-2-Saber que usuario tiene un pasaje de más de $100.000.
-
+b)Saber que usuario tiene un pasaje de más de $100.000.
 MATCH (usuario:Usuario)-[:PASAJE]->(pasajes:Pasaje)
 WHERE (pasajes.costo>100000)
 return usuario
